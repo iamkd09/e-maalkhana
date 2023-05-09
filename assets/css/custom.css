@@ -1,0 +1,64 @@
+.card-new {
+    box-shadow:none;
+    margin-top:30% !important;
+}
+.card-header {
+    background: none;
+}
+.card-header > .text-center > b {
+    font-size: 30px;
+}
+.card-para > .text-center {
+    font-size: large;
+    font-weight: 500;
+    color: #006000eb;
+}
+.form-group label[for="otp-input"] {
+    font-size: 18px;
+    font-weight: 500;
+}
+.form-group input[name="contact"] {
+    border: none;
+    border-bottom: 2px solid #dcdcdc;
+    border-radius: 0px !important;
+    font-size: 16px;
+    padding: 0px 18px 12px 0px !important;
+}
+.green {
+    color: green !important;
+}
+.custom-padding {
+    padding: 1rem 0rem 0rem 1rem !important;
+}
+.otp-alignment {
+    position: relative !important;
+    right: 5% !important;
+}
+.card-align {
+    padding: 0;
+}
+@media screen and (min-width: 768px) {
+    .desk-login {
+        left: 22%;
+        display: flex !important;
+        position: absolute;
+        margin-top: 5%;
+    }
+    .pp-logo-icon {
+        margin-top: 20%;
+        position: relative;
+    }
+    .w-395 {
+        width: 395px;
+        margin-top: 25% !important;
+    }
+}
+@media screen and (max-width: 768px) {
+    .desk-login {
+        display: block;
+    }
+    .pp-logo-icon {
+        display: none;
+    }
+}
+      
