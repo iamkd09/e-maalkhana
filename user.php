@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
 
 <?php include "conn.php"; ?>
 <?php include "header.php"; ?>
 
-
+<?php
+if (!isset($_SESSION['user']) || $_SESSION['user'] !== true) {
+    header("Location: index.php");
+    exit;
+}
+?>
 
 <?php
 $query_city = "SELECT `id`,`name` FROM `city` ORDER BY `city`.`name` ASC";
@@ -74,22 +77,22 @@ if (isset($_POST['submit'])){
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Register Here</h5>
+                <h5 class="title"><?php echo $lang['register_here'] ?></h5>
               </div>
               <div class="card-body">
                 <form method="POST" action="" autocomplete="off">
                   <div class="row">
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" name="userName" placeholder="Enter Your Name" required>
+                        <label><?php echo $lang['station_name'] ?>:</label>
+                        <input type="text" class="form-control" name="userName" placeholder="<?php echo $lang['station_name'] ?>" required>
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label>Role:</label>
+                        <label><?php echo $lang['role_select'] ?>:</label>
                         <select class="form-control" name="roleName" id="role" aria-label="Default select example" required>
-                         <option value="">Select Role</option>
+                         <option value=""><?php echo $lang['role_select'] ?>:</option>
                          <?php foreach ($options_role as $k => $role) {
                              echo "<option value =" .
                                  $role["id"] .
@@ -104,23 +107,23 @@ if (isset($_POST['submit'])){
                   <div class="row">
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label>Contact Number:</label>
-                        <input type="number" class="form-control" name="phoneName"  placeholder="Mobile Number" required>
+                        <label><?php echo $lang['mobile_number'] ?>:</label>
+                        <input type="number" class="form-control" name="phoneName"  placeholder="<?php echo $lang['mobile_number'] ?>" required>
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label>Address</label>
-                        <input type="text" class="form-control" name="addressName" placeholder="Address" required>
+                        <label><?php echo $lang['address'] ?>:</label>
+                        <input type="text" class="form-control" name="addressName" placeholder="<?php echo $lang['address'] ?>" required>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label>State:</label>
+                        <label><?php echo $lang['state'] ?>:</label>
                         <select class="form-control statetocity" name="stateName" onChange="getcity(this.value);" id="state" aria-label="Default select example" required>
-                         <option value="">Select State</option>
+                         <option value=""><?php echo $lang['select_state'] ?></option>
                          <?php foreach ($options_state as $state) {
                              echo "<option value = " .
                                  $state["id"] .
@@ -133,15 +136,14 @@ if (isset($_POST['submit'])){
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label>City:</label>
+                        <label><?php echo $lang['city'] ?>:</label>
                         <select class="form-control" name="cityName" id="city" aria-label="Default select example" required>
-                 
-                          <option value="">Select City</option>
+                          <option value=""><?php echo $lang['select_state'] ?></option>
                         </select>
                       </div>
                     </div>
                   </div>
-                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" name="submit" class="btn btn-primary"><?php echo $lang['submit'] ?></button>
                 </form>
               </div>
             </div>

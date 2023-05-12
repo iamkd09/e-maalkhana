@@ -36,18 +36,18 @@ session_start();
   <img src="./assets/img/logo.png" class="card-img-top" alt="Card image">
   <div class="card-body">
   <div class="card-header card-align">
-    <h4 class="text-center"><b>E-Malkhana</b></h4>
+    <h4 class="text-center"><b><span><?php echo $lang['e'] ?></span>-<span><?php echo $lang['malkhana'] ?></span></b></h4>
   </div>
       <div class="card-header custom-padding">
           <?php
           $number = $_SESSION['contact'];
           $last_four_digits = substr($number, -4); 
           $first_six_digits = str_pad('', 6, '*', STR_PAD_LEFT); 
-          $dynamic_code = '<div class="green"> <span>4 digit OTP code has been sent to your registered mobile no.</span> <small>' . $first_six_digits . $last_four_digits . '</small> </div>'; 
+          $dynamic_code = '<div class="green"> <span>'.$lang['otp_sent'].'</span> <small>' . $first_six_digits . $last_four_digits . '</small> </div>'; 
           echo $dynamic_code; 
         ?>
       <br />
-      <h6 style="text-transform:none;">Please enter OTP to verify your account</h6>
+      <h6 style="text-transform:none;"><?php echo $lang['enter_otp'] ?></h6>
       <form action="otp_auth.php" method="POST" autocomplete="off" >
       <div class="card-body">
           <div id="otp" class="inputs d-flex flex-row justify-content-center otp_new otp-alignment" name="otp"> 
@@ -64,13 +64,13 @@ session_start();
             }
           ?>
           <div class="mt-4 form-group"> 
-          <button class="btn btn-danger px-4 validate" name="validate">Validate</button> 
+          <button class="btn btn-danger px-4 validate" name="validate"><?php echo $lang['validate'] ?></button> 
           </div>
       </div>
       </form>
     </div>
     <div class="card-2">
-      <div class="content d-flex justify-content-center align-items-center"> <span>Didn't get the code? </span> <a href="#" class="text-decoration-none  ms-3"> Resend(1/3)</a> </div>
+      <div class="content d-flex justify-content-center align-items-center"> <span><?php echo $lang['not_got_otp'] ?> </span> <a href="#" class="text-decoration-none  ms-3"><?php echo $lang['resend_otp'] ?></a> </div>
     </div>
 </div>
 </div>
@@ -106,4 +106,3 @@ $inp.on({
   
 });
 </script>
-

@@ -1,4 +1,6 @@
-
+<?php
+  include('header.php');
+?>
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle">
@@ -8,7 +10,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">E-Malkhana</a>
+            <a class="navbar-brand" style="font-size: large;" href="#pablo"><b><span><?php echo $lang['e'] ?></span>-<span><?php echo $lang['malkhana'] ?></span></b></a>
           </div>
 
          

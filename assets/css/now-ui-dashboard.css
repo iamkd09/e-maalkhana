@@ -1729,7 +1729,7 @@ textarea.form-control {
   max-height: 80px;
   padding: 10px 10px 0 0;
   resize: none;
-  border: none;
+  /* border: none; */
   border-bottom: 1px solid #E3E3E3;
   border-radius: 0;
   line-height: 2;
@@ -1761,7 +1761,7 @@ textarea.form-control:active {
 }
 
 .form-group input[type=file] {
-  opacity: 0;
+  /* opacity: 0; */
   position: absolute;
   top: 0;
   right: 0;
@@ -4586,9 +4586,9 @@ Created using IcoMoon - icomoon.io
 
 
 .card-img-top{
-   width: 35%;
-   left: 35%;
-   position: relative;
+  width: 35%;
+  margin-top: 10%;
+  margin-left: 32%;
 }
 
 .card-text{
@@ -6009,6 +6009,7 @@ Created using IcoMoon - icomoon.io
 
 .searchbar {
   height: 3rem;
+  
   /* width: 54%; */
   /* margin-left: 10%; */
   /* margin-right: 10%; */
@@ -6040,7 +6041,7 @@ Created using IcoMoon - icomoon.io
 
 .icon-new{
   font-size: 20px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 .required:before {
@@ -6059,7 +6060,7 @@ Created using IcoMoon - icomoon.io
   border-radius: 5px !important;
 }
 
-textarea.form-control desc{
+ .desc{
   max-width: 100%;
   max-height: 80px;
   padding: 10px 10px 0 0;
@@ -6067,6 +6068,44 @@ textarea.form-control desc{
   border-bottom: 1px solid #E3E3E3;
   border-radius: 0;
   line-height: 2;
+}
+
+.form-group input[type=file] {
+  /* opacity: 0; !important */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.custom-hide {
+  display: none !important;
+}
+.custom-show {
+  display: block !important;
+}
+
+.search-card{
+  width: 20.5rem;
+  height: 20 rem !important;
+  top: 3rem;
+  font-size: 15px;
+  border-radius: 10px !important;
+  background-color: #ffff;
+  box-shadow: 5px 5px 10px 2px rgba(168, 168, 168, 0.8);
+}
+
+.search-body {
+  padding: 0px 10px 85px 10px !important;
+}
+
+a.ct-txt {
+  font-size: 16px;
+  color:#1da2ff;
 }
 
 

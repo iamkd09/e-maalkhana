@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
 
 <?php include "conn.php"; ?>
 <?php include "header.php"; ?>
 
 <?php
+
+$_SESSION['category'] = 1;
+$_SESSION['sub_category'] = 1;
+
+if (!isset($_SESSION['inward']) || $_SESSION['inward'] !== true) {
+    header("Location: index.php");
+    exit;
+}
+
 $query = "SELECT `id`,`name` FROM `category`";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
@@ -19,6 +26,7 @@ if ($result->num_rows > 0) {
     $sub_category = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 ?>
+
 
 <head>
    <title>
@@ -36,47 +44,59 @@ if ($result->num_rows > 0) {
       <div class="panel-header panel-header-sm">
       </div>
       <div class="content">
+        <?php echo $success; ?>
         <div class="row">
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Inward Form</h5>
+                <h5 class="title"><?php echo $lang['inward_form'] ?></h5>
               </div>
               <div class="card-body">
               <form method="POST" action="" autocomplete="off">
-  <div class="row">
-    <div class="col-md-4 pl-1">
-      <div class="form-group">
-        <select class="form-control" name="category" id="category" aria-label="Default select example" required>
-          <option value="">Category</option>
-          <?php foreach ($category as $k => $cat) {
-              echo "<option value =" .
-                  $cat["id"] .
-                  ">" .
-                  $cat["name"] .
-                  "</option>";
-          } ?>
-        </select>
-      </div>
-    </div>
-  </div>
+                  <div class="row">
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <select class="form-control" name="category" id="category" aria-label="Default select example" required>
+                          <option value=""><?php echo $lang['category'] ?></option>
+                          <?php foreach ($category as $k => $cat) {
+                            $_SESSION['id'] = $cat_id;                              
+                            echo "<option value =". $cat["id"] .">".$cat["name"] ."</option>";
+                          } 
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
   
-  <div class="row" id="subCategoryRow" style="display: none;">
-    <div class="col-md-4 pl-1">
-      <div class="form-group">
-        <select class="form-control" name="sub_category" id="sub_category" aria-label="Default select example" required>
-          <option value="">Sub-category</option>
-        </select>
-      </div>
-    </div>
-  </div>
-</form>
-              </div>
+                  <div class="row" id="subCategoryRow" style="display: none;">
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group" >
+                        <select class="form-control" name="sub_category" id="sub_category" aria-label="Default select example" required>
+                          <option value=""><?php echo $lang['sub_category'] ?></option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+              </form>
+              <?php 
+                //  if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+                //     echo $_SESSION['error'];
+                //  }
+               ?>
             </div>
           </div>
         </div>
-      </div>
+        
+     
+        <hr class=""> </hr>
 
+        <div class="form-div" id="common_inputs">
+          
+        </div>
+
+      </div>
+      </div>
+     
 <script>
 var categorySelect = document.getElementById('category');
   var subCategoryRow = document.getElementById('subCategoryRow');
@@ -97,6 +117,8 @@ var categorySelect = document.getElementById('category');
 
   $(document).ready(function() {
     $('#category').change(function() {
+      $('#formDiv').removeClass('custom-hide');
+      $('#formDiv').addClass('custom-show');
       var categoryCode = $(this).val();
       $.ajax({
         url: 'get_sub_category.php',
@@ -111,20 +133,68 @@ var categorySelect = document.getElementById('category');
     });
   });
 
-
-
 </script>
 
-  <!--   Core JS Files   -->
-  <script src="./assets/js/core/jquery.min.js"></script>
-  <script src="./assets/js/core/popper.min.js"></script>
-  <script src="./assets/js/core/bootstrap.min.js"></script>
-  <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
- <!-- Chart JS -->
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="./assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-  <script src="./assets/demo/demo.js"></script>
+<script>
+  $(document).ready(function(){  
+	// code to get all records from table via select box
+	$("#category").change(function() {    
+		var id = $(this).find(":selected").val();
+    $('#common_inputs').html('');
+    if(id != 1 && id != ''){
+      var form_heading = $(this).find(":selected").html();
+      // alert(form_heading);
+      var data = {
+        'id':id,
+        'form_heading':form_heading 
+      }   
+      $.ajax({
+        url: 'common_inputs.php',
+        data: data, 
+        type: 'POST', 
+        success: function(data) {
+            // console.log('cccc' + data);
+            $('#common_inputs').html(data);
+        }
+      });
+    }else{
+      $('#common_inputs').html('');
+    }
+    
+ 	}) 
+
+
+   $("#sub_category").change(function() {    
+		var id = $(this).find(":selected").val();
+    
+      var form_heading = $(this).find(":selected").html();
+      // alert(form_heading);
+      var data = {
+        'sub_id':id,
+        'form_heading':form_heading 
+      }   
+      $.ajax({
+        url: 'common_inputs.php',
+        data: data, 
+        type: 'POST', 
+        success: function(data) {
+            // console.log('cccc' + data);
+            $('#common_inputs').html(data);
+        }
+      });
+    
+    
+ 	}) 
+
+
+
+
+});
+</script>
+
+  <?php include('footer.php'); ?>
+
+
 </body>
 
 </html>

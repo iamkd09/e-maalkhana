@@ -1,5 +1,7 @@
+
 <?php include('header.php') ?>
 <?php include('conn.php') ?>
+
 
 <head>
   <title>
@@ -8,18 +10,18 @@
 </head>
 
 <?php
-
-  if (isset($_POST['verify'])){ 
-    $contact = $_POST['contact'];
-    $_SESSION['contact'] = $contact;
-    $_SESSION['msg'] = '';
-    $otp = rand(1000, 9999);
+ 
+if (isset($_POST['verify'])){
+  $contact = $_POST['contact'];
+  $_SESSION['contact'] = $contact;
+  $_SESSION['msg'] = '';
+  $otp = rand(1000, 9999);
 
   if (!empty($contact) && !empty($otp)) {
     $mob = "SELECT * FROM `users` WHERE contact = $contact";
-      $res = $conn->query($mob);
-      $row = $res->fetch_assoc();
-      $check_mob = $row['contact'];
+    $res = $conn->query($mob);
+    $row = $res->fetch_assoc();
+    $check_mob = $row['contact'];
     $status = $row['status'];
 
     if (!empty($check_mob)) {
@@ -32,21 +34,21 @@
                       $check_contact = $row['contact'];
 
                           if(!empty($check_contact)){
-            $update = "UPDATE `otp-auth` SET `otp` =  '$otp', `updated_at` = NOW() WHERE `contact` = $contact ";
-            $updated_result = $conn->query($update);
+                            $update = "UPDATE `otp-auth` SET `otp` =  '$otp', `updated_at` = NOW() WHERE `contact` = $contact ";
+                            $updated_result = $conn->query($update);
                             $_SESSION['resend'] = $updated_result;
-            if($updated_result){
-              header("Location: otp.php");
-            }
-          }else{
+                            if($updated_result){
+                              header("Location: otp.php");
+                            }
+                          }else{
                            $insert = "INSERT INTO `otp-auth` (`contact`, `otp`) VALUES ( '$contact', '$otp')";
                            $result_insert = $conn->query($insert);
                               if($result_insert){
-        header("Location: otp.php");
-      } 
-    }
-  }
-}
+                                header("Location: otp.php");
+                              } 
+                          }
+                        }
+                      }
       else {
         $error ='<span style="color:red;">User is not active, please try again.</span>';
       }
@@ -55,24 +57,17 @@
      }
   }
  }
+
 ?>
 
-
-
 <body class="user-profile">
-<div class="desk-view">  
-<div class="desk-login">
- <div class="pp-logo-icon">
-  <img src="./assets/img/police_Logo.png" />
- </div> 
-<div>    
 <div class="card-new">
-  <img src="./assets/img/logo.png" class="card-img-top" alt="Card image">
+  <img src="./assets/img/park.png" class="card-img-top" alt="Card image">
   <div class="card-header">
-    <h4 class="text-center"><b><span><?php echo $lang['e'] ?></span>-<span><?php echo $lang['malkhana'] ?></span></b></h4>
+    <h4 class="text-center"><b><?php echo $lang['project_name'] ?></b></h4>
   </div>
   <div class="card-para">
-    <h4 class="text-center"><?php echo $lang['smart'] ?><br/><?php echo $lang['marching'] ?></h4>
+    <h4 class="text-center"><?php echo $lang['project_heading'] ?></h4>
   </div>
   <div class="card-body">
     <form action="" method="POST" autocomplete="off">
@@ -105,7 +100,9 @@ phoneNumberInput.addEventListener('input', function() {
 });
 </script>
 
-<?php include('footer.php'); ?>
 
+<script>
+  <?php include('footer.php'); ?>
+</script>
 </body>
 </html>
