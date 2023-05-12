@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
       <div class="panel-header panel-header-sm">
       </div>
       <div class="content">
-        <?php echo $success; ?>
+        <?php echo $success ?? ''; ?>
         <div class="row">
           <div class="col-md-8">
             <div class="card">
