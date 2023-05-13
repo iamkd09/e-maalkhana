@@ -32,7 +32,7 @@ if (isset($_POST['gd_search'])) {
         <form action="" method="post" autocomplete="off">
           <div class="row">
             <div class="col-9">
-              <input class="form-control searchbar btn btn-outline-info searchnew" href="search.php" type="search"name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search"  style="color: #ffffff; height: fit-content; border-radius: 5px!important;" value="<?php echo ($_POST['gd_search']) ? $_POST['gd_search'] : ''?>" >  
+              <input class="form-control searchbar btn btn-outline-info searchnew" href="search.php" type="search"name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search"  style="color: #ffffff; height: fit-content; border-radius: 5px!important;" value="<?php echo ($_POST['gd_search']) ?? ''?>" >  
             </div>
             <div class="col-3">
               <button name="search" class="btn btn-success"><?php echo $lang['go_button'] ?></button>
@@ -43,19 +43,16 @@ if (isset($_POST['gd_search'])) {
         </nav>
       <div class="panel-header panel-header-sm">
       </div>
-      <div class="content my-3 ">
-      <div class="card card-user search-card">
-                      <div class="card-body search-body">
-                        
-          <?php
-          
-                
+      <div class="content ck"> 
+            <?php
                 if (!empty($result)) {
                     
                     $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     foreach ($rows as $k){
                          ?>  
-                        <table>
+                      <div class="card card-user search-card">
+                        <div class="my-card">   
+                         <table>
                             <tbody class="bg-custom-color">
                                 <tr>
                                  <td style="margin-left:10px">
@@ -66,38 +63,35 @@ if (isset($_POST['gd_search'])) {
                                  </td> 
                                 </tr>
                                 <tr>
-                                <td><b>'<?php $lang['recovery_date']?>'</b> 
+                                <td><b><?php echo $lang['recovery_date'];?></b> 
                                 </td>
-                                <td><?php echo $k['Date_Of_Recovery']?> </td>
-                                <br>
+                                <td><?php echo date('d M,Y',strtotime($k['Date_Of_Recovery']))?> </td>
                                 </tr>
                                 <tr>
                                 <td><?php echo '<b>'.$lang['fir_number'].':</b>'?></td>
                                 <td><?php echo $k['FIR_Reference_Number']?></td>
-                                <br>
                                 </tr>
                                 <tr>
                                 <?php if(!empty($k['Vehicle_R_Number'])){ ?>
                                 <td><?php echo '<b>'.$lang['vehicle_r_number'].':</b>'?></td>
                                 <td><?php echo $k['Vehicle_R_Number']?></td>
                                 <?php } ?>
-                                <br>
                                 </tr>
                                 <tr>
                                 <td><?php echo '<b>'.$lang['item_desc'].':</b>'?></td>
                                 <td><?php echo $k['Item_desc']?></td>
-                                <br>
                                 </tr>
                             </tbody>
-                        </table>
-                        <?php
+                        </table> 
+                      </div>
+                     </div>
+                     <br />
+                   <?php
                     }
                 } else { ?>   
-                    <img src="./assets/img/datanotfound.jpg" width="100%"  alt="" srcset="" />
-                    <h3 style="text-align: center;"><?php $lang['no_data'] ?>!</h3>
+                    <img class="ck-img" src="./assets/img/datanotfound.jpg" width="100%"  alt="" srcset="" />
+                    <h5 style="text-align: center; position:sticky;"><?php echo $lang['no_data'] ?>!</h5>
             <?php }?>
-              </div>
-          </div>
       </div>
     </div>
  
