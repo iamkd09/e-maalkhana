@@ -74,7 +74,7 @@ if (isset($_POST['submit'])){
       </div>
       <div class="content">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h5 class="title"><?php echo $lang['register_here'] ?></h5>
@@ -82,13 +82,13 @@ if (isset($_POST['submit'])){
               <div class="card-body">
                 <form method="POST" action="" autocomplete="off">
                   <div class="row">
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label><?php echo $lang['station_name'] ?>:</label>
                         <input type="text" class="form-control" name="userName" placeholder="<?php echo $lang['station_name'] ?>" required>
                       </div>
                     </div>
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label><?php echo $lang['role_select'] ?>:</label>
                         <select class="form-control" name="roleName" id="role" aria-label="Default select example" required>
@@ -104,14 +104,17 @@ if (isset($_POST['submit'])){
                       </div>
                     </div>
                   </div>
+
                   <div class="row">
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label><?php echo $lang['mobile_number'] ?>:</label>
-                        <input type="number" class="form-control" name="phoneName"  placeholder="<?php echo $lang['mobile_number'] ?>" required>
+                        <input name="phoneName" class="form-control" type="tel" id="phoneNumberInput" pattern="[0-9]{10}" placeholder="<?php echo $lang['mobile_number'] ?>" required
+                        oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10); else this.value = this.value.replace(/\D/g, '');" />
                       </div>
                     </div>
-                    <div class="col-md-4 pl-1">
+
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label><?php echo $lang['address'] ?>:</label>
                         <input type="text" class="form-control" name="addressName" placeholder="<?php echo $lang['address'] ?>" required>
@@ -119,7 +122,7 @@ if (isset($_POST['submit'])){
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label><?php echo $lang['state'] ?>:</label>
                         <select class="form-control statetocity" name="stateName" onChange="getcity(this.value);" id="state" aria-label="Default select example" required>
@@ -134,7 +137,7 @@ if (isset($_POST['submit'])){
                         </select>
                       </div>
                     </div>
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label><?php echo $lang['city'] ?>:</label>
                         <select class="form-control" name="cityName" id="city" aria-label="Default select example" required>

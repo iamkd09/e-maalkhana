@@ -4,9 +4,6 @@
 
 <?php
 
-$_SESSION['category'] = 1;
-$_SESSION['sub_category'] = 1;
-
 if (!isset($_SESSION['inward']) || $_SESSION['inward'] !== true) {
     header("Location: index.php");
     exit;
@@ -25,6 +22,8 @@ $result = $conn->query($query);
 if ($result->num_rows > 0) {
     $sub_category = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
+
 ?>
 
 
@@ -44,39 +43,41 @@ if ($result->num_rows > 0) {
       <div class="panel-header panel-header-sm">
       </div>
       <div class="content">
-        <?php echo $success; ?>
+        <?php echo $success ?? ''; ?>
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h5 class="title"><?php echo $lang['inward_form'] ?></h5>
               </div>
               <div class="card-body">
-              <form method="POST" action="" autocomplete="off">
+              <form method="POST" action="inward_config.php" autocomplete="off">
                   <div class="row">
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <select class="form-control" name="category" id="category" aria-label="Default select example" required>
                           <option value=""><?php echo $lang['category'] ?></option>
                           <?php foreach ($category as $k => $cat) {
-                            $_SESSION['id'] = $cat_id;                              
+                            $_SESSION['id'] = $cat_id;                    
+
                             echo "<option value =". $cat["id"] .">".$cat["name"] ."</option>";
                           } 
                           ?>
                         </select>
                       </div>
                     </div>
-                  </div>
-  
-                  <div class="row" id="subCategoryRow" style="display: none;">
-                    <div class="col-md-4 pl-1">
+                  
+                  <div class="col-md-6 pl-1" id="subCategoryRow" style="display: none;">
+                    <div class="">
                       <div class="form-group" >
-                        <select class="form-control" name="sub_category" id="sub_category" aria-label="Default select example" required>
+                        <select class="form-control" name="sub_category" id="sub_category">
                           <option value=""><?php echo $lang['sub_category'] ?></option>
                         </select>
                       </div>
                     </div>
                   </div>
+                  </div>    
+                  <div class="row form-div" id="common_inputs"></div>   
               </form>
               <?php 
                 //  if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
@@ -89,10 +90,6 @@ if ($result->num_rows > 0) {
         
      
         <hr class=""> </hr>
-
-        <div class="form-div" id="common_inputs">
-          
-        </div>
 
       </div>
       </div>
@@ -165,12 +162,14 @@ var categorySelect = document.getElementById('category');
 
 
    $("#sub_category").change(function() {    
-		var id = $(this).find(":selected").val();
+		var subid = $(this).find(":selected").val();
     
       var form_heading = $(this).find(":selected").html();
       // alert(form_heading);
+      var id = $("#category").find(":selected").val();
       var data = {
-        'sub_id':id,
+        'cat_id':id,
+        'sub_id':subid,
         'form_heading':form_heading 
       }   
       $.ajax({

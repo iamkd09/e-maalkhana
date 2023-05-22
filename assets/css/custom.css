@@ -24,6 +24,7 @@
     font-size: 16px;
     padding: 0px 18px 12px 0px !important;
 }
+
 .green {
     color: green !important;
 }
@@ -34,8 +35,37 @@
     position: relative !important;
     right: 5% !important;
 }
+.form-group > label {
+    color: #000;
+    font-size: 14px;
+}
+.form-group > input {
+    font-size: 14px;
+}
 .card-align {
     padding: 0;
+}
+b.desk-b {
+    top: 4px;
+    position: relative;
+}
+.mt-2rem {
+    margin-top: 2rem;
+}
+.ff-file {
+    position: initial;
+}
+.modal-content.my-model {
+    position: relative;
+    margin-top: 40% !important;
+}
+.my-header {
+    background: #1D6AA0;
+    color: #FFF;
+}
+.fs-fw {
+    font-size: 14px;
+    font-weight: 600;
 }
 @media screen and (min-width: 768px) {
     .desk-login {
@@ -52,13 +82,27 @@
         width: 395px;
         margin-top: 25% !important;
     }
+    .desk-search {
+        position: relative;
+        width: 20%;
+    }
+    .modal-content.my-model {
+        position: relative;
+        margin-top: 25% !important;
+    }
 }
+
+
 @media screen and (max-width: 768px) {
     .desk-login {
         display: block;
     }
     .pp-logo-icon {
         display: none;
+    }
+    .modal-content.my-model {
+        position: relative;
+        margin-top: 40% !important;
     }
 }
       

@@ -14,7 +14,7 @@
     $_SESSION['contact'] = $contact;
     $_SESSION['msg'] = '';
     $otp = rand(1000, 9999);
-
+    
   if (!empty($contact) && !empty($otp)) {
     $mob = "SELECT * FROM `users` WHERE contact = $contact";
       $res = $conn->query($mob);

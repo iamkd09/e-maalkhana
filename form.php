@@ -9,10 +9,6 @@
               </div>
               <div class="card-body">
                 <form method="POST" action="" autocomplete="off">
-
-               
-
-
                 <div class="row">
                     <div class="col-md-4 pl-1">
                       <div class="form-group">

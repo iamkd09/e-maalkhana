@@ -1,3 +1,14 @@
+<?php session_start(); 
+  include('lang.php');
+  $lang = $en;
+  if(isset($_COOKIE['mal_lang'])){
+  
+    if($_COOKIE['mal_lang'] == "hi"){
+      $lang = $hi;
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8" />
@@ -23,18 +34,3 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  <?php 
-  session_start(); 
-  include('lang.php');
-  // mal_lang
-  $lang = $en;
-
-  if(isset($_COOKIE['mal_lang'])){
-  
-    if($_COOKIE['mal_lang'] == "hi"){
-      $lang = $hi;
-    }
-  }
-  
- 
-?>

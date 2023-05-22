@@ -25,6 +25,8 @@ $en = array(
     "inward_button"=>"Inward",
     "scrapyard_button"=>"Scrapyard",
     "auction_button"=>"Auction",
+    "outward_button"=>"Outward",
+    "scrap_auct_button"=>"Scrapyard/Auction",
 
     // Search Page
     "go_button"=>"Go",
@@ -41,19 +43,21 @@ $en = array(
     "select_state"=>"select state",
     "city"=>"City",
     "select_city"=>"select city",
-    "submit"=>"submit",
+    "submit"=>"Submit",
 
     // Inward Form
     "inward_form"=>"Inward Form",
     "category"=>"Category",
     "sub_category"=>"Sub-category",
-    "gd_number"=>"General Dairy Number (G.D. Number)",
+    "gd_number"=>"G.D. Number",
     "stolen_date"=>"Stolen Date",
     "recovery_date"=>"Date of Recovery",
     "fir_number"=>"F.I.R Number",
     "under_section"=>"Under-Section",
     "recovered_from"=>"Recovered From",
     "recovered_by"=>"Recovered By",
+    "accident_date"=>"Accident Date",
+    "release_date"=>"Release Date",
     "vehicle_number"=>"Vehicle Number",
     "vehicle_type"=>"Vehicle Type",
     "two_wheeler"=>"Two Wheeler",
@@ -64,20 +68,25 @@ $en = array(
     "vehicle_variant"=>"Vehicle Variant",
     "vehicle_color"=>"Vehicle Colour",
     "item_desc"=>"Item Description",
+    "attachments"=>"Attachment of vehicle owner (Aadhaar , DL, RC, Insurance )",
     "pictures"=>"Pictures",
     "engine_number"=>"Engine Number",
     "chassis_number"=>"Chassis Number",
     "mv_act"=>"M.V. Act",
     "owner_name"=>"Name of Owner",
     "vehicle_r_number"=>"Vehicle Registration Number",
-    "Unclaimed Vehicles"=>"Unclaimed Vehicles Form",
-    "Accidental case"=>"Accidental Case Form",
-    "Jama Talashi"=>"Jama Talashi Form",
-    "MV Act"=>"M.V. Act. Form",
-    "Stolen Vehicles"=>"Stolen Vehicles Form",
-    "Objects other than ehicles"=>"Objects other than Vehicles Form",
+    "Unclaimed Vehicles"=>"Unclaimed vehicles form",
+    "Accidental case"=>"Accidental case form",
+    "Jama Talashi"=>"Jama talashi form",
+    "MV Act"=>"M.V. Act. form",
+    "Stolen Vehicles"=>"Stolen vehicles form",
+    "Objects other than vehicles"=>"Objects other than vehicles form",
     "select_lang"=>"Select Language",
     "hindi"=>"Hindi",
+
+    // Outward Form
+    "outward_form"=>"Outward Form",
+    "na"=> '',
 );
 
 $hi = array(
@@ -103,6 +112,8 @@ $hi = array(
     "inward_button"=>"इन्वर्ड",
     "scrapyard_button"=>"रद्दीखाना",
     "auction_button"=>"नीलामी",
+    "outward_button"=>"आउटवर्ड",
+    "scrap_auct_button"=>"रद्दीखाना/नीलामी",
     // Search Page
     "go_button"=>"खोजे",
     "no_data"=>"डाटा प्राप्त नहीं हुआ",
@@ -128,6 +139,8 @@ $hi = array(
     "under_section"=>"आईपीसी धारा के तहत",
     "recovered_from"=>"बरामद हुआ",
     "recovered_by"=>"के द्वारा बरामद",
+    "accident_date"=>"दुर्घटना की तारीख",
+    "release_date"=>"रिहाई की तारीख",
     "vehicle_number"=>"वाहन संख्या",
     "vehicle_type"=>"वाहन का प्रकार",
     "two_wheeler"=>"2 व्हीलर",
@@ -138,6 +151,7 @@ $hi = array(
     "vehicle_variant"=>"वाहन का संस्करण",
     "vehicle_color"=>"वाहन का रंग",
     "item_desc"=>"वस्तु विवरण",
+    "attachments"=>"वाहन मालिक के प्रमाण के संलग्न (आधार, ड्राइविंग लाइसेंस, रजिस्ट्रेशन प्रमाणपत्र, बीमा)",
     "pictures"=>"तस्वीरें",
     "engine_number"=>"इंजन संख्या",
     "chassis_number"=>"चेसिस संख्या",
@@ -153,6 +167,8 @@ $hi = array(
     "select_lang"=>"भाषा चुने",
     "hindi"=>"हिंदी",
 
+    "outward_form"=>"आउटवर्ड फॉर्म",
+    "na"=> ''
 );
 
 ?>
