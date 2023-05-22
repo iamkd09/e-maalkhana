@@ -5,15 +5,13 @@
   E-Malkhana otp verification
 </title>
 </head>
-
 <body class="user-profile">
 <div class="desk-view">
-
 <div class="desk-login">
  <div class="pp-logo-icon">
   <img src="./assets/img/police_Logo.png" />
- </div> 
-<div> 
+ </div>
+<div>
 <div class="card-new w-395">
   <img src="./assets/img/logo.png" class="card-img-top" alt="Card image">
   <div class="card-body">
@@ -23,10 +21,10 @@
       <div class="card-header custom-padding">
           <?php
           $number = $_SESSION['contact'];
-          $last_four_digits = substr($number, -4); 
-          $first_six_digits = str_pad('', 6, '*', STR_PAD_LEFT); 
-          $dynamic_code = '<div class="green"> <span>'.$lang['otp_sent'].'</span> <small>' . $first_six_digits . $last_four_digits . '</small> </div>'; 
-          echo $dynamic_code; 
+          $last_four_digits = substr($number, -4);
+          $first_six_digits = str_pad('', 6, '*', STR_PAD_LEFT);
+          $dynamic_code = '<div class="green"> <span>'.$lang['otp_sent'].'</span> <small>' . $first_six_digits . $last_four_digits . '</small> </div>';
+          echo $dynamic_code;
         ?>
       <br />
       <h6 style="text-transform:none;"><?php echo $lang['enter_otp'] ?></h6>
@@ -46,8 +44,8 @@
               echo $_SESSION['msg'];
             }
           ?>
-          <div class="mt-4 form-group"> 
-          <button class="btn btn-danger px-4 validate" name="validate"><?php echo $lang['validate'] ?></button> 
+          <div class="mt-4 form-group">
+          <button class="btn btn-danger px-4 validate" name="validate"><?php echo $lang['validate'] ?></button>
           </div>
       </div>
       </form>
@@ -59,9 +57,8 @@
 </div>
 </div>
 <div>
-</div>  
+</div>
 </body>
-
 <script>
 
 function validateInput(input) {
@@ -69,7 +66,6 @@ function validateInput(input) {
 }
 
    const $inp = $(".ap-otp-input");
-
 $inp.on({
   paste(ev) { 
   
@@ -88,6 +84,5 @@ $inp.on({
     const i = $inp.index(this);
     if (!this.value && ev.key === "Backspace" && i) $inp.eq(i - 1).focus();
   }
-  
 });
 </script>
