@@ -7,31 +7,81 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
    exit;
 }
 
-// Fetch inventory data for inward
-$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(*) as count FROM `malkhana`.`inventory` GROUP BY `category_id`, `sub_category_id`";
+// Fetch inventory data for different statuses
+$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 GROUP BY `category_id`, `sub_category_id`";
 $resultInward = mysqli_query($conn, $queryInward);
-$rowInward = mysqli_fetch_assoc($resultInward);
-$countInward = intval($rowInward['count']);
+$dataInward = array();
+while ($row = mysqli_fetch_assoc($resultInward)) {
+   $category_id = $row['category_id'];
+   $sub_category_id = $row['sub_category_id'];
+   $count = intval($row['count']);
+   $label = getStatusLabel($category_id, $sub_category_id);
+   $dataInward[] = array($label, $count);
+}
 
-// Fetch inventory data for outward (status = 2)
-$queryOutward = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 2";
+$queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 GROUP BY `category_id`, `sub_category_id`";
 $resultOutward = mysqli_query($conn, $queryOutward);
-$rowOutward = mysqli_fetch_assoc($resultOutward);
-$countOutward = intval($rowOutward['count']);
+$dataOutward = array();
+while ($row = mysqli_fetch_assoc($resultOutward)) {
+   $category_id = $row['category_id'];
+   $sub_category_id = $row['sub_category_id'];
+   $count = intval($row['count']);
+   $label = getStatusLabel($category_id, $sub_category_id);
+   $dataOutward[] = array($label, $count);
+}
 
-// Fetch inventory data for scrapyard (status = 3)
-$queryScrapyard = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 3";
+$queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 GROUP BY `category_id`, `sub_category_id`";
 $resultScrapyard = mysqli_query($conn, $queryScrapyard);
-$rowScrapyard = mysqli_fetch_assoc($resultScrapyard);
-$countScrapyard = intval($rowScrapyard['count']);
+$dataScrapyard = array();
+while ($row = mysqli_fetch_assoc($resultScrapyard)) {
+   $category_id = $row['category_id'];
+   $sub_category_id = $row['sub_category_id'];
+   $count = intval($row['count']);
+   $label = getStatusLabel($category_id, $sub_category_id);
+   $dataScrapyard[] = array($label, $count);
+}
 
-// Fetch inventory data for auction (status = 4)
-$queryAuction = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 4";
+$queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 GROUP BY `category_id`, `sub_category_id`";
 $resultAuction = mysqli_query($conn, $queryAuction);
-$rowAuction = mysqli_fetch_assoc($resultAuction);
-$countAuction = intval($rowAuction['count']);
+$dataAuction = array();
+while ($row = mysqli_fetch_assoc($resultAuction)) {
+   $category_id = $row['category_id'];
+   $sub_category_id = $row['sub_category_id'];
+   $count = intval($row['count']);
+   $label = getStatusLabel($category_id, $sub_category_id);
+   $dataAuction[] = array($label, $count);
+}
 
 mysqli_close($conn);
+
+// Function to get label based on status value
+function getStatusLabel($category_id, $sub_category_id)
+{
+   switch ($category_id) {
+      case 1:
+         switch ($sub_category_id) {
+            case 1:
+               return 'MalMukdamati - Stolen Vehicles';
+            case 2:
+               return 'MalMukdamati - Accidental case';
+            case 3:
+               return 'MalMukdamati - Objects other than vehicles';
+            default:
+               return '';
+         }
+      case 2:
+         // Mapping for category ID 2 (Unclaimed Vehicles)
+         return 'Unclaimed Vehicles';
+      case 3:
+         // Mapping for category ID 3 (Jama Talashi)
+         return 'Jama Talashi';
+      case 4:
+         // Mapping for category ID 4 (MV Act)
+         return 'MV Act';
+      default:
+         return '';
+   }
+}
 ?>
 
 <head>
@@ -42,53 +92,53 @@ mysqli_close($conn);
       google.charts.setOnLoadCallback(drawCharts);
 
       function drawCharts() {
-         // Data for inward
-         var dataInward = google.visualization.arrayToDataTable([
-            ['Status', 'Count'],
-            ['Inward', <?php echo $countInward; ?>]
-         ]);
+         // Draw Inward Pie chart
+         var dataInward = new google.visualization.DataTable();
+         dataInward.addColumn('string', 'Category and Subcategory');
+         dataInward.addColumn('number', 'Count');
+         dataInward.addRows(<?php echo json_encode($dataInward); ?>);
 
          var optionsInward = {
-            title: 'Inward Inventory'
+            title: 'Inward Inventory Category and Subcategory'
          };
 
          var chartInward = new google.visualization.PieChart(document.getElementById('piechart-inward'));
          chartInward.draw(dataInward, optionsInward);
 
-         // Data for outward
-         var dataOutward = google.visualization.arrayToDataTable([
-            ['Status', 'Count'],
-            ['Outward', <?php echo $countOutward; ?>]
-         ]);
+         // Draw Outward Pie chart
+         var dataOutward = new google.visualization.DataTable();
+         dataOutward.addColumn('string', 'Category and Subcategory');
+         dataOutward.addColumn('number', 'Count');
+         dataOutward.addRows(<?php echo json_encode($dataOutward); ?>);
 
          var optionsOutward = {
-            title: 'Outward Inventory'
+            title: 'Outward Inventory Category and Subcategory'
          };
 
          var chartOutward = new google.visualization.PieChart(document.getElementById('piechart-outward'));
          chartOutward.draw(dataOutward, optionsOutward);
 
-         // Data for scrapyard
-         var dataScrapyard = google.visualization.arrayToDataTable([
-            ['Status', 'Count'],
-            ['Scrapyard', <?php echo $countScrapyard; ?>]
-         ]);
+         // Draw Scrapyard Pie chart
+         var dataScrapyard = new google.visualization.DataTable();
+         dataScrapyard.addColumn('string', 'Category and Subcategory');
+         dataScrapyard.addColumn('number', 'Count');
+         dataScrapyard.addRows(<?php echo json_encode($dataScrapyard); ?>);
 
          var optionsScrapyard = {
-            title: 'Scrapyard Inventory'
+            title: 'Scrapyard Inventory Category and Subcategory'
          };
 
          var chartScrapyard = new google.visualization.PieChart(document.getElementById('piechart-scrapyard'));
          chartScrapyard.draw(dataScrapyard, optionsScrapyard);
 
-         // Data for auction
-         var dataAuction = google.visualization.arrayToDataTable([
-            ['Status', 'Count'],
-            ['Auction', <?php echo $countAuction; ?>]
-         ]);
+         // Draw Auction Pie chart
+         var dataAuction = new google.visualization.DataTable();
+         dataAuction.addColumn('string', 'Category and Subcategory');
+         dataAuction.addColumn('number', 'Count');
+         dataAuction.addRows(<?php echo json_encode($dataAuction); ?>);
 
          var optionsAuction = {
-            title: 'Auction Inventory'
+            title: 'Auction Inventory Category and Subcategory'
          };
 
          var chartAuction = new google.visualization.PieChart(document.getElementById('piechart-auction'));
@@ -135,67 +185,70 @@ mysqli_close($conn);
             <div class="row">
                <!-- Existing code for buttons -->
                <div class="col-md-3">
-                  <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
-                     data-mdb-ripple-color="dark">
-                     <b>
-                        <a href="inward.php" class="ct-txt">
+                  <a href="inward.php" class="ct-txt">
+                     <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
+                        data-mdb-ripple-color="dark">
+                        <b>
                            <?php echo $lang['inward_button'] ?>
-                        </a>
-                     </b>&emsp;<i class='fa fa-compress-arrows-alt icon-new'></i>
-                  </button>
-               </div>
-               <div class="col-md-3">
-                  <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
-                     data-mdb-ripple-color="dark">
-                     <b>
-                        <a href="outward.php" class="ct-txt">
-                           <?php echo $lang['outward_button'] ?>
-                        </a>
-                     </b>&emsp;<i class='fa fa-arrows-alt icon-new'></i>
-                  </button>
-               </div>
-               <div class="col-md-3">
-                  <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
-                     data-mdb-ripple-color="dark">
-                     <b>
-                        <a href="scrapyard.php" class="ct-txt">
-                           <?php echo $lang['scrapyard_button'] ?>
-                        </a>
-                     </b>&emsp;<i class="fa fa-trash icon-new" aria-hidden="true"></i>
-                  </button>
-               </div>
-               <div class="col-md-3">
-                  <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
-                     data-mdb-ripple-color="dark">
-                     <b>
-                        <a href="auction.php" class="ct-txt">
-                           <?php echo $lang['auction_button'] ?>
-                        </a>
-                     </b>&emsp; <i class="fa fa-gavel icon-new"></i>
-                  </button>
-               </div>
-            </div>
 
-            <!-- Pie charts -->
-            <div class="container mt-5">
-               <div class="row">
-                  <div class="col-md-6 mt-2">
-                     <div id="piechart-inward" style="width: 330px; height: 300px;"></div>
+                        </b>&emsp;<i class='fa fa-compress-arrows-alt icon-new'></i>
+                     </button>
+                  </a>
+               </div>
+               <div class="col-md-3">
+                  <a href="outward.php" class="ct-txt">
+                     <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
+                        data-mdb-ripple-color="dark">
+                        <b>
+                           <?php echo $lang['outward_button'] ?>
+                        </b>&emsp;<i class='fa fa-arrows-alt icon-new'></i>
+                     </button>
+                  </a>
+               </div>
+               <div class="col-md-3">
+                  <a href="scrapyard.php" class="ct-txt">
+                     <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
+                        data-mdb-ripple-color="dark">
+                        <b>
+                           <?php echo $lang['scrapyard_button'] ?>
+                        </b>&emsp;<i class="fa fa-trash icon-new" aria-hidden="true"></i>
+                     </button>
+                  </a>
+               </div>
+               <div class="col-md-3">
+                  <a href="auction.php" class="ct-txt">
+                     <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
+                        data-mdb-ripple-color="dark">
+                        <b>
+                           <?php echo $lang['auction_button'] ?>
+                        </b>&emsp; <i class="fa fa-gavel icon-new"></i>
+                     </button>
+                  </a>
+
+               </div>
+
+
+               <!-- Pie chart - Scrapyard -->
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-6 mt-2">
+                        <div id="piechart-inward" style="width: 370px; height: 300px;"></div>
+                     </div>
+                     <div class="col-md-6 mt-2">
+                        <div id="piechart-outward" style="width: 370px; height: 300px;"></div>
+                     </div>
                   </div>
-                  <div class="col-md-6 mt-2">
-                     <div id="piechart-outward" style="width: 330px; height: 300px;"></div>
+                  <div class="row">
+                     <div class="col-md-6 mt-2">
+                        <div id="piechart-scrapyard" style="width: 370px; height: 300px;"></div>
+                     </div>
+                     <div class="col-md-6 mt-2">
+                        <div id="piechart-auction" style="width: 370px; height: 300px;"></div>
+                     </div>
                   </div>
                </div>
-               <div class="row">
-                  <div class="col-md-6 mt-2">
-                     <div id="piechart-scrapyard" style="width: 330px; height: 300px;"></div>
-                  </div>
-                  <div class="col-md-6 mt-2">
-                     <div id="piechart-auction" style="width: 330px; height: 300px;"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
       </div>
-      <?php include('footer.php'); ?>
+      <!-- ... -->
+   </div>
+   <?php include('footer.php'); ?>
 </body>
