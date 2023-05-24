@@ -27,19 +27,30 @@
       $_SESSION['contact'] = $contact;
       if ($status == 1) {
                     if(!empty($contact) && !empty($otp)){
+                      $url = user_service_url."/api/user/SendLoginOTP/";
+                      $postData = json_encode([
+                        "phone_number" => $contact
+                      ]);
+                      $saveInService = postCurl($url,$postData);
+       
+                      $users = json_decode($saveInService, true);
+                      $status = $users['status'] ?? 1;
+                      $state = $users['state'] ?? null;
+                      $otp = $users['otp'] ?? 0000;
+
                       $mobile_number = "SELECT * FROM `otp-auth` WHERE `contact` = $contact ";
                       $result = $conn->query($mobile_number);
                       $row = $result->fetch_assoc();
-                      $check_contact = $row['contact'];
+                      $check_contact = $row['contact'] ?? null;
                           if(!empty($check_contact)){
-            $update = "UPDATE `otp-auth` SET `otp` =  '$otp', `updated_at` = NOW() WHERE `contact` = $contact ";
+            $update = "UPDATE `otp-auth` SET `otp` =  '$otp', `state` = '$state',`updated_at` = NOW() WHERE `contact` = $contact ";
             $updated_result = $conn->query($update);
                             $_SESSION['resend'] = $updated_result;
             if($updated_result){
               header("Location: otp.php");
             }
           }else{
-                           $insert = "INSERT INTO `otp-auth` (`contact`, `otp`) VALUES ( '$contact', '$otp')";
+                           $insert = "INSERT INTO `otp-auth` (`contact`, `otp`,`state`) VALUES ( '$contact', '$otp','$state')";
                            $result_insert = $conn->query($insert);
                               if($result_insert){
         header("Location: otp.php");
