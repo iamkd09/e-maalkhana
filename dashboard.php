@@ -7,17 +7,21 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
    exit;
 }
 
-// Fetch inventory data for inward
-$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(*) as count FROM `malkhana`.`inventory` GROUP BY `category_id`, `sub_category_id`";
-$resultInward = mysqli_query($conn, $queryInward);
-$rowInward = mysqli_fetch_assoc($resultInward);
-$countInward = intval($rowInward['count']);
-
-// Fetch inventory data for outward (status = 2)
-$queryOutward = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 2";
-$resultOutward = mysqli_query($conn, $queryOutward);
-$rowOutward = mysqli_fetch_assoc($resultOutward);
-$countOutward = intval($rowOutward['count']);
+// Fetch inventory data
+$query = "SELECT `category_id`, `sub_category_id`, COUNT(*) as count FROM `malkhana`.`inventory` GROUP BY `category_id`, `sub_category_id`";
+$result = mysqli_query($conn, $query);
+$data = array();
+if($result && !empty($result)) {
+while ($row = mysqli_fetch_assoc($result)) {
+   $category_id = $row['category_id'];
+   $sub_category_id = $row['sub_category_id'];
+   $count = intval($row['count']);
+   $label = getStatusLabel($category_id, $sub_category_id);
+   $data[] = array($label, $count);
+}
+mysqli_free_result($result);
+}
+mysqli_close($conn);
 
 // Fetch inventory data for scrapyard (status = 3)
 $queryScrapyard = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 3";
