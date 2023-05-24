@@ -69,7 +69,6 @@ b.desk-b {
 }
 .my-card {
     position: relative;
-    padding: 15px;
     font-size: 14px;
 }
 .form-group > label {
@@ -82,6 +81,16 @@ b.desk-b {
 .ck-img {
     top: 20%;
     position: sticky;
+}
+.card.custom-card {
+    margin: 10px 10px 10px 10px;
+}
+.no-ui {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+.nav-item-new {
+    background-color: #f7f7f7;
 }
 @media screen and (min-width: 768px) {
     .desk-login {

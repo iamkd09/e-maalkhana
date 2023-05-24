@@ -11,17 +11,16 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 $query = "SELECT `category_id`, `sub_category_id`, COUNT(*) as count FROM `malkhana`.`inventory` GROUP BY `category_id`, `sub_category_id`";
 $result = mysqli_query($conn, $query);
 $data = array();
-if($result && !empty($result)) {
-while ($row = mysqli_fetch_assoc($result)) {
-   $category_id = $row['category_id'];
-   $sub_category_id = $row['sub_category_id'];
-   $count = intval($row['count']);
-   $label = getStatusLabel($category_id, $sub_category_id);
-   $data[] = array($label, $count);
-}
-mysqli_free_result($result);
-}
-mysqli_close($conn);
+// if($result && !empty($result)) {
+// while ($row = mysqli_fetch_assoc($result)) {
+//    $category_id = $row['category_id'];
+//    $sub_category_id = $row['sub_category_id'];
+//    $count = intval($row['count']);
+//    $label = getStatusLabel($category_id, $sub_category_id);
+//    $data[] = array($label, $count);
+// }
+// mysqli_free_result($result);
+// }
 
 // Fetch inventory data for scrapyard (status = 3)
 $queryScrapyard = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 3";
