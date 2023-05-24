@@ -7,50 +7,31 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
    exit;
 }
 
-// Fetch inventory data
-$query = "SELECT `category_id`, `sub_category_id`, COUNT(*) as count FROM `malkhana`.`inventory` GROUP BY `category_id`, `sub_category_id`";
-$result = mysqli_query($conn, $query);
-$data = array();
-while ($row = mysqli_fetch_assoc($result)) {
-   $category_id = $row['category_id'];
-   $sub_category_id = $row['sub_category_id'];
-   $count = intval($row['count']);
-   $label = getStatusLabel($category_id, $sub_category_id);
-   $data[] = array($label, $count);
-}
+// Fetch inventory data for inward
+$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(*) as count FROM `malkhana`.`inventory` GROUP BY `category_id`, `sub_category_id`";
+$resultInward = mysqli_query($conn, $queryInward);
+$rowInward = mysqli_fetch_assoc($resultInward);
+$countInward = intval($rowInward['count']);
 
-mysqli_free_result($result);
+// Fetch inventory data for outward (status = 2)
+$queryOutward = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 2";
+$resultOutward = mysqli_query($conn, $queryOutward);
+$rowOutward = mysqli_fetch_assoc($resultOutward);
+$countOutward = intval($rowOutward['count']);
+
+// Fetch inventory data for scrapyard (status = 3)
+$queryScrapyard = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 3";
+$resultScrapyard = mysqli_query($conn, $queryScrapyard);
+$rowScrapyard = mysqli_fetch_assoc($resultScrapyard);
+$countScrapyard = intval($rowScrapyard['count']);
+
+// Fetch inventory data for auction (status = 4)
+$queryAuction = "SELECT COUNT(*) as count FROM `malkhana`.`inventory` WHERE `status` = 4";
+$resultAuction = mysqli_query($conn, $queryAuction);
+$rowAuction = mysqli_fetch_assoc($resultAuction);
+$countAuction = intval($rowAuction['count']);
+
 mysqli_close($conn);
-
-// Function to get label based on status value
-function getStatusLabel($category_id, $sub_category_id)
-{
-   switch ($category_id) {
-      case 1:
-         switch ($sub_category_id) {
-            case 1:
-               return 'MalMukdamati - Stolen Vehicles';
-            case 2:
-               return 'MalMukdamati - Accidental case';
-            case 3:
-               return 'MalMukdamati - Objects other than vehicles';
-            default:
-               return '';
-         }
-      case 2:
-         // Mapping for category ID 2 (Unclaimed Vehicles)
-         return 'Unclaimed Vehicles';
-      case 3:
-         // Mapping for category ID 3 (Jama Talashi)
-         return 'Jama Talashi';
-      case 4:
-         // Mapping for category ID 4 (MV Act)
-         return 'MV Act';
-      default:
-         return '';
-   }
-}
-
 ?>
 
 <head>
@@ -58,21 +39,60 @@ function getStatusLabel($category_id, $sub_category_id)
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <script type="text/javascript">
       google.charts.load('current', { 'packages': ['corechart'] });
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawCharts);
 
-      function drawChart() {
-         var data = new google.visualization.DataTable();
-         data.addColumn('string', 'Category and Subcategory');
-         data.addColumn('number', 'Count');
-         data.addRows(<?php echo json_encode($data); ?>);
+      function drawCharts() {
+         // Data for inward
+         var dataInward = google.visualization.arrayToDataTable([
+            ['Status', 'Count'],
+            ['Inward', <?php echo $countInward; ?>]
+         ]);
 
-         var options = {
-            title: 'Inventory Category and Subcategory'
+         var optionsInward = {
+            title: 'Inward Inventory'
          };
 
-         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+         var chartInward = new google.visualization.PieChart(document.getElementById('piechart-inward'));
+         chartInward.draw(dataInward, optionsInward);
 
-         chart.draw(data, options);
+         // Data for outward
+         var dataOutward = google.visualization.arrayToDataTable([
+            ['Status', 'Count'],
+            ['Outward', <?php echo $countOutward; ?>]
+         ]);
+
+         var optionsOutward = {
+            title: 'Outward Inventory'
+         };
+
+         var chartOutward = new google.visualization.PieChart(document.getElementById('piechart-outward'));
+         chartOutward.draw(dataOutward, optionsOutward);
+
+         // Data for scrapyard
+         var dataScrapyard = google.visualization.arrayToDataTable([
+            ['Status', 'Count'],
+            ['Scrapyard', <?php echo $countScrapyard; ?>]
+         ]);
+
+         var optionsScrapyard = {
+            title: 'Scrapyard Inventory'
+         };
+
+         var chartScrapyard = new google.visualization.PieChart(document.getElementById('piechart-scrapyard'));
+         chartScrapyard.draw(dataScrapyard, optionsScrapyard);
+
+         // Data for auction
+         var dataAuction = google.visualization.arrayToDataTable([
+            ['Status', 'Count'],
+            ['Auction', <?php echo $countAuction; ?>]
+         ]);
+
+         var optionsAuction = {
+            title: 'Auction Inventory'
+         };
+
+         var chartAuction = new google.visualization.PieChart(document.getElementById('piechart-auction'));
+         chartAuction.draw(dataAuction, optionsAuction);
       }
    </script>
 </head>
@@ -84,7 +104,7 @@ function getStatusLabel($category_id, $sub_category_id)
          <!-- Navbar -->
          <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
             <?php include("navbar.php") ?>
-            <div class="heading col-md-6"><b><h5>Welcome to
+            <div class="heading col-md-6"><b>Welcome to
                   <?php
                   // Fetch the name from the users table based on the logged-in user's ID
                   $user_id = $_SESSION['user_id'];
@@ -97,7 +117,7 @@ function getStatusLabel($category_id, $sub_category_id)
                      echo "User";
                   }
                   ?>
-               <h5></b></div>
+               </b></div>
 
             <a class="form-control me-2 searchbar btn btn-outline-info desk-search" href="search.php"
                data-mdb-ripple-color="dark" placeholder="Search" aria-label="Search"
@@ -156,10 +176,23 @@ function getStatusLabel($category_id, $sub_category_id)
                </div>
             </div>
 
-            <!-- Pie chart -->
-            <div class="row">
-               <div class="container mt-5">
-                  <div id="piechart" style="width: 800px; height: 500px;"></div>
+            <!-- Pie charts -->
+            <div class="container mt-5">
+               <div class="row">
+                  <div class="col-md-6 mt-2">
+                     <div id="piechart-inward" style="width: 330px; height: 300px;"></div>
+                  </div>
+                  <div class="col-md-6 mt-2">
+                     <div id="piechart-outward" style="width: 330px; height: 300px;"></div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-6 mt-2">
+                     <div id="piechart-scrapyard" style="width: 330px; height: 300px;"></div>
+                  </div>
+                  <div class="col-md-6 mt-2">
+                     <div id="piechart-auction" style="width: 330px; height: 300px;"></div>
+                  </div>
                </div>
             </div>
          </div>
