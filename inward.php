@@ -4,11 +4,6 @@
 
 <?php
 
-if (!isset($_SESSION['inward']) || $_SESSION['inward'] !== true) {
-    header("Location: index.php");
-    exit;
-}
-
 $query = "SELECT `id`,`name` FROM `category`";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
@@ -51,7 +46,7 @@ if ($result->num_rows > 0) {
                 <h5 class="title"><?php echo $lang['inward_form'] ?></h5>
               </div>
               <div class="card-body">
-              <form method="POST" action="inward_config.php" autocomplete="off">
+              <form method="POST" action="inward_config.php" enctype="multipart/form-data" autocomplete="off">
                   <div class="row">
                     <div class="col-md-6 pl-1">
                       <div class="form-group">

@@ -11,7 +11,7 @@ if (isset($_POST['gd_number'])) {
         $row = mysqli_fetch_assoc($result);
         $current_status = $row['Status'];
 
-        if ($current_status != 4) {
+        if ($current_status != 3) {
             $created_at = $row['Created_at'];
             $created_by = $row['Created_By'];
             $id = $row['id'];
@@ -20,12 +20,12 @@ if (isset($_POST['gd_number'])) {
             $days_diff = $date_diff->days;
 
             if ($days_diff > 365) {
-                $update_query = "UPDATE `inventory` SET `Status` = '3' WHERE `Gd_Number` = '$gd_number'";
+                $update_query = "UPDATE `inventory` SET `Status` = '4' WHERE `Gd_Number` = '$gd_number'";
                 $update_result = mysqli_query($conn, $update_query);
 
                 if ($update_result) {
                     $inward_id = $id;
-                    $subject = 'Scrapped';
+                    $subject = 'Auctioned';
 
                     $insert_query = "INSERT INTO `sa_log` (`inward_id`, `subject`, `created_by`) VALUES ('$inward_id', '$subject', '$created_by')";
                     $insert_result = mysqli_query($conn, $insert_query);
@@ -42,7 +42,7 @@ if (isset($_POST['gd_number'])) {
                 echo 'not_scrapable';
             }
         } else {
-            echo 'already_scraped';
+            echo 'already_auctioned';
         }
     } else {
         echo 'not_found';

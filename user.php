@@ -1,4 +1,3 @@
-
 <?php include "conn.php"; ?>
 <?php include "header.php"; ?>
 
@@ -34,7 +33,9 @@ if ($result->num_rows > 0) {
 ?>
 
 <?php 
-if (isset($_POST['submit'])){
+$message = ""; // Initialize empty message variable
+
+if (isset($_POST['submit'])) {
   $name = $_POST['userName'];
   $role = $_POST['roleName'];
   $phone = $_POST['phoneName'];
@@ -42,43 +43,58 @@ if (isset($_POST['submit'])){
   $state = $_POST['stateName'];
   $city = $_POST['cityName'];
 
-  if(!empty($name) && !empty($role) && !empty($phone) && !empty($address) && !empty($state) && !empty($city)){
-    $query = "INSERT INTO `users` (`name`, `role_id`, `contact`, `address`, `state`, `city`) VALUES ( '$name', '$role', '$phone', '$address', '$state', '$city')";
-    $result = $conn->query($query);
-  
-    if($result){
-      echo "Registration successfully";
-    }
+  // Check if user with the same name already exists
+  $checkQuery = "SELECT COUNT(*) as count FROM users WHERE `contact` = '$phone'";
+  $checkResult = $conn->query($checkQuery);
+  $checkRow = $checkResult->fetch_assoc();
+  if ($checkRow['count'] > 0) {
+      $message = "User already exists.";
+      $messageColor = "red";
+  } else {
+      if (!empty($name) && !empty($role) && !empty($phone) && !empty($address) && !empty($state) && !empty($city)) {
+          $query = "INSERT INTO `users` (`name`, `role_id`, `contact`, `address`, `state`, `city`) VALUES ('$name', '$role', '$phone', '$address', '$state', '$city')";
+          $result = $conn->query($query);
+
+          if ($result) {
+              $message = "Registration successfully";
+              $messageColor = "green";
+          } else {
+              $message = "Error occurred while registering. Please try again.";
+              $messageColor = "red";
+          }
+      } else {
+          $message = "All fields are required.";
+          $messageColor = "red";
+      }
   }
 }
 ?>
 
-<?php
-  $state = "SELECT * FROM `state` ";
-  $state_query = mysqli_query($conn,$state);
-?>
 <head>
-   <title>
-  E-Malkhana Register
-  </title>
+   <title>E-Malkhana Register</title>
 </head>
 
 <body class="user-profile">
   <div class="wrapper ">
     <?php include "sidebar.php"; ?>
     <div class="main-panel" id="main-panel">
-      <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+      <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
         <?php include "navbar.php"; ?>
         </nav>
-      <div class="panel-header panel-header-sm">
-      </div>
+      <div class="panel-header panel-header-sm"></div>
       <div class="content">
+      <?php if(!empty($message)): ?>
+        <div class="alert <?php echo ($result) ? 'alert-success' : 'alert-danger'; ?>">
+          <?php echo $message; ?>
+        </div>
+      <?php endif; ?>
         <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h5 class="title"><?php echo $lang['register_here'] ?></h5>
               </div>
+              
               <div class="card-body">
                 <form method="POST" action="" autocomplete="off">
                   <div class="row">
@@ -92,14 +108,14 @@ if (isset($_POST['submit'])){
                       <div class="form-group">
                         <label><?php echo $lang['role_select'] ?>:</label>
                         <select class="form-control" name="roleName" id="role" aria-label="Default select example" required>
-                         <option value=""><?php echo $lang['role_select'] ?>:</option>
-                         <?php foreach ($options_role as $k => $role) {
-                             echo "<option value =" .
-                                 $role["id"] .
-                                 ">" .
-                                 $role["name"] .
-                                 "</option>";
-                         } ?>
+                          <option value=""><?php echo $lang['role_select'] ?>:</option>
+                          <?php
+                          foreach ($options_role as $k => $role) {
+                            if ($_SESSION['user_id'] == 1 || ($_SESSION['user_id'] == 2 && $role['id'] >= 2 && $role['id'] <= 3)) {
+                              echo "<option value=" . $role['id'] . ">" . $role['name'] . "</option>";
+                            }
+                          }
+                          ?>
                         </select>
                       </div>
                     </div>
@@ -126,14 +142,14 @@ if (isset($_POST['submit'])){
                       <div class="form-group">
                         <label><?php echo $lang['state'] ?>:</label>
                         <select class="form-control statetocity" name="stateName" onChange="getcity(this.value);" id="state" aria-label="Default select example" required>
-                         <option value=""><?php echo $lang['select_state'] ?></option>
-                         <?php foreach ($options_state as $state) {
-                             echo "<option value = " .
-                                 $state["id"] .
-                                 ">" .
-                                 $state["name"] .
-                                 "</option>";
-                         } ?>
+                          <option value=""><?php echo $lang['select_state'] ?></option>
+                          <?php foreach ($options_state as $state) {
+                            echo "<option value = " .
+                              $state["id"] .
+                              ">" .
+                              $state["name"] .
+                              "</option>";
+                          } ?>
                         </select>
                       </div>
                     </div>
@@ -146,7 +162,7 @@ if (isset($_POST['submit'])){
                       </div>
                     </div>
                   </div>
-                  <button type="submit" name="submit" class="btn btn-primary"><?php echo $lang['submit'] ?></button>
+                  <button type="submit" name="submit" class="btn btn-primary fs-fw"><?php echo $lang['submit'] ?></button>
                 </form>
               </div>
             </div>
@@ -154,8 +170,6 @@ if (isset($_POST['submit'])){
         </div>
       </div>
 
-      
-  
 <script>
   function getcity(val) {
     $.ajax({

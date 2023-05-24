@@ -7,6 +7,9 @@
       $lang = $hi;
     }
   }
+
+  $scrap_day = 365;
+  $auct_day = 300;
 ?>
 
 <!DOCTYPE html>
@@ -33,4 +36,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+  
 

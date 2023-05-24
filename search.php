@@ -96,10 +96,15 @@ if (isset($_POST['gd_search'])) {
                         $currentDate = date('Y-m-d');
                         $daysDiff = floor((strtotime($currentDate) - strtotime($creationDate)) / (60 * 60 * 24));
                         echo '<div class="buttons" style="display: flex; margin-top: 2rem;">';
-                        if ($daysDiff > 365) {
+                        if ($daysDiff > $scrap_day) {
                            echo '<button id="scrap_init" name="scrap" class="btn btn-sm btn-info" >Send to Scrapyard</button>';
                            echo '<button id="auct_init" name="auct" class="btn btn-sm btn-malkhana">Send to Auction</button>';
+                           echo '<button class="btn btn-sm btn-malkhana">
+                           <a href="outward.php">Send to Outward</a>
+                         </button>
+                         ';
                         }
+                        else
                         echo '</div>';
                      }
                   } else {
@@ -197,7 +202,7 @@ if (isset($_POST['gd_search'])) {
          url = 'scrap.php';
          successMessage = 'The item has been sent to the scrapyard.';
       } else if ($('#confirmationModal .modal-title').text() === 'Send to Auction') {
-         url = 'auction.php';
+         url = 'auct.php';
          successMessage = 'The item has been sent to the auction.';
       }
 

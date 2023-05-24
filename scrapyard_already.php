@@ -36,33 +36,25 @@
       <div class="main-panel" id="main-panel">
          <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
             <?php include "navbar.php"; ?>
-
-            <form action="" method="post" autocomplete="off">
-               <div class="row">
-                  <div class="col-8">
-                     <input class="form-control searchbar btn btn-outline-info searchnew" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="color: #ffffff; height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search; ?>">
-                  </div>
-                  <div class="col-2">
-                     <button name="search" class="btn btn-success"><?php echo $lang['go_button'] ?></button>
-                  </div>
-               </div>
-            </form>
          </nav>
          <div class="panel-header panel-header-sm">
          </div>
+        
          <div class="content my-3">
+
          <div class="row mt-5" >
             <div class="col-md-4">
                   <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"aria-current="page" href="aucti.php"><b>Eligible for auction</b></a>
+                        <li class="nav-item" >
+                           <a class="nav-link " style="color:black; !important" aria-current="page" href="scrapyard.php"><b>Eligible for scrapyard</b></a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" style="color:black; !important" href="auction_already.php"><b>Already present in auction</b></a>
+                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important" href="scrapyard_already.php"><b>Already present in scrapyard</b></a>
                         </li>
                   </ul>
             </div>
          </div>
+         
             <?php
             $fieldLabels = [
                'Gd_Number' => $lang['gd_number'],
@@ -89,11 +81,9 @@
                'Pictures' => $lang['pictures']
             ];
 
+            $status = 3; // Status for items in the scrapyard
 
-            $currentDate = date('Y-m-d');
-            $DaysAgo = date('Y-m-d', strtotime('-365 days'));
-
-            $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' ";
+            $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` INNER JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '3' ";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -110,8 +100,8 @@
                            if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
                               $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
                               echo '<tr>';
-                              echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
-                              echo '<td>' . $value . '</td>';
+                              echo '<td >' . '<b>' . $label . ':</b>' . '</td>';
+                              echo '<td >' . $value . '</td>';
                               echo '</tr>';
                            }
                         }
@@ -136,6 +126,9 @@
          </div>
       </div>
    </div>
+
+
+   
    <?php include('footer.php') ?>
 </body>
 
