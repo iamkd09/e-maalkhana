@@ -43,13 +43,10 @@
                         $user_id = $row['id'];
                         $token = $VerifyData['data']['token'];
 
-                        $updateToken = "UPDATE `users` SET `token_auth` = '$token' WHERE `id` = '$user_id'";
-                        $update_result = mysqli_query($conn,$update_query);
+                        $updateToken = "UPDATE `users` SET `token_auth` = '".$token."' WHERE `id` = $user_id";
+                        $update_result = mysqli_query($conn,$updateToken);
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['role_id'] = $role_id; 
-                        
-                             
-                        
                         header("Location: dashboard.php");
                         exit;
                     }else{
