@@ -38,14 +38,14 @@
                     $sql = "SELECT * FROM `users` WHERE `contact` = '$contact'";
                     $result_role = $conn->query($sql);
                     if ($result_role) {
+                        print_r($VerifyData); 
                         $row = $result_role->fetch_assoc();
                         $role_id = $row['role_id'];
                         $user_id = $row['id'];
                         $token = $VerifyData['data']['token'];
 
                         $updateToken = "UPDATE `users` SET `token_auth` = '$token' WHERE `id` = '$user_id'";
-                        $update_result = mysqli_query($conn, $update_query);
-
+                        $update_result = mysqli_query($conn,$update_query);
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['role_id'] = $role_id; 
                         
