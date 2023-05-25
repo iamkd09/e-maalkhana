@@ -1,7 +1,7 @@
 <?php include('header.php') ?>
 <?php include('conn.php') ?>
 <?php include('sidebar.php') ?>
-
+<?php $gdNumber = 0; ?>
 <head>
    <title>
       Project-admin
@@ -154,8 +154,9 @@
             <div class="modal-body" id="getCode">
                <p></p>
             </div>
+          
             <div class="text-center">
-               <button type="button"  class="btn btn-info fs-fw" id="confirmYes">Yes</button>
+               <button type="button"  class="btn btn-info fs-fw" id="confirmYes" >Yes</button>
                <button type="button" class="btn btn-malkhana" data-dismiss="modal">No</button>
             </div>
          </div>
@@ -181,6 +182,10 @@
    </div>
 
    <script>
+
+      function test(gdNUmber){
+        
+      }
       function openModal(id) {
          console.log(id);
         if(id != '' && id != undefined) {
