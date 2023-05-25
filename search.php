@@ -77,6 +77,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                   if (!empty($result)) {
                      $gd_number = $gd_search;
                      $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                     print_r($rows);
                      foreach ($rows as $k) {
                         echo '<div class="card custom-card col-sm-12 col-md-5"><div class="card-body"><div class="my-card">';
 
