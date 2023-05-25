@@ -9,9 +9,9 @@ if (isset($_POST['submit'])) {
   $cat = $_POST['category'];
   $sub_cat = empty($_POST['sub_category']) ? 0 : $_POST['sub_category'];
   $gd_number = $_POST['gd_number'];
-  $stolen_date = date('Y-m-d', strtotime($_POST['stolen_date']));
-  $recovery_date = date('Y-m-d', strtotime($_POST['recovery_date']));
-  $accident_date = date('Y-m-d', strtotime($_POST['accident_date']));
+  $stolen_date = isset($_POST['stolen_date']) ? date('Y-m-d', strtotime($_POST['stolen_date'])) : NULL;
+  $recovery_date = isset($_POST['recovery_date']) ? date('Y-m-d', strtotime($_POST['recovery_date'])) : NULL;
+  $accident_date = isset($_POST['accident_date']) ? date('Y-m-d', strtotime($_POST['accident_date'])) : NULL;
   $fir_number = $_POST['fir_number'];
   $under_section = $_POST['under_section'];
   $recovered_from = $_POST['recovered_from'];

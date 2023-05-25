@@ -93,7 +93,7 @@
             $currentDate = date('Y-m-d');
             $DaysAgo = date('Y-m-d', strtotime('-365 days'));
 
-            $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' ";
+            $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4)";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {

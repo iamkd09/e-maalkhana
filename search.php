@@ -7,12 +7,13 @@
    </title>
 </head>
 
+<?php $user_id = $_SESSION['user_id'];?>
+
 <?php
-if (isset($_POST['gd_search'])) { 
+if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) { 
    $gd_search = $_POST['gd_search'];
 
-   $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%'";
-
+   $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%' AND `Created_By` = '$user_id'";
    $result = mysqli_query($conn, $sql);
 } else {
    $gd_search = '';

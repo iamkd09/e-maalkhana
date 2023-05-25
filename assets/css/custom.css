@@ -82,6 +82,15 @@ b.desk-b {
     top: 20%;
     position: sticky;
 }
+
+.success {
+    color: green;
+}
+        
+.error {
+    color: red;
+}
+
 .card.custom-card {
     margin: 10px 10px 10px 10px;
 }
