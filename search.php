@@ -17,7 +17,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
    $rowsInv = mysqli_fetch_all($resultInv,MYSQLI_ASSOC);
 } else {
    $gd_search = '';
-   $result = [];
+   $rowsInv = [];
 }
 ?>
 
