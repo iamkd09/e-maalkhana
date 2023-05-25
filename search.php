@@ -13,7 +13,7 @@
 if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) { 
    $gd_search = $_POST['gd_search'];
 
-   $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%' AND `Created_By` = '$user_id'";
+   $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%' AND `Created_By` = $user_id";
    $result = mysqli_query($conn, $sql);
 } else {
    $gd_search = '';
@@ -76,7 +76,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
 
                   if (!empty($result)) {
                      $gd_number = $gd_search;
-                     $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                     $rows = mysqli_fetch_assoc($result);
                      print_r($rows);
                      foreach ($rows as $k) {
                         echo '<div class="card custom-card col-sm-12 col-md-5"><div class="card-body"><div class="my-card">';
