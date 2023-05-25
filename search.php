@@ -1,5 +1,4 @@
 <?php include('header.php')?>
-<?php include('conn.php')?>
 <?php include('sidebar.php') ?>
 <head>
    <title>
@@ -13,8 +12,9 @@
 if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) { 
    $gd_search = $_POST['gd_search'];
 
-   $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%' AND `Created_By` = $user_id";
-   $result = mysqli_query($conn, $sql);
+   $sqlInv = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%' AND `Created_By` = $user_id";
+   $resultInv = mysqli_query($conn, $sqlInv);
+   $rowsInv = mysqli_fetch_assoc($resultInv);
 } else {
    $gd_search = '';
    $result = [];
@@ -74,11 +74,9 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                      'Pictures' => $lang['pictures']
                   ];
 
-                  if (!empty($result)) {
+                  if (!empty($rowsInv)) {
                      $gd_number = $gd_search;
-                     $rows = mysqli_fetch_assoc($result);
-                     print_r($rows);
-                     foreach ($rows as $k) {
+                     foreach ($rowsInv as $k) {
                         echo '<div class="card custom-card col-sm-12 col-md-5"><div class="card-body"><div class="my-card">';
 
                         echo '<table class="table table-responsive">';
