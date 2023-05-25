@@ -38,7 +38,6 @@
                     $sql = "SELECT * FROM `users` WHERE `contact` = '$contact'";
                     $result_role = $conn->query($sql);
                     if ($result_role) {
-                        print_r($VerifyData); 
                         $row = $result_role->fetch_assoc();
                         $role_id = $row['role_id'];
                         $user_id = $row['id'];
