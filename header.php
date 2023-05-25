@@ -1,4 +1,6 @@
-<?php session_start(); 
+<?php 
+session_start(); 
+error_reporting(0);
 ini_set('session.gc_maxlifetime', -1);
   include('lang.php');
   include('env.php');
