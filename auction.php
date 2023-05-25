@@ -1,5 +1,4 @@
 <?php include('header.php') ?>
-<?php include('conn.php') ?>
 <?php include('sidebar.php') ?>
 <head>
    <title>
@@ -97,7 +96,7 @@
                $currentDate = date('Y-m-d');
                $DaysAgo = date('Y-m-d', strtotime('-365 days'));
 
-               $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' ";
+               $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4)";
                $result = mysqli_query($conn, $sql);
                if (!empty($result)) {
                   $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -108,7 +107,7 @@
 
                      echo '<table class="table table-responsive">';
                      echo '<tbody class="bg-custom-color">';
-
+                     $gdNumber = "";
                      foreach ($k as $key => $value) {
                         if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
@@ -117,11 +116,15 @@
                            echo '<td>' . $value . '</td>';
                            echo '</tr>';
                         }
+                        if($key == 'Gd_Number'){
+                           $gdNumber = $value;
+                           
+                        }
                      }
-
+                     
                      echo '</tbody>';
                      echo '</table>';
-                     echo '<button id="scrap_init" name="scrap" class="btn btn-primary fs-fw" >Send to auciton</button>';
+                     echo '<button id="scrap_init" name="scrap" onclick=openModal("'.$gdNumber.'"); class="btn btn-primary fs-fw" >Send to auciton</button>';
                      echo '</div></div></div>';
                   }
                } else {
@@ -147,6 +150,7 @@
          <div class="modal-body" id="getCode">
             <p></p>
          </div>
+         <input type="hidden" value="" name="gd" id="gd_confirm" readonly>
          <div class="text-center">
             <button type="button" class="btn btn-info fs-fw" id="confirmYes">Yes</button>
             <button type="button" class="btn btn-malkhana" data-dismiss="modal">No</button>
@@ -174,7 +178,14 @@
 </div>
 
 <script>
-   function showConfirmationPopup(title, message) {
+    function openModal(id) {
+         console.log(id);
+        if(id != '' && id != undefined) {
+           showConfirmationPopup('Send to Scrapyard', 'Are you sure you want to send '+ id +' it to the Auction?',id);  
+        }
+      }
+   function showConfirmationPopup(title, message,id) {
+      $('#gd_confirm').val(id);
       $('#confirmationModal .modal-title').text(title);
       $('#confirmationModal .modal-body p').text(message);
       $('#confirmationModal').modal('show');
@@ -191,11 +202,12 @@
 
    function hideAlertPopup() {
       $('#alertPopup').modal('hide');
+      window.location.reload();
    }
 
-   $('#scrap_init').on('click', function () {
-      showConfirmationPopup('Send to Auction', 'Are you sure you want to send it to the auction?');
-   });
+   // $('#scrap_init').on('click', function () {
+   //    showConfirmationPopup('Send to Auction', 'Are you sure you want to send it to the auction?');
+   // });
 
    $('.alert_sh').on('click', function () {
       hideAlertPopup();
@@ -205,20 +217,17 @@
       // Perform the action based on scrapyard or auction
       var url = '';
       var successMessage = '';
+      var gd_no = $('#gd_confirm').val();
 
-      if ($('#confirmationModal .modal-title').text() === 'Send to Scrapyard') {
-         url = 'scrap.php';
-         successMessage = 'The item has been sent to the scrapyard.';
-      } else if ($('#confirmationModal .modal-title').text() === 'Send to Auction') {
-         url = 'auct.php';
-         successMessage = 'The item has been sent to the auction.';
-      }
+
+      url = 'auct.php';
+      successMessage = 'The item has been sent to the auction.';
 
       $.ajax({
          url: url,
          type: 'POST',
          data: {
-            gd_number: '<?php echo $gd_number ?? ''; ?>'
+            gd_number: gd_no
          },
          success: function (response) {
             if (response === 'success') {

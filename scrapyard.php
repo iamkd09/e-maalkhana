@@ -1,5 +1,4 @@
 <?php include('header.php') ?>
-<?php include('conn.php') ?>
 <?php include('sidebar.php') ?>
 <?php $gdNumber = 0; ?>
 <head>
@@ -100,11 +99,12 @@
                $currentDate = date('Y-m-d');
                $DaysAgo = date('Y-m-d', strtotime('-365 days'));
                $user_id = $_SESSION['user_id'];
-               $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4) AND `Created_By` = '$user_id' ";
-               $result = mysqli_query($conn, $sql);
-               if (!empty($result)) {
-                  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                  foreach ($rows as $k) {
+               $sqlScrap = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4) AND `Created_By` = '$user_id' ";
+               $resultQS = mysqli_query($conn, $sqlScrap);
+               $rowsScrap = mysqli_fetch_all($resultQS, MYSQLI_ASSOC);
+               if (!empty($rowsScrap)) {
+                  
+                  foreach ($rowsScrap as $k) {
                      $gdNumber = '';
                      echo '<div class="card custom-card col-sm-12 col-md-5">
                      <div class="">
@@ -132,8 +132,13 @@
                      echo '</div></div></div>';
                   }
                } else {
+                  echo '<div class="card custom-card col-sm-12 col-md-5">
+                     <div class="">
+                     <div class="my-card">';
                   echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
                   echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
+                  echo '</div></div></div>';
+
                }
             ?>
            </div> 
@@ -154,6 +159,7 @@
             <div class="modal-body" id="getCode">
                <p></p>
             </div>
+            <input type="hidden" value="" name="gd" id="gd_confirm" readonly>
           
             <div class="text-center">
                <button type="button"  class="btn btn-info fs-fw" id="confirmYes" >Yes</button>
@@ -189,11 +195,12 @@
       function openModal(id) {
          console.log(id);
         if(id != '' && id != undefined) {
-           showConfirmationPopup('Send to Scrapyard', 'Are you sure you want to send it to the scrapyard?');  
+           showConfirmationPopup('Send to Scrapyard', 'Are you sure you want to send '+ id +' it to the scrapyard?',id);  
         }
       }
 
-      function showConfirmationPopup(title, message) {
+      function showConfirmationPopup(title, message,id) {
+         $('#gd_confirm').val(id);
          $('#confirmationModal .modal-title').text(title);
          $('#confirmationModal .modal-body p').text(message);
          $('#confirmationModal').modal('show');
@@ -210,6 +217,7 @@
 
       function hideAlertPopup() {
          $('#alertPopup').modal('hide');
+         window.location.reload();
       }
 
       // $('#scrap_init').on('click', function () {
@@ -221,6 +229,7 @@
       });
 
       $('#confirmYes').on('click', function () {
+         var gd_no = $('#gd_confirm').val();
          // Perform the action based on scrapyard or auction
          var url = '';
          var successMessage = '';
@@ -237,7 +246,7 @@
             url: url,
             type: 'POST',
             data: {
-               gd_number: '<?php echo $gd_number; ?>'
+               gd_number: gd_no
             },
             success: function (response) {
                console.log(response);
