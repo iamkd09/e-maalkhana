@@ -1,4 +1,3 @@
-
 <?php
 include('header.php');
 // echo '<pre>';
@@ -116,18 +115,18 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
                          </div>
                        </div>
 
-                       <div class="col-md-4 pl-1">
-                       <div class="form-group">
-                           <label>' . $lang['vehicle_type'] . ':</label>
-                           <select class="form-control statetocity" name="vehicle_type">
-                           <option value="">' . $lang['vehicle_type'] . '</option>
-                           <option value="">' . $lang['two_wheeler'] . '</option>
-                           <option value="">' . $lang['three_wheeler'] . '</option>
-                           <option value="">' . $lang['four_wheeler'] . '</option>
-                           
-                           </select>
-                       </div>
-                   </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <label>' . $lang['vehicle_type'] . ':</label>
+                                <select class="form-control statetocity" name="vehicle_type">
+                                <option>' . $lang['vehicle_type'] . '</option>
+                                <option>' . $lang['two_wheeler'] . '</option>
+                                <option>' . $lang['three_wheeler'] . '</option>
+                                <option>' . $lang['four_wheeler'] . '</option>
+                                
+                                </select>
+                            </div>
+                        </div>
               
                    <div class="col-md-4 pl-1">
                      <div class="form-group">
@@ -155,7 +154,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
                           <div class="col-md-4 pl-1">
                           <div class="form-group">
                             <label>' . $lang['recovery_date'] . ':</label>
-                            <input type="date" class="form-control" name="recovery_date  value="' . $data['Date_Of_Recovery'] . '"  placeholder="' . $lang['recovery_date'] . '">
+                            <input type="date" class="form-control" name="recovery_date placeholder="' . $lang['recovery_date'] . '">
                           </div>
                         </div>
 
@@ -261,7 +260,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
      <div class="col-md-4 pl-1">
          <div class="form-group">
              <label>' . $lang['vehicle_type'] . ':</label>
-             <select class="form-control statetocity" name="vehicle_type" value=>
+             <select class="form-control statetocity" name="vehicle_type">
              <option>' . $lang['vehicle_type'] . '</option>
              <option>' . $lang['two_wheeler'] . '</option>
              <option>' . $lang['three_wheeler'] . '</option>
@@ -297,7 +296,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
       <div class="col-md-4 pl-1">
         <div class="form-group">
           <label>' . $lang['recovery_date'] . ':</label>
-          <input type="date" class="form-control" name="recovery_date" id="datplaceholder="' . $lang['recovery_date'] . '">
+          <input type="date" class="form-control" name="recovery_date" placeholder="' . $lang['recovery_date'] . '">
         </div>
       </div>
 
@@ -325,17 +324,17 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
       </div>
  
       <div class="col-md-4 pl-1">
-          <div class="form-group">
-              <label>' . $lang['vehicle_type'] . ':</label>
-              <select class="form-control statetocity" name="vehicle_type">
-              <option value="">' . $lang['vehicle_type'] . '</option>
-              <option value="">' . $lang['two_wheeler'] . '</option>
-              <option value="">' . $lang['three_wheeler'] . '</option>
-              <option value="">' . $lang['four_wheeler'] . '</option>
-              
-              </select>
-          </div>
-      </div>
+         <div class="form-group">
+             <label>' . $lang['vehicle_type'] . ':</label>
+             <select class="form-control statetocity" name="vehicle_type">
+             <option>' . $lang['vehicle_type'] . '</option>
+             <option>' . $lang['two_wheeler'] . '</option>
+             <option>' . $lang['three_wheeler'] . '</option>
+             <option>' . $lang['four_wheeler'] . '</option>
+             
+             </select>
+         </div>
+     </div>
  
       <div class="col-md-4 pl-1">
         <div class="form-group">

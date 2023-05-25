@@ -97,15 +97,18 @@
                'Item_desc' => $lang['item_desc'],
                'Pictures' => $lang['pictures']
             ];
-
+            $user_id = $_SESSION['user_id'];
             $currentDate = date('Y-m-d');
             $DaysAgo = date('Y-m-d', strtotime('-365 days'));
 
-            $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' ";
+            $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4) AND `Created_By` = '$user_id' ";
+
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+               $gd_number = $rows['Gd_Number'];
 
                foreach ($rows as $k) {
                   ?>
@@ -113,7 +116,7 @@
                      <div class="card-body search-body">
                         <?php
                         echo '<table>';
-
+                        $gd = '';
                         foreach ($k as $key => $value) {
                            if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
                               $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
@@ -121,16 +124,16 @@
                               echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
                               echo '<td >' . $value . '</td>';
                               echo '</tr>';
+                              //$gd = $key['Gd_Number'];
                            }
                         }
-
 
                         echo '</table>';
 
                         ?>
                      </div>
                      <?php
-                     echo '<button id="scrap_init" name="scrap" class="btn btn-sm btn-info" >Send to Scrapyard</button>'; ?>
+                     echo '<button id="scrap_init" onClick=openModel('.$gd.'); name="scrap" class="btn btn-sm btn-info" >Send to Scrapyard</button>'; ?>
                   </div>
                   <?php
                }
@@ -189,6 +192,10 @@
    </div>
 
    <script>
+      function openModel(id) {
+        alert(id);
+      }
+
       function showConfirmationPopup(title, message) {
          $('#confirmationModal .modal-title').text(title);
          $('#confirmationModal .modal-body p').text(message);
@@ -236,6 +243,7 @@
                gd_number: '<?php echo $gd_number; ?>'
             },
             success: function (response) {
+               console.log(response);
                if (response === 'success') {
                   hideConfirmationPopup();
                   showAlertPopup(successMessage);
