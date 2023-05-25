@@ -111,7 +111,6 @@
                   echo '</div></div></div>';
                }
             } else {
-               echo
                echo '<img src="assets/img/nodatapolice.jpeg" width="50%" alt="" srcset="" style="margin-left: 32%;"/>';
                echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
             }
