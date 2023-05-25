@@ -37,32 +37,35 @@
       <div class="main-panel" id="main-panel">
          <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
             <?php include "navbar.php"; ?>
-
+         </nav>
+         <div class="panel-header panel-header-sm">
+         </div>
+         <div class="container">
             <form action="" method="post" autocomplete="off">
-               <div class="row">
-                  <div class="col-8">
-                     <input class="form-control searchbar btn btn-outline-info searchnew" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="color: #ffffff; height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
+               <div class="row search-row">
+               <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
+                  <div class="col-9">
+                     <input class="form-control searchbar btn btn-outline-info searchnew f-14" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
                   </div>
                   <div class="col-2">
                      <button name="search" class="btn btn-success">
                         <?php echo $lang['go_button'] ?>
                      </button>
                   </div>
+                </div></div>  
                </div>
             </form>
-         </nav>
-         <div class="panel-header panel-header-sm">
          </div>
-         <div class="content">
-         <div class="row mt-5" >
+         <div class="content ck">
+         <div class="row" >
             <div class="col-md-12">
-                  <ul class="nav nav-tabs">
-                        <li class="nav-item nav-item-new">
-                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"aria-current="page" href="scrapyard.php"><b>Eligible for scrapyard</b></a>
-                        </li>
-                        <li class="nav-item nav-item-new">
-                           <a class="nav-link" style="color:black; !important" href="scrapyard_already.php"><b>Already present in scrapyard</b></a>
-                        </li>
+                  <ul class="nav-custom container-custom">
+                     <li class="nav-item nav-item-new">
+                        <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"aria-current="page" href="scrapyard.php"><b>Eligible for scrapyard</b></a>
+                     </li>
+                     <li class="nav-item nav-item-new">
+                        <a class="nav-link" style="color:black; !important" href="scrapyard_already.php"><b>Already present in scrapyard</b></a>
+                     </li>
                   </ul>
                </div>
             </div>

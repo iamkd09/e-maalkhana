@@ -539,6 +539,8 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 .btn-primary {
   /* background-color: #f96332; */
   color: #FFFFFF;
+  background-color: #007bff !important;
+  border-color: #007bff !important;
 }
 
 .btn-primary:hover,
@@ -552,10 +554,13 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 .show>.btn-primary.dropdown-toggle,
 .show>.btn-primary.dropdown-toggle:focus,
 .show>.btn-primary.dropdown-toggle:hover {
-  background-color: #13a705;
-  color: #FFFFFF;
-  box-shadow: none;
-  border-color: #7afa50;
+  /* background-color: #13a705; */
+  /* color: #FFFFFF;
+  box-shadow: none; */
+  /* border-color: #7afa50; */
+  color: #fff;
+  background-color: #007bff !important;
+  border-color: #007bff !important;
 }
 
 .btn-primary:not([data-action]):not([class*="btn-outline-"]):hover {
@@ -1261,7 +1266,7 @@ fieldset[disabled] .btn-link.active {
 
 .btn-round {
   border-width: 1px;
-  border-radius: 30px;
+  border-radius: 10px;
   padding-right: 23px;
   padding-left: 23px;
 }
@@ -1301,7 +1306,7 @@ fieldset[disabled] .btn-link.active {
 .form-control {
   background-color: transparent;
   border: 1px solid #E3E3E3;
-  border-radius: 30px;
+  border-radius: 10px;
   color: #2c2c2c;
   line-height: normal;
   height: auto;
@@ -1596,7 +1601,7 @@ fieldset[disabled] .btn-link.active {
 .input-group-prepend .input-group-text {
   background-color: transparent;
   border: 1px solid #E3E3E3;
-  border-radius: 30px;
+  border-radius: 10px;
   color: #888;
   -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -moz-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -1685,7 +1690,7 @@ fieldset[disabled] .btn-link.active {
 
 .input-group .form-control:not(:first-child):not(:last-child),
 .input-group-btn:not(:first-child):not(:last-child) {
-  border-radius: 30px;
+  border-radius: 10px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left: 0 none;
@@ -3860,7 +3865,7 @@ Created using IcoMoon - icomoon.io
 .sidebar .nav li>a,
 .off-canvas-sidebar .nav li>a {
   margin: 10px 15px 0;
-  border-radius: 30px;
+  border-radius: 10px;
   color: #FFFFFF;
   display: block;
   text-decoration: none;
