@@ -14,7 +14,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
 
    $sqlInv = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%' AND `Created_By` = $user_id";
    $resultInv = mysqli_query($conn, $sqlInv);
-   $rowsInv = mysqli_fetch_assoc($resultInv);
+   $rowsInv = mysqli_fetch_all($resultInv,MYSQLI_ASSOC);
 } else {
    $gd_search = '';
    $result = [];
