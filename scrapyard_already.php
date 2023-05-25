@@ -40,11 +40,11 @@
          <div class="panel-header panel-header-sm">
          </div>
         
-         <div class="content my-3">
+         <div class="content">
 
          <div class="row mt-5" >
             <div class="col-md-12">
-                  <ul class="nav nav-tabs">
+                  <ul class="nav-custom container-custom">
                         <li class="nav-item" >
                            <a class="nav-link nav-item-new" style="color:black; !important" aria-current="page" href="scrapyard.php"><b>Eligible for scrapyard</b></a>
                         </li>
@@ -80,37 +80,35 @@
                'Item_desc' => $lang['item_desc'],
                'Pictures' => $lang['pictures']
             ];
-
+            ?>
+            <div class="row">
+            <?php
             $status = 3; // Status for items in the scrapyard
-
             $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` INNER JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '3' ";
             $result = mysqli_query($conn, $sql);
-
-            if (mysqli_num_rows($result) > 0) {
+            if (!empty($result)) {
                $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
                foreach ($rows as $k) {
-            ?>
-                  <div class="card card-user search-card">
-                     <div class="card-body search-body">
-                        <?php
-                        echo '<table>';
+                  echo '<div class="card custom-card col-sm-12 col-md-5">
+                  <div class="">
+                  <div class="my-card">';
 
-                        foreach ($k as $key => $value) {
-                           if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
-                              $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
-                              echo '<tr>';
-                              echo '<td >' . '<b>' . $label . ':</b>' . '</td>';
-                              echo '<td >' . $value . '</td>';
-                              echo '</tr>';
-                           }
-                        }
+                  echo '<table class="table table-responsive">';
+                  echo '<tbody class="bg-custom-color">';
 
-                        echo '</table>';
-                        ?>
-                     </div>
-                  </div>
-            <?php
+                  foreach ($k as $key => $value) {
+                     if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
+                        $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                        echo '<tr>';
+                        echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+                        echo '<td>' . $value . '</td>';
+                        echo '</tr>';
+                     }
+                  }
+
+                  echo '</tbody>';
+                  echo '</table>';
+                  echo '</div></div></div>';
                }
             } else {
                echo '<img src="./assets/img/datanotfound.jpg" width="100%" alt="" srcset="" />';
@@ -123,6 +121,7 @@
                return isset($fieldLabels[$fieldName]) ? $fieldLabels[$fieldName] : $fieldName;
             }
             ?>
+            </div>
          </div>
       </div>
    </div>

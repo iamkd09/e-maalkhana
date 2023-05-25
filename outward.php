@@ -31,27 +31,24 @@ if (isset($_POST['gd_search'])) {
     <div class="main-panel" id="main-panel">
       <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
         <?php include "navbar.php"; ?>
-
-        <form action="" method="post" autocomplete="off">
-          <div class="row">
-            <div class="col-8">
-              <input class="form-control searchbar btn btn-outline-info searchnew" type="search" name="gd_search"
-                data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search"
-                style="color: #ffffff; height: fit-content; border-radius: 5px!important;"
-                value="<?php echo $gd_search; ?>">
-            </div>
-            <div class="col-2">
-              <button name="search" class="btn btn-success">
-                <?php echo $lang['go_button'] ?>
-              </button>
-            </div>
-          </div>
-        </form>
       </nav>
       <div class="panel-header panel-header-sm">
       </div>
-
-      <div class="content mt-3" <?php $select = 'outward' ?>>
+      <div class="container">
+            <form action="" method="post" autocomplete="off">
+               <div class="row search-row">
+               <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
+                  <div class="col-9">
+                     <input class="form-control searchbar btn btn-outline-info searchnew f-14" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search; ?>">
+                  </div>
+                  <div class="col-2">
+                     <button name="search" class="btn btn-success"><?php echo $lang['go_button'] ?></button>
+                  </div>
+                </div></div>  
+               </div>
+            </form>
+         </div>
+      <div class="content ck" <?php $select = 'outward' ?>>
         <div class="row">
           <div class="col-md-12">
             <div class="card">

@@ -92,7 +92,39 @@ b.desk-b {
 .nav-item-new {
     background-color: #f7f7f7;
 }
-@media screen and (min-width: 768px) {
+.search-row {
+    min-height: 140px;
+    top: -75px;
+    position: relative;
+}
+.top-24 {
+    top: 24%;
+}
+.f-14 {
+    font-size: 14px;;
+}
+td {
+    word-break: break-all;
+}
+select {
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+select {
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 5px;
+    border: 1px solid #dfdfdf;
+    border-radius: 2px;
+    margin-right: 2rem;
+    padding: 1rem;
+    padding-right: 2rem;
+  }
+@media screen and (min-width: 768px) { 
+    /* Desktop CSS */
     .desk-login {
         left: 22%;
         display: flex !important;
@@ -109,11 +141,24 @@ b.desk-b {
     }
     .desk-search {
         position: relative;
-        width: 27%;
+        width: 50%;
     }
     .modal-content.my-model {
         position: relative;
         margin-top: 25% !important;
+    }
+    .nav-custom {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+    .content.ck {
+        position: relative;
+        margin-top: -6%;
     }
 }
 
@@ -128,6 +173,19 @@ b.desk-b {
     .modal-content.my-model {
         position: relative;
         margin-top: 40% !important;
+    }
+    .container-custom {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        list-style: none;
+        display: inline-flex;
+    }
+    .content.ck {
+        position: relative;
+        margin-top: -20%;
     }
 }
       

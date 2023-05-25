@@ -36,30 +36,33 @@
       <div class="main-panel" id="main-panel">
          <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
             <?php include "navbar.php"; ?>
-
+         </nav>
+         <div class="panel-header panel-header-sm">
+         </div>
+         <div class="container">
             <form action="" method="post" autocomplete="off">
-               <div class="row">
-                  <div class="col-8">
-                     <input class="form-control searchbar btn btn-outline-info searchnew" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="color: #ffffff; height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search; ?>">
+               <div class="row search-row">
+               <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
+                  <div class="col-9">
+                     <input class="form-control searchbar btn btn-outline-info searchnew f-14" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
                   </div>
                   <div class="col-2">
                      <button name="search" class="btn btn-success"><?php echo $lang['go_button'] ?></button>
                   </div>
+                </div></div>  
                </div>
             </form>
-         </nav>
-         <div class="panel-header panel-header-sm">
          </div>
-         <div class="content my-3">
-         <div class="row mt-5" >
-            <div class="col-md-4">
-                  <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"aria-current="page" href="aucti.php"><b>Eligible for auction</b></a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" style="color:black; !important" href="auction_already.php"><b>Already present in auction</b></a>
-                        </li>
+         <div class="content ck">
+         <div class="row" >
+            <div class="col-md-12">
+                  <ul class="nav-custom container-custom">
+                     <li class="nav-item nav-item-new">
+                        <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"aria-current="page" href="auction.php"><b>Eligible for auction</b></a>
+                     </li>
+                     <li class="nav-item nav-item-new">
+                        <a class="nav-link" style="color:black; !important" href="auction_already.php"><b>Already present in auction</b></a>
+                     </li>
                   </ul>
             </div>
          </div>
@@ -88,54 +91,152 @@
                'Item_desc' => $lang['item_desc'],
                'Pictures' => $lang['pictures']
             ];
-
-
-            $currentDate = date('Y-m-d');
-            $DaysAgo = date('Y-m-d', strtotime('-365 days'));
-
-            $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' ";
-            $result = mysqli_query($conn, $sql);
-
-            if (mysqli_num_rows($result) > 0) {
-               $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-               foreach ($rows as $k) {
             ?>
-                  <div class="card card-user search-card">
-                     <div class="card-body search-body">
-                        <?php
-                        echo '<table>';
+            <div class="row">
+            <?php     
+               $currentDate = date('Y-m-d');
+               $DaysAgo = date('Y-m-d', strtotime('-365 days'));
 
-                        foreach ($k as $key => $value) {
-                           if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
-                              $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
-                              echo '<tr>';
-                              echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
-                              echo '<td>' . $value . '</td>';
-                              echo '</tr>';
-                           }
+               $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' ";
+               $result = mysqli_query($conn, $sql);
+               if (!empty($result)) {
+                  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                  foreach ($rows as $k) {
+                     echo '<div class="card custom-card col-sm-12 col-md-5">
+                     <div class="">
+                     <div class="my-card">';
+
+                     echo '<table class="table table-responsive">';
+                     echo '<tbody class="bg-custom-color">';
+
+                     foreach ($k as $key => $value) {
+                        if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
+                           $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                           echo '<tr>';
+                           echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+                           echo '<td>' . $value . '</td>';
+                           echo '</tr>';
                         }
+                     }
 
-                        echo '</table>';
-                        ?>
-                     </div>
-                  </div>
-            <?php
+                     echo '</tbody>';
+                     echo '</table>';
+                     echo '<button id="scrap_init" name="scrap" class="btn btn-primary fs-fw" >Send to auciton</button>';
+                     echo '</div></div></div>';
+                  }
+               } else {
+                  echo '<img src="./assets/img/datanotfound.jpg" width="100%" alt="" srcset="" />';
+                  echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                }
-            } else {
-               echo '<img src="./assets/img/datanotfound.jpg" width="100%" alt="" srcset="" />';
-               echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
-            }
-
-            function getFieldLabel($fieldName)
-            {
-               global $fieldLabels;
-               return isset($fieldLabels[$fieldName]) ? $fieldLabels[$fieldName] : $fieldName;
-            }
             ?>
+           </div> 
          </div>
       </div>
    </div>
+
+     <!-- Common modal structure for scrapyard and auction -->
+<div class="modal" tabindex="-1" id="confirmationModal" role="dialog">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content my-model">
+         <div class="modal-header my-header">
+            <h5 class="modal-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body" id="getCode">
+            <p></p>
+         </div>
+         <div class="text-center">
+            <button type="button" class="btn btn-info fs-fw" id="confirmYes">Yes</button>
+            <button type="button" class="btn btn-malkhana" data-dismiss="modal">No</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal" tabindex="-1" id="alertPopup" role="dialog">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content my-model">
+         <div class="modal-header my-header">
+            <h5 class="modal-title">Message</h5>
+            <button type="button" class="close alert_sh" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body" id="getCode">
+         </div>
+         <div class="text-center">
+            <button type="button" class="btn btn-malkhana alert_sh fs-fw" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script>
+   function showConfirmationPopup(title, message) {
+      $('#confirmationModal .modal-title').text(title);
+      $('#confirmationModal .modal-body p').text(message);
+      $('#confirmationModal').modal('show');
+   }
+
+   function hideConfirmationPopup() {
+      $('#confirmationModal').modal('hide');
+   }
+
+   function showAlertPopup(message) {
+      $('#alertPopup .modal-body').text(message);
+      $('#alertPopup').modal('show');
+   }
+
+   function hideAlertPopup() {
+      $('#alertPopup').modal('hide');
+   }
+
+   $('#scrap_init').on('click', function () {
+      showConfirmationPopup('Send to Auction', 'Are you sure you want to send it to the auction?');
+   });
+
+   $('.alert_sh').on('click', function () {
+      hideAlertPopup();
+   });
+
+   $('#confirmYes').on('click', function () {
+      // Perform the action based on scrapyard or auction
+      var url = '';
+      var successMessage = '';
+
+      if ($('#confirmationModal .modal-title').text() === 'Send to Scrapyard') {
+         url = 'scrap.php';
+         successMessage = 'The item has been sent to the scrapyard.';
+      } else if ($('#confirmationModal .modal-title').text() === 'Send to Auction') {
+         url = 'auct.php';
+         successMessage = 'The item has been sent to the auction.';
+      }
+
+      $.ajax({
+         url: url,
+         type: 'POST',
+         data: {
+            gd_number: '<?php echo $gd_number ?? ''; ?>'
+         },
+         success: function (response) {
+            if (response === 'success') {
+               hideConfirmationPopup();
+               showAlertPopup(successMessage);
+            } else {
+               hideConfirmationPopup();
+               showAlertPopup('Failed to send the item.');
+            }
+         },
+         error: function () {
+            hideConfirmationPopup();
+            showAlertPopup('An error occurred while processing your request.');
+         }
+      });
+   });
+</script>
+
    <?php include('footer.php') ?>
 </body>
 
