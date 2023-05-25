@@ -22,27 +22,43 @@
         if ($result) {
             $row = $result->fetch_assoc();
             $db_otp_code = $row['otp'];
-
-                if ($otp_code == $db_otp_code) {
+            $state = $row['state'];
+            $url = user_service_url."/api/v2/user/clientOTPVerification/";
+            $postData = json_encode([
+              "phone_number" => $contact,
+              "otp" => $otp_code,
+              "state" => $state
+            ]);
+            $saveInService = postCurl($url,$postData);
+            $VerifyData = json_decode($saveInService,true);
+           
+                if ($VerifyData['status'] == 0 && isset($VerifyData['data']['token'])) {
                     // Set the logged_in flag in the session
                     $_SESSION['logged_in'] = true;
                     $sql = "SELECT * FROM `users` WHERE `contact` = '$contact'";
                     $result_role = $conn->query($sql);
                     if ($result_role) {
-                    $row = $result_role->fetch_assoc();
-                    $role_id = $row['role_id'];
-                    $user_id = $row['id'];
-                    $_SESSION['user_id'] = $user_id;
-                    $_SESSION['role_id'] = $role_id;      
-                    
-                    header("Location: dashboard.php");
+                        $row = $result_role->fetch_assoc();
+                        $role_id = $row['role_id'];
+                        $user_id = $row['id'];
+                        $token = $VerifyData['data']['token'];
+
+                        $updateToken = "UPDATE `users` SET `token` = '$token' WHERE `id` = '$user_id'";
+                        $update_result = mysqli_query($conn, $update_query);
+
+                        $_SESSION['user_id'] = $user_id;
+                        $_SESSION['role_id'] = $role_id; 
+                        
+                             
+                        
+                        header("Location: dashboard.php");
+                        exit;
+                    }
+                } else {
+                    $_SESSION['msg'] = '<span style="color:red;">Invalid OTP, please try again.</span>';
+                    header("Location: otp.php");
                     exit;
-                }
-    } else {
-        $_SESSION['msg'] = '<span style="color:red;">Invalid OTP, please try again.</span>';
-        header("Location: otp.php");
-        exit;
-    }  
+                }  
  } 
 }
 

@@ -43,6 +43,8 @@ if (isset($_POST['submit'])) {
   $state = $_POST['stateName'];
   $city = $_POST['cityName'];
 
+  $serviceRoleQ = $conn->query("select * from role where id = $role");
+  $roleRow = $serviceRoleQ->fetch_assoc();
   // Check if user with the same name already exists
   $checkQuery = "SELECT COUNT(*) as count FROM users WHERE `contact` = '$phone'";
   $checkResult = $conn->query($checkQuery);
@@ -51,8 +53,29 @@ if (isset($_POST['submit'])) {
       $message = "User already exists.";
       $messageColor = "red";
   } else {
-      if (!empty($name) && !empty($role) && !empty($phone) && !empty($address) && !empty($state) && !empty($city)) {
-          $query = "INSERT INTO `users` (`name`, `role_id`, `contact`, `address`, `state`, `city`) VALUES ('$name', '$role', '$phone', '$address', '$state', '$city')";
+
+   
+
+
+      if (isset($roleRow['user_service_role']) && !empty($name) && !empty($role) && !empty($phone) && !empty($address) && !empty($state) && !empty($city)) {
+        $url = user_service_url."/api/v1/user/serviceCall/user-account/create/";
+        $postData = json_encode([
+          "phone_number" => $phone,
+          "first_name" => $name,
+          "email_id" => "",
+          "last_name" => "",
+          "role_id" => $roleRow['user_service_role'],
+          "source" => "junkyard",
+          "project_ids" => [],
+          "committed_by_user_id" => 1,
+        ]);
+        $saveInService = postCurl($url,$postData);
+       
+        $users = json_decode($saveInService, true);
+        $user_service_id = $users['id'] ?? null;
+
+
+          $query = "INSERT INTO `users` (`name`, `role_id`, `contact`, `address`, `state`, `city`,`user_service_id`) VALUES ('$name', '$role', '$phone', '$address', '$state', '$city','$user_service_id')";
           $result = $conn->query($query);
 
           if ($result) {

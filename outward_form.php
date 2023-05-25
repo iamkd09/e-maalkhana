@@ -1,5 +1,4 @@
 <?php
-include('header.php');
 
 $fieldLabels = [
     'Gd_Number' => $lang['gd_number'],

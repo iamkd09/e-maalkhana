@@ -1,5 +1,7 @@
 <?php session_start(); 
   include('lang.php');
+  include('env.php');
+  include "functions.php";
   $lang = $en;
   if(isset($_COOKIE['mal_lang'])){
   

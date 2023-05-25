@@ -41,10 +41,8 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
          </nav>
          <div class="panel-header panel-header-sm">
          </div>
-         <div class="content my-3 ">
-            <div class="card card-user search-card">
-               <div class="card-body search-body">
-
+         <div class="content ck">
+          <div class="row">
                   <?php
                   $fieldLabels = [
                      'Gd_Number' => $lang['gd_number'],
@@ -75,9 +73,9 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                      $gd_number = $gd_search;
                      $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                      foreach ($rows as $k) {
-                        echo '<br>'; 
+                        echo '<div class="card custom-card col-sm-12 col-md-5"><div class="card-body"><div class="my-card">';
 
-                        echo '<table>';
+                        echo '<table class="table table-responsive">';
                         echo '<tbody class="bg-custom-color">';
 
                         foreach ($k as $key => $value) {
@@ -96,17 +94,15 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                         $creationDate = $k['Created_at'];
                         $currentDate = date('Y-m-d');
                         $daysDiff = floor((strtotime($currentDate) - strtotime($creationDate)) / (60 * 60 * 24));
-                        echo '<div class="buttons" style="display: flex; margin-top: 2rem;">';
+                        echo '<div class="buttons" style="display: flex;">';
                         if ($daysDiff > $scrap_day) {
-                           echo '<button id="scrap_init" name="scrap" class="btn btn-sm btn-info" >Send to Scrapyard</button>';
-                           echo '<button id="auct_init" name="auct" class="btn btn-sm btn-malkhana">Send to Auction</button>';
-                           echo '<button class="btn btn-sm btn-malkhana">
-                           <a href="outward.php">Send to Outward</a>
-                         </button>
-                         ';
+                           echo '<div class="row">';
+                           echo '<button id="scrap_init" name="scrap" class="btn btn-primary fs-fw btn-info" >Send to Scrapyard</button><button id="auct_init" name="auct" class="btn btn-primary fs-fw btn-info">Send to Auction</button><button class="btn btn-primary fs-fw btn-info">
+                           <a class="no-ui" href="outward.php">Send to Outward</a>
+                         </button>';
+                           echo '</div>';
                         }
-                        else
-                        echo '</div>';
+                        echo '</div></div></div></div>';
                      }
                   } else {
                      echo '<img src="./assets/img/datanotfound.jpg" width="100%" alt="" srcset="" />';
@@ -120,6 +116,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                   ?>
                </div>
             </div>
+          </div>  
          </div>
       </div>
    </div>
