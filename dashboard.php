@@ -101,7 +101,8 @@ function getStatusLabel($category_id, $sub_category_id)
          dataInward.addRows(<?php echo json_encode($dataInward); ?>);
 
          var optionsInward = {
-            title: 'Inward Inventory Category and Subcategory'
+            title: '',
+            legend: {position: 'bottom', alignment: 'start'},
          };
 
          var chartInward = new google.visualization.PieChart(document.getElementById('piechart-inward'));
@@ -114,7 +115,8 @@ function getStatusLabel($category_id, $sub_category_id)
          dataOutward.addRows(<?php echo json_encode($dataOutward); ?>);
 
          var optionsOutward = {
-            title: 'Outward Inventory Category and Subcategory'
+            title: '',
+            legend: {position: 'bottom', alignment: 'start'}
          };
 
          var chartOutward = new google.visualization.PieChart(document.getElementById('piechart-outward'));
@@ -127,7 +129,8 @@ function getStatusLabel($category_id, $sub_category_id)
          dataScrapyard.addRows(<?php echo json_encode($dataScrapyard); ?>);
 
          var optionsScrapyard = {
-            title: 'Scrapyard Inventory Category and Subcategory'
+            title: '',
+            legend: {position: 'bottom', alignment: 'start'}
          };
 
          var chartScrapyard = new google.visualization.PieChart(document.getElementById('piechart-scrapyard'));
@@ -140,7 +143,8 @@ function getStatusLabel($category_id, $sub_category_id)
          dataAuction.addRows(<?php echo json_encode($dataAuction); ?>);
 
          var optionsAuction = {
-            title: 'Auction Inventory Category and Subcategory'
+            title: '',
+            legend: {position: 'bottom', alignment: 'start'}
          };
 
          var chartAuction = new google.visualization.PieChart(document.getElementById('piechart-auction'));
@@ -216,25 +220,43 @@ function getStatusLabel($category_id, $sub_category_id)
 
 
                <!-- Pie chart - Scrapyard -->
-               <div class="container">
+               <!-- <div class="container"> -->
                   <div class="row">
-                     <div class="col-md-6 mt-2">
-                        <div id="piechart-inward" style="width: 370px; height: 300px;"></div>
+                     <div class="col-md-6 mt-3">
+                      <div class="card">
+                      <div class="card-header"><b>Inward Inventory Category and Subcategory</b></div>
+                      <div class="card-body">
+                        <div id="piechart-inward" style="height: 300px;"></div>
+                      </div>  
+                      </div>  
                      </div>
-                     <div class="col-md-6 mt-2">
-                        <div id="piechart-outward" style="width: 370px; height: 300px;"></div>
+                     <div class="col-md-6 mt-3">
+                      <div class="card">
+                        <div class="card-header"><b>Outward Inventory Category and Subcategory</b></div>
+                        <div class="card-body">
+                        <div id="piechart-outward" style="height: 300px;"></div>
+                        </div>
+                      </div>  
                      </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-md-6 mt-2">
-                        <div id="piechart-scrapyard" style="width: 370px; height: 300px;"></div>
+                 
+                     <div class="col-md-6 mt-3">
+                      <div class="card">
+                        <div class="card-header"><b>Scrapyard Inventory Category and Subcategory</b></div>
+                        <div class="card-body">
+                        <div id="piechart-scrapyard" style="height: 300px;"></div>
+                        </div> 
+                      </div>
                      </div>
-                     <div class="col-md-6 mt-2">
-                        <div id="piechart-auction" style="width: 370px; height: 300px;"></div>
+                     <div class="col-md-6 mt-3">
+                      <div class="card">
+                      <div class="card-header"><b>Auction Inventory Category and Subcategory</b></div>
+                      <div class="card-body">
+                        <div id="piechart-auction" style="height: 300px;"></div>
+                      </div>  
+                      </div>   
                      </div>
-                  </div>
                </div>
-      </div>
+      <!-- </div> -->
       <!-- ... -->
    </div>
    <?php include('footer.php'); ?>

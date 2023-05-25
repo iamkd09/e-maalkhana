@@ -119,7 +119,8 @@ var categorySelect = document.getElementById('category');
           categorycode: categoryCode
         },
         success: function(response) {
-          $('#sub_category').html(response);
+          // $('#sub_category').html(response);
+          document.getElementById('sub_category').innerHTML = response;
         }
       });
     });
@@ -146,7 +147,8 @@ var categorySelect = document.getElementById('category');
         type: 'POST', 
         success: function(data) {
             // console.log('cccc' + data);
-            $('#common_inputs').html(data);
+            //$('#common_inputs').html(data);
+            document.getElementById('common_inputs').innerHTML = data;
         }
       });
     }else{
@@ -173,7 +175,8 @@ var categorySelect = document.getElementById('category');
         type: 'POST', 
         success: function(data) {
             // console.log('cccc' + data);
-            $('#common_inputs').html(data);
+            // $('#common_inputs').html(data);
+            document.getElementById('common_inputs').innerHTML = data;
         }
       });
     
