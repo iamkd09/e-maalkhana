@@ -3,6 +3,7 @@ include('conn.php');
 
 if (isset($_POST['gd_number'])) {
     $gd_number = $_POST['gd_number'];
+
     $user_id = $_SESSION['user_id'];
 
     $query = "SELECT * FROM `inventory` WHERE `Gd_Number` = '$gd_number' AND (`category_id` = 2 OR `category_id` = 4) AND  `Created_By` = '$user_id' ";

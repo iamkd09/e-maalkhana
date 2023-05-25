@@ -110,7 +110,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                         echo '</div></div></div></div>';
                      }
                   } else {
-                     echo '<img src="./assets/img/datanotfound.jpg" width="100%" alt="" srcset="" />';
+                     echo '<img src="assets/img/nodatapolice.jpeg" width="50%" alt="" srcset="" style="margin-left: 23%;"/>';
                      echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                   }
 
