@@ -120,15 +120,16 @@
                         }
                         if($key == 'Gd_Number'){
                            $gdNumber = $value;
+                           
                         }
                      }
                      echo '</tbody>';
                      echo '</table>';
-                     echo '<button id="scrap_init" onclick=openModal('.$gdNumber.'); name="scrap" class="btn btn-primary fs-fw" >Send to Scrapyard</button>';
+                     echo '<button id="scrap_init" onclick=openModal("'.$gdNumber.'"); name="scrap" class="btn btn-primary fs-fw" >Send to Scrapyard</button>';
                      echo '</div></div></div>';
                   }
                } else {
-                  echo '<img src="./assets/img/datanotfound.jpg" width="100%" alt="" srcset="" />';
+                  echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
                   echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                }
             ?>
@@ -151,7 +152,7 @@
                <p></p>
             </div>
             <div class="text-center">
-               <button type="button" class="btn btn-info fs-fw" id="confirmYes">Yes</button>
+               <button type="button"  class="btn btn-info fs-fw" id="confirmYes">Yes</button>
                <button type="button" class="btn btn-malkhana" data-dismiss="modal">No</button>
             </div>
          </div>
@@ -178,8 +179,9 @@
 
    <script>
       function openModal(id) {
-        $('init_scrap').onclick(){
-         
+         console.log(id);
+        if(id != '' && id != undefined) {
+           showConfirmationPopup('Send to Scrapyard', 'Are you sure you want to send it to the scrapyard?');  
         }
       }
 
@@ -202,9 +204,9 @@
          $('#alertPopup').modal('hide');
       }
 
-      $('#scrap_init').on('click', function () {
-         showConfirmationPopup('Send to Scrapyard', 'Are you sure you want to send it to the scrapyard?');
-      });
+      // $('#scrap_init').on('click', function () {
+      //    showConfirmationPopup('Send to Scrapyard', 'Are you sure you want to send it to the scrapyard?');
+      // });
 
       $('.alert_sh').on('click', function () {
          hideAlertPopup();

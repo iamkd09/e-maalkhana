@@ -10,7 +10,20 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <div class="sidebar" data-color="blue">  
     <div class="logo">
         <a href="#" style="font-size:large;" class="simple-text logo-normal">
-            <b><span><?php echo $lang['e'] ?></span>-<span><?php echo $lang['malkhana'] ?></span></b>
+            <b><span><div class="heading col-md-6"><b>
+                  <?php
+                  // Fetch the name from the users table based on the logged-in user's ID
+                  $user_id = $_SESSION['user_id'];
+                  $query = "SELECT `name` FROM `users` WHERE `id` = $user_id";
+                  $result = $conn->query($query);
+                  if ($result && $result->num_rows > 0) {
+                     $row = $result->fetch_assoc();
+                     echo $row['name'];
+                  } else {
+                     echo "User";
+                  }
+                  ?>
+               </b></div></span></b>
         </a>
     </div>
     <div class="sidebar-wrapper" id="sidebar-wrapper">

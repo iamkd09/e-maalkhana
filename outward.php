@@ -62,7 +62,7 @@ if (isset($_POST['gd_search'])) {
                 if (!empty($result)) {
                   include('outward_form.php');
                 } else {
-                  echo '<img src="./assets/img/datanotfound.jpg" width="50%" alt="" srcset="" style="margin-left: 23%;"/>';
+                  echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
                   echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                 }
                 ?>

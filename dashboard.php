@@ -7,8 +7,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
    exit;
 }
 
+$user_id = $_SESSION['user_id'];
+
 // Fetch inventory data for different statuses
-$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 GROUP BY `category_id`, `sub_category_id`";
+$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 GROUP BY `category_id`, `sub_category_id` AND `Created_By` = '$user_id' ";
 $resultInward = mysqli_query($conn, $queryInward);
 $dataInward = array();
 while ($row = mysqli_fetch_assoc($resultInward)) {
@@ -19,7 +21,7 @@ while ($row = mysqli_fetch_assoc($resultInward)) {
    $dataInward[] = array($label, $count);
 }
 
-$queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 GROUP BY `category_id`, `sub_category_id`";
+$queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 GROUP BY `category_id`, `sub_category_id` AND `Created_By` = '$user_id'";
 $resultOutward = mysqli_query($conn, $queryOutward);
 $dataOutward = array();
 while ($row = mysqli_fetch_assoc($resultOutward)) {
@@ -30,7 +32,7 @@ while ($row = mysqli_fetch_assoc($resultOutward)) {
    $dataOutward[] = array($label, $count);
 }
 
-$queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 GROUP BY `category_id`, `sub_category_id`";
+$queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 GROUP BY `category_id`, `sub_category_id` AND `Created_By` = '$user_id'";
 $resultScrapyard = mysqli_query($conn, $queryScrapyard);
 $dataScrapyard = array();
 while ($row = mysqli_fetch_assoc($resultScrapyard)) {
@@ -41,7 +43,7 @@ while ($row = mysqli_fetch_assoc($resultScrapyard)) {
    $dataScrapyard[] = array($label, $count);
 }
 
-$queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 GROUP BY `category_id`, `sub_category_id`";
+$queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 GROUP BY `category_id`, `sub_category_id` AND `Created_By` = '$user_id'";
 $resultAuction = mysqli_query($conn, $queryAuction);
 $dataAuction = array();
 while ($row = mysqli_fetch_assoc($resultAuction)) {
@@ -154,21 +156,6 @@ function getStatusLabel($category_id, $sub_category_id)
          <!-- Navbar -->
          <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
             <?php include("navbar.php") ?>
-            <div class="heading col-md-6"><b>Welcome to
-                  <?php
-                  // Fetch the name from the users table based on the logged-in user's ID
-                  $user_id = $_SESSION['user_id'];
-                  $query = "SELECT `name` FROM `users` WHERE `id` = $user_id";
-                  $result = $conn->query($query);
-                  if ($result && $result->num_rows > 0) {
-                     $row = $result->fetch_assoc();
-                     echo $row['name'];
-                  } else {
-                     echo "User";
-                  }
-                  ?>
-               </b></div>
-
             <a class="form-control me-2 searchbar btn btn-outline-info desk-search" href="search.php"
                data-mdb-ripple-color="dark" placeholder="Search" aria-label="Search"
                style="color: #ffffff; font-size:15px;">
