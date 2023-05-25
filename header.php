@@ -1,4 +1,5 @@
 <?php session_start(); 
+ini_set('session.gc_maxlifetime', -1);
   include('lang.php');
   include('env.php');
   include "functions.php";
