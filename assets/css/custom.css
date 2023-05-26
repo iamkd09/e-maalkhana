@@ -167,10 +167,14 @@ select {
     }
     .content.ck {
         position: relative;
-        margin-top: -6%;
+        margin-top: -10%;
     }
 }
 
+
+.container-custom {
+    margin-top: 30px;
+}
 
 @media screen and (max-width: 768px) {
     .desk-login {
@@ -184,10 +188,11 @@ select {
         margin-top: 40% !important;
     }
     .container-custom {
-        width: 100%;
+        /* width: 100%; */
         padding-right: 15px;
         padding-left: 15px;
         margin-right: auto;
+        margin-top: 5px !important;
         margin-left: auto;
         list-style: none;
         display: inline-flex;

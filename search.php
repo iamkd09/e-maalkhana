@@ -17,7 +17,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
    $rowsInv = mysqli_fetch_all($resultInv,MYSQLI_ASSOC);
 } else {
    $gd_search = '';
-   $result = [];
+   $rowsInv = [];
 }
 ?>
 
@@ -109,8 +109,17 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                         echo '</div></div></div></div>';
                      }
                   } else {
+<<<<<<< HEAD
+                     echo '<div class="card custom-card col-sm-12 col-md-5"><div class="card-body"><div class="my-card">';
                      echo '<img src="assets/img/nodatapolice.jpeg" width="50%" alt="" srcset="" style="margin-left: 23%;"/>';
+=======
+                     echo '<div class="card custom-card col-sm-12 col-md-5">
+                     <div class="">
+                     <div class="my-card">';
+                     echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
+>>>>>>> d5a42d01ad84dcc2d56d751ee41c06cfc523ac32
                      echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
+                     echo '</div></div></div>';
                   }
 
                   function getFieldLabel($fieldName) {

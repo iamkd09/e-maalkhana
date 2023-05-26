@@ -6,7 +6,7 @@ $en = array(
     "malkhana"=>"Malkhana",
     "marching"=>"Marching Towards",
     "smart"=>"“Smart Policing & Swachh Bharat”",
-    "project_heading"=>"Marching Towards 'Smart Policing and Swacch Bharat'",
+    "project_heading"=>"'Smart Policing and Marching Towards Swacch Bharat'",
     "enter_mobile"=>"Enter Mobile No.",
     "otp_generate"=>"Send Otp",
     // Otp Page Keys
@@ -44,6 +44,8 @@ $en = array(
     "city"=>"City",
     "select_city"=>"select city",
     "submit"=>"Submit",
+
+    "bhasha" => "Language",
 
     // Inward Form
     "inward_form"=>"Inward Form",
@@ -87,6 +89,16 @@ $en = array(
     // Outward Form
     "outward_form"=>"Outward Form",
     "na"=> '',
+
+    //Page Titles
+    "outward.php" => 'Outward',
+    "search.php" => 'Search',
+    "dashboard.php" => 'Dashboard',
+    "inward.php" => 'Inward',
+    "scrapyard.php" => 'Scrapyard',
+    "auction.php" => 'Auction',
+    "user.php" => 'Register',
+    "language_change.php" => 'Translate',
 );
 
 $hi = array(
@@ -127,6 +139,8 @@ $hi = array(
     "city"=>"शहर",
     "select_city"=>"शहर चुनें",
     "submit"=>"जमा करें",
+
+    "bhasha" => "भाषा",
     // Inward Form
     "form"=>"फॉर्म",
     "inward_form"=>"इन्वर्ड फॉर्म",
@@ -168,7 +182,18 @@ $hi = array(
     "hindi"=>"हिंदी",
 
     "outward_form"=>"आउटवर्ड फॉर्म",
-    "na"=> ''
+    "na"=> '',
+
+    //Page titles
+    "outward.php" => 'आउटवर्ड',
+    "search.php" => 'सर्च',
+    "dashboard.php" => 'होम ',
+    "inward.php" => 'इन्वर्ड',
+    "scrapyard.php" => 'रद्दीखाना',
+    "auction.php" => 'नीलामी',
+    "user.php" => 'रजिस्टर',
+    "language_change.php" => 'भाषा',
+
 );
 
 ?>
