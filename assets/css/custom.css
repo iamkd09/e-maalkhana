@@ -169,13 +169,14 @@ select {
         position: relative;
         margin-top: -10%;
     }
-    .container-custom {
-        padding-top: 4%;
+    .container-custom {    
+        padding-top: calc(17px + (100vw - 700px) * (15 - 30) / (700 -  1000));
     }
     .container-custom-none {
         padding-top: 0 !important;
     }
 }
+
 
 @media screen and (max-width: 768px) {
     .desk-login {
