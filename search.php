@@ -110,7 +110,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                      }
                   } else {
                      echo '<div class="card custom-card col-sm-12 col-md-12 mtop-5"><div class="card-body"><div class="my-card">';
-                     echo '<img src="assets/img/nodatapolice.jpeg" width="50%" alt="" srcset="" style="margin-left: 23%;"/>';
+                     echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
                      echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                      echo '</div></div></div>';
                   }

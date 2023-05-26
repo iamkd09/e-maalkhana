@@ -99,10 +99,10 @@
             <?php
             $status = 3; // Status for items in the scrapyard
             $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` INNER JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '3' ";
-            $result = mysqli_query($conn, $sql);
-            if (!empty($result)) {
-               $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-               foreach ($rows as $k) {
+            $result_4 = mysqli_query($conn, $sql);
+            if (!empty($result_4) && $result_4->num_rows > 0) {
+               $rows = mysqli_fetch_all($result_4, MYSQLI_ASSOC);
+               foreach ($rows as $k ) {
                   echo '<div class="card custom-card col-sm-12 col-md-5">
                   <div class="">
                   <div class="my-card">';
@@ -125,8 +125,12 @@
                   echo '</div></div></div>';
                }
             } else {
-               echo '<img src="assets/img/nodatapolice.jpeg" width="50%" alt="" srcset="" style="margin-left: 32%;"/>';
-               echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
+                  echo '<div class="card custom-card col-sm-12 col-md-12">
+                           <div class="">
+                           <div class="my-card">';
+                  echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
+                  echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
+                  echo '</div></div></div>';
             }
 
             function getFieldLabel($fieldName)
