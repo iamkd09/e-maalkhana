@@ -52,15 +52,15 @@
                </div>
             </form>
          </div>
-         <div class="content ck">
+         <div class="content ck ck2">
          <div class="row" >
             <div class="col-md-12">
-                  <ul class="nav-custom container-custom">
+                  <ul class="nav-custom container-custom container-custom-none">
                      <li class="nav-item nav-item-new">
-                        <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"aria-current="page" href="auction.php"><b>Eligible for auction</b></a>
+                        <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"aria-current="page" href="auction.php"><b>Eligible</b></a>
                      </li>
                      <li class="nav-item nav-item-new">
-                        <a class="nav-link" style="color:black; !important" href="auction_already.php"><b>Already present in auction</b></a>
+                        <a class="nav-link" style="color:black; !important" href="auction_already.php"><b>Already present</b></a>
                      </li>
                   </ul>
             </div>

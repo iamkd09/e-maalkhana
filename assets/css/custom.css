@@ -167,13 +167,19 @@ select {
     }
     .content.ck {
         position: relative;
-        margin-top: -5%;
+        margin-top: -10%;
+    }
+    .ck2 {
+        margin-top: -5% !important;
     }
     .container-custom {    
         padding-top: calc(17px + (100vw - 700px) * (15 - 30) / (700 -  1000));
     }
     .container-custom-none {
         padding-top: 0 !important;
+    }
+    .mtop-5 {
+        margin-top: 5% !important;
     }
 }
 
