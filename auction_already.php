@@ -96,8 +96,8 @@
             ?>
             <div class="row">
             <?php
-            $status = 3; // Status for items in the scrapyard
-            $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` INNER JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '4' ";
+            $user_id = $_SESSION['user_id'];
+            $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` LEFT JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '4' AND inventory.`Created_By` = '$user_id' ";
             $result_3 = mysqli_query($conn, $sql);
             if (!empty($result_3) && $result_3->num_rows > 0) {
                $rows = mysqli_fetch_all($result_3, MYSQLI_ASSOC);

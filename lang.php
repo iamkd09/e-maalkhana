@@ -110,7 +110,10 @@ $en = array(
     "scrapped"=>"Eligible",
     "scrapped_already"=>"Already Present",
 
-
+    // user_list
+    "name" => "Name",
+    "contact" => "Mobile No.",
+    "address" => "Address",
 
 );
 
