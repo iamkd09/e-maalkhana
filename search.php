@@ -46,7 +46,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                </div>
             </form>
          </div>
-         <div class="content ck">
+         <div class="content ck ck2">
           <div class="row">
                   <?php
                   $fieldLabels = [
