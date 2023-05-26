@@ -128,8 +128,12 @@
                      echo '</div></div></div>';
                   }
                } else {
-                  echo '<img src="./assets/img/datanotfound.jpg" width="100%" alt="" srcset="" />';
+                  echo '<div class="card custom-card col-sm-12 col-md-5">
+                     <div class="">
+                     <div class="my-card">';
+                  echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
                   echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
+                  echo '</div></div></div>';
                }
             ?>
            </div> 
