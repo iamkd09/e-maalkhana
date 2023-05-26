@@ -132,7 +132,7 @@
                      echo '</div></div></div>';
                   }
                } else {
-                  echo '<div class="card custom-card col-sm-12 col-md-5">
+                  echo '<div class="card custom-card col-sm-12 col-md-12">
                      <div class="">
                      <div class="my-card">';
                   echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';

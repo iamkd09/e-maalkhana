@@ -51,7 +51,7 @@
       </form>
     </div>
     <div class="card-2">
-      <div class="content d-flex justify-content-center align-items-center"> <span><?php echo $lang['not_got_otp'] ?> </span> <a href="#" class="text-decoration-none  ms-3"><?php echo $lang['resend_otp'] ?></a> </div>
+      <div class="content d-flex justify-content-center align-items-center"> <span><?php echo $lang['not_got_otp'] ?> </span> <a href="otp_resend.php" class="text-decoration-none  ms-3"><?php echo $lang['resend_otp'] ?></a> </div>
     </div>
 </div>
 </div>
