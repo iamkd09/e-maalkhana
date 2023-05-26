@@ -37,7 +37,7 @@ if (!isset($_SESSION['language']) || $_SESSION['language'] !== true) {
 
                   <div class="col-md-4 pl-1">
                     <div class="form-group">
-                        <label>Language:</label>
+                        <label><?php echo $lang['bhasha'] ?>:</label>
                         <select class="form-control statetocity" id="translate"      name="under_section"           required>
                         <option value=""><?php echo $lang['select_lang'];?></option>
                         <option value="en">English</option>
