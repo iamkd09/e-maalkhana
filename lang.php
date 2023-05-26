@@ -96,9 +96,16 @@ $en = array(
     "dashboard.php" => 'Dashboard',
     "inward.php" => 'Inward',
     "scrapyard.php" => 'Scrapyard',
+    "scrapyard_already.php" => 'Scrapyard',
+    "auction_already.php" => 'Auction',
     "auction.php" => 'Auction',
     "user.php" => 'Register',
     "language_change.php" => 'Translate',
+
+    "scrapped"=>"Eligible",
+    "scrapped_already"=>"Already Present",
+
+
 );
 
 $hi = array(
@@ -189,10 +196,14 @@ $hi = array(
     "search.php" => 'सर्च',
     "dashboard.php" => 'होम ',
     "inward.php" => 'इन्वर्ड',
+    "scrapyard_already.php" => 'रद्दीखाना',
+    "auction_already.php" => 'नीलामी',
     "scrapyard.php" => 'रद्दीखाना',
     "auction.php" => 'नीलामी',
     "user.php" => 'रजिस्टर',
     "language_change.php" => 'भाषा',
+    "scrapped"=>"योग्य",
+    "scrapped_already"=>"पहले से मौजूद",
 
 );
 

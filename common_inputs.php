@@ -303,7 +303,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
       <div class="col-md-4 pl-1">
           <div class="form-group">
           <label>' . $lang['recovered_from'] . ':</label>
-          <input type="text" class="form-control" name="recovered_from" placeholder="' . ['recovered_from'] . '">
+          <input type="text" class="form-control" name="recovered_from" placeholder="' . $lang['recovered_from'] . '">
           </div>
       </div>
       
