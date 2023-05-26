@@ -81,9 +81,9 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
 
                         echo '<table class="table table-responsive">';
                         echo '<tbody class="bg-custom-color">';
-
+                        $null_date = "0000-00-00";
                         foreach ($k as $key => $value) {
-                           if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
+                           if (!empty($value) && $value != $null_date && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
                               $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
                               echo '<tr>';
                               echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
@@ -110,7 +110,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                      }
                   } else {
                      echo '<div class="card custom-card col-sm-12 col-md-12"><div class="card-body"><div class="my-card">';
-                     echo '<img src="assets/img/nodatapolice.jpeg" width="50%" alt="" srcset="" style="margin-left: 23%;"/>';
+                     echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
                      echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                      echo '</div></div></div>';
                   }

@@ -3,9 +3,9 @@
 $en = array(
     // Login page keys
     "e"=>"E",
-    "malkhana"=>"Malkhana",
-    "marching"=>"Marching Towards",
-    "smart"=>"“Smart Policing & Swachh Bharat”",
+    "malkhana"=>"Maalkhana",
+    "marching"=>"Towards Swachh Bharat",
+    "smart"=>"Smart Policing and Marching",
     "project_heading"=>"'Smart Policing and Marching Towards Swacch Bharat'",
     "enter_mobile"=>"Enter Mobile No.",
     "otp_generate"=>"Send Otp",

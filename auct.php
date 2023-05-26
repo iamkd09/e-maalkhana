@@ -6,10 +6,10 @@ if (isset($_POST['gd_number'])) {
     $gd_number = $_POST['gd_number'];
 
     $query = "SELECT * FROM `inventory` WHERE `Gd_Number` = '$gd_number' AND (`category_id` = 2 OR `category_id` = 4)";
-    $result = mysqli_query($conn, $query);
+    $result_auct = mysqli_query($conn, $query);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
+    if ($result_auct && mysqli_num_rows($result_auct) > 0) {
+        $row = mysqli_fetch_assoc($result_auct);
         $current_status = $row['Status'];
 
         if ($current_status != 3) {
