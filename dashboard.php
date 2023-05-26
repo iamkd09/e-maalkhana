@@ -217,6 +217,7 @@ function getStatusLabel($category_id, $sub_category_id)
                   </a>
 
                </div>
+            </div>   
 
 
                <!-- Pie chart - Scrapyard -->
@@ -258,6 +259,5 @@ function getStatusLabel($category_id, $sub_category_id)
                </div>
       <!-- </div> -->
       <!-- ... -->
-   </div>
    <?php include('footer.php'); ?>
 </body>
