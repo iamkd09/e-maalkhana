@@ -44,12 +44,12 @@
 
          <div class="row mt-5" >
             <div class="col-md-12">
-                  <ul class="nav-custom container-custom">
+                  <ul class="nav-custom container-custom container-custom-none">
                         <li class="nav-item" >
-                           <a class="nav-link nav-item-new" style="color:black; !important" aria-current="page" href="scrapyard.php"><b>Eligible for scrapyard</b></a>
+                           <a class="nav-link nav-item-new" style="color:black; !important" aria-current="page" href="scrapyard.php"><b>Eligible</b></a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important" href="scrapyard_already.php"><b>Already present in scrapyard</b></a>
+                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important" href="scrapyard_already.php"><b>Already present</b></a>
                         </li>
                   </ul>
             </div>

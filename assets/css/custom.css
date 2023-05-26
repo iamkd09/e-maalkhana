@@ -169,11 +169,12 @@ select {
         position: relative;
         margin-top: -10%;
     }
-}
-
-
-.container-custom {
-    margin-top: 30px;
+    .container-custom {
+        padding-top: 4%;
+    }
+    .container-custom-none {
+        padding-top: 0 !important;
+    }
 }
 
 @media screen and (max-width: 768px) {
