@@ -154,7 +154,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
                           <div class="col-md-4 pl-1">
                           <div class="form-group">
                             <label>' . $lang['recovery_date'] . ':</label>
-                            <input type="date" class="form-control" name="recovery_date placeholder="' . $lang['recovery_date'] . '">
+                            <input type="date" class="form-control" name="recovery_date" placeholder="' . $lang['recovery_date'] . '">
                           </div>
                         </div>
 
