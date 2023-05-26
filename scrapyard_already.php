@@ -57,7 +57,7 @@
          </div>
          <div class="content ck ck2">
          <div class="row" >
-            <div class="col-md-12">
+            <div class="col-md-12 cr-text">
                   <ul class="nav-custom container-custom container-custom-none">
                         <li class="nav-item" >
                            <a class="nav-link nav-item-new" style="color:black; !important" aria-current="page" href="scrapyard.php"><b>Eligible</b></a>

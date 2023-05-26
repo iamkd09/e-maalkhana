@@ -181,6 +181,9 @@ select {
     .mtop-5 {
         margin-top: 5% !important;
     }
+    .cr-text {
+        text-align:left;
+    }
 }
 
 
@@ -208,6 +211,9 @@ select {
     .content.ck {
         position: relative;
         margin-top: -20%;
+    }
+    .cr-text {
+        text-align:center;
     }
 }
       
