@@ -28,6 +28,11 @@ $en = array(
     "outward_button"=>"Outward",
     "scrap_auct_button"=>"Scrapyard/Auction",
 
+    "inward_cases" => "Inward Cases",
+    "outward_cases" => "Outward Cases",
+    "scrapyard_cases" => "Scrapyard Cases",
+    "auction_cases" => "Auction Cases",
+
     // Search Page
     "go_button"=>"Go",
     "no_data"=>"No Data Found",
@@ -106,6 +111,7 @@ $en = array(
     "scrapped_already"=>"Already Present",
 
 
+
 );
 
 $hi = array(
@@ -133,6 +139,11 @@ $hi = array(
     "auction_button"=>"नीलामी",
     "outward_button"=>"आउटवर्ड",
     "scrap_auct_button"=>"रद्दीखाना/नीलामी",
+
+    "inward_cases" => "इन्वर्ड मामले",
+    "outward_cases" => "आउटवर्ड मामले",
+    "scrapyard_cases" => "रद्दीखाना मामले",
+    "auction_cases" => "नीलामी मामले",
     // Search Page
     "go_button"=>"खोजे",
     "no_data"=>"डाटा प्राप्त नहीं हुआ",

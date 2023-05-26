@@ -1,6 +1,6 @@
 <?php
-include('conn.php');
 include('header.php');
+include('conn.php');
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
    header("Location: index.php");
@@ -10,7 +10,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 $user_id = $_SESSION['user_id'];
 
 // Fetch inventory data for different statuses
-$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 GROUP BY `category_id`, `sub_category_id` AND `Created_By` = '$user_id' ";
+$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 AND `Created_By` = '$user_id' GROUP BY `category_id`, `sub_category_id`  ";
 $resultInward = mysqli_query($conn, $queryInward);
 $dataInward = array();
 while ($row = mysqli_fetch_assoc($resultInward)) {
@@ -21,7 +21,7 @@ while ($row = mysqli_fetch_assoc($resultInward)) {
    $dataInward[] = array($label, $count);
 }
 
-$queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 GROUP BY `category_id`, `sub_category_id` AND `Created_By` = '$user_id'";
+$queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 AND `Created_By` = '$user_id' GROUP BY `category_id`, `sub_category_id`";
 $resultOutward = mysqli_query($conn, $queryOutward);
 $dataOutward = array();
 while ($row = mysqli_fetch_assoc($resultOutward)) {
@@ -32,7 +32,7 @@ while ($row = mysqli_fetch_assoc($resultOutward)) {
    $dataOutward[] = array($label, $count);
 }
 
-$queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 GROUP BY `category_id`, `sub_category_id` AND `Created_By` = '$user_id'";
+$queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 AND `Created_By` = '$user_id' GROUP BY `category_id`, `sub_category_id`";
 $resultScrapyard = mysqli_query($conn, $queryScrapyard);
 $dataScrapyard = array();
 while ($row = mysqli_fetch_assoc($resultScrapyard)) {
@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_assoc($resultScrapyard)) {
    $dataScrapyard[] = array($label, $count);
 }
 
-$queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 GROUP BY `category_id`, `sub_category_id` AND `Created_By` = '$user_id'";
+$queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 AND `Created_By` = '$user_id' GROUP BY `category_id`, `sub_category_id`";
 $resultAuction = mysqli_query($conn, $queryAuction);
 $dataAuction = array();
 while ($row = mysqli_fetch_assoc($resultAuction)) {
@@ -54,7 +54,7 @@ while ($row = mysqli_fetch_assoc($resultAuction)) {
    $dataAuction[] = array($label, $count);
 }
 
-mysqli_close($conn);
+// mysqli_close($conn);
 
 // Function to get label based on status value
 function getStatusLabel($category_id, $sub_category_id)
@@ -225,7 +225,7 @@ function getStatusLabel($category_id, $sub_category_id)
                   <div class="row">
                      <div class="col-md-6 mt-3">
                       <div class="card">
-                      <div class="card-header"><b>Inward Inventory Category and Subcategory</b></div>
+                      <div class="card-header"><b><?php echo $lang['inward_cases'] ?></b></div>
                       <div class="card-body">
                         <div id="piechart-inward" style="height: 300px;"></div>
                       </div>  
@@ -233,7 +233,7 @@ function getStatusLabel($category_id, $sub_category_id)
                      </div>
                      <div class="col-md-6 mt-3">
                       <div class="card">
-                        <div class="card-header"><b>Outward Inventory Category and Subcategory</b></div>
+                        <div class="card-header"><b><?php echo $lang['outward_cases'] ?></b></div>
                         <div class="card-body">
                         <div id="piechart-outward" style="height: 300px;"></div>
                         </div>
@@ -242,7 +242,7 @@ function getStatusLabel($category_id, $sub_category_id)
                  
                      <div class="col-md-6 mt-3">
                       <div class="card">
-                        <div class="card-header"><b>Scrapyard Inventory Category and Subcategory</b></div>
+                        <div class="card-header"><b><?php echo $lang['scrapyard_cases'] ?></b></div>
                         <div class="card-body">
                         <div id="piechart-scrapyard" style="height: 300px;"></div>
                         </div> 
@@ -250,7 +250,7 @@ function getStatusLabel($category_id, $sub_category_id)
                      </div>
                      <div class="col-md-6 mt-3">
                       <div class="card">
-                      <div class="card-header"><b>Auction Inventory Category and Subcategory</b></div>
+                      <div class="card-header"><b><?php echo $lang['auction_cases'] ?></b></div>
                       <div class="card-body">
                         <div id="piechart-auction" style="height: 300px;"></div>
                       </div>  
