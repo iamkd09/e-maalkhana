@@ -167,7 +167,7 @@ select {
     }
     .content.ck {
         position: relative;
-        margin-top: -10%;
+        margin-top: -5%;
     }
     .container-custom {    
         padding-top: calc(17px + (100vw - 700px) * (15 - 30) / (700 -  1000));
