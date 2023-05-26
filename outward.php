@@ -44,7 +44,7 @@ if (isset($_POST['gd_search'])) {
                </div>
             </form>
          </div>
-      <div class="content ck" <?php $select = 'outward' ?>>
+      <div class="content ck ck2" <?php $select = 'outward' ?>>
         <div class="row">
           <?php $status_new ?>
           <div class="col-md-12">
