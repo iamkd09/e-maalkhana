@@ -42,6 +42,7 @@ if (isset($_POST['submit'])) {
   $address = $_POST['addressName'];
   $state = $_POST['stateName'];
   $city = $_POST['cityName'];
+  $user_id = $_SESSION['user_id'];
 
   $serviceRoleQ = $conn->query("select * from role where id = $role");
   $roleRow = $serviceRoleQ->fetch_assoc();
@@ -75,7 +76,7 @@ if (isset($_POST['submit'])) {
         $user_service_id = $users['id'] ?? null;
 
 
-          $query = "INSERT INTO `users` (`name`, `role_id`, `contact`, `address`, `state`, `city`,`user_service_id`) VALUES ('$name', '$role', '$phone', '$address', '$state', '$city','$user_service_id')";
+          $query = "INSERT INTO `users` (`name`, `role_id`, `contact`, `address`, `state`, `city`, `created_by`,`user_service_id`) VALUES ('$name', '$role', '$phone', '$address', '$state', '$city','$user_id', '$user_service_id')";
           $result = $conn->query($query);
 
           if ($result) {

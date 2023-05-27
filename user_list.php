@@ -53,7 +53,7 @@ $fieldLabels = [
             </form>
          </div>
 
-         <div class="content ck">
+         <div class="content ck ck2">
          <div class="row">
                <?php
 
