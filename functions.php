@@ -27,3 +27,30 @@ function postCurl($url,$data){
     return $response;
 }
 
+
+function imageSave(){
+  $curl = curl_init();
+
+  curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://storage.parkplus.io/api/v1/document/upload/',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => array('file'=> new CURLFILE('/Users/abc/Downloads/1684236504types-of-homes-hero.jpg'),'doc_name' => 'checked_out','service_name' => 'oms','extension' => 'jpg','is_public' => 'true','doc_type' => 'image','is_view_only' => 'true'),
+    CURLOPT_HTTPHEADER => array(
+      'client-id: 8186c1be-660f-428c-93a7-6480c2d8af66',
+      'client-secret: hjjh0uw8c3j7vw5jgba8',
+      'x-api-key: 2eb80017-f525-4ee7-8b8f-aa1a94ec3412'
+    ),
+  ));
+
+  $response = curl_exec($curl);
+
+  curl_close($curl);
+  echo $response;
+
+}
