@@ -182,6 +182,9 @@ select {
     .mtop-5 {
         margin-top: 5% !important;
     }
+    .cr-text {
+        text-align:left;
+    }
 }
 
 
@@ -201,7 +204,7 @@ select {
         padding-right: 15px;
         padding-left: 15px;
         margin-right: auto;
-        margin-top: 5px !important;
+        margin-top: 10px !important;
         margin-left: auto;
         list-style: none;
         display: inline-flex;
@@ -209,6 +212,9 @@ select {
     .content.ck {
         position: relative;
         margin-top: -20%;
+    }
+    .cr-text {
+        text-align:center;
     }
 }
       
