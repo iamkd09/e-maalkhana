@@ -11,6 +11,12 @@
 
 <?php
 $user_id = $_SESSION['user_id'];
+
+if (!isset($_SESSION['user_list']) || $_SESSION['user_list'] !== true) {
+   header("Location: index.php");
+   exit;
+}
+
 $fieldLabels = [
    'name' => $lang['station_name'],
    'contact' => $lang['mobile_number'],
@@ -57,7 +63,7 @@ $fieldLabels = [
          <div class="row">
                <?php
 
-               $sql_user = "SELECT * FROM `users` WHERE `status` = '$user_id' ";
+               $sql_user = "SELECT users.*,state.name as state_name, city.name as city_name FROM `users` left join `state` on state.id = users.state left join `city` on city.id = users.city WHERE `status` = '1';  "; 
                $result_user = mysqli_query($conn, $sql_user);
                if (!empty($result_user) && $result_user->num_rows > 0) {
                   $rows_user = mysqli_fetch_all($result_user, MYSQLI_ASSOC);
@@ -70,7 +76,7 @@ $fieldLabels = [
                      echo '<tbody class="bg-custom-color">';
 
                      foreach ($k as $key => $value) {
-                        if (!empty($value) && !in_array($key, ['id', 'role_id', 'status', 'user_service_id', 'created_at', 'updated_at', 'token_auth' ])) {
+                        if (!empty($value) && !in_array($key, ['id', 'role_id', 'status', 'user_service_id', 'created_by', 'created_at', 'updated_at', 'token_auth' ])) {
                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
                            echo '<tr>';
                            echo '<td>' . '<b>' . $label . ':</b>' . '</td>';

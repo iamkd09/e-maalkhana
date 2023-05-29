@@ -54,10 +54,6 @@ if (isset($_POST['submit'])) {
       $message = "User already exists.";
       $messageColor = "red";
   } else {
-
-   
-
-
       if (isset($roleRow['user_service_role']) && !empty($name) && !empty($role) && !empty($phone) && !empty($address) && !empty($state) && !empty($city)) {
         $url = user_service_url."/api/v1/user/serviceCall/user-account/create/";
         $postData = json_encode([

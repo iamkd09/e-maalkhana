@@ -19,6 +19,7 @@ $en = array(
     // Dashbboard Page Keys
     "sidebar_home"=>"HOME",
     "sidebar_register"=>"REGISTER",
+    "sidebar_userlist" => "USER LIST",
     "sidebar_languages"=>"LANGUAGES",
     "sidebar_logout"=>"LOGOUT",
     "dashboard_search"=>"Search Inventory",
@@ -105,6 +106,7 @@ $en = array(
     "auction_already.php" => 'Auction',
     "auction.php" => 'Auction',
     "user.php" => 'Register',
+    "user_list.php" => 'User List',
     "language_change.php" => 'Translate',
 
     "scrapped"=>"Eligible",
@@ -134,6 +136,7 @@ $hi = array(
     // Dashbboard Page Keys
     "sidebar_home"=>"होम",
     "sidebar_register"=>"रजिस्टर करें",
+    "sidebar_userlist" => "उपयोगकर्ता सूची",
     "sidebar_languages"=>"भाषा",
     "sidebar_logout"=>"लॉग आउट",
     "dashboard_search"=>"सूची में खोजें",
@@ -218,6 +221,8 @@ $hi = array(
     "language_change.php" => 'भाषा',
     "scrapped"=>"योग्य",
     "scrapped_already"=>"पहले से मौजूद",
+
+    "user_list.php" => 'उपयोगकर्ता सूची',
 
 );
 
