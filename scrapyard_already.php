@@ -1,6 +1,7 @@
 <?php include('header.php') ?>
 <?php include('conn.php') ?>
 <?php include('sidebar.php') ?>
+
 <head>
    <title>
       Project-admin
@@ -27,7 +28,9 @@
          padding-right: 10px;
       }
    </style>
+
 </head>
+
 
 
 <body class="user-profile">
@@ -42,33 +45,45 @@
          <div class="container">
             <form action="" method="post" autocomplete="off">
                <div class="row search-row">
-               <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
-                  <div class="col-9">
-                     <input class="form-control searchbar btn btn-outline-info searchnew f-14" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
+                  <div class="card custom-card col-sm-12 col-md-12">
+                     <div class="row my-card top-24">
+                        <div class="col-9">
+                           <input class="form-control searchbar btn btn-outline-info searchnew f-14"
+                              type="search" name="gd_search" data-mdb-ripple-color="dark"
+                              placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search"
+                              style="height: fit-content; border-radius: 5px!important;"
+                              value="<?php echo $gd_search ?? ''; ?>">
+                        </div>
+                        <div class="col-2">
+                           <button name="search" class="btn btn-success">
+                              <?php echo $lang['go_button'] ?>
+                           </button>
+                        </div>
+                     </div>
                   </div>
-                  <div class="col-2">
-                     <button name="search" class="btn btn-success">
-                        <?php echo $lang['go_button'] ?>
-                     </button>
-                  </div>
-                </div></div>  
                </div>
             </form>
          </div>
          <div class="content ck ck2">
-         <div class="row" >
-            <div class="col-md-12">
+            <div class="row">
+               <div class="col-md-12">
                   <ul class="nav-custom container-custom container-custom-none">
-                        <li class="nav-item" >
-                           <a class="nav-link nav-item-new" style="color:black; !important" aria-current="page" href="scrapyard.php"><b><?php echo $lang['scrapped'] ?></b></a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important" href="scrapyard_already.php"><b><?php echo $lang['scrapped_already'] ?></b></a>
-                        </li>
+                     <li class="nav-item">
+                        <a class="nav-link nav-item-new" style="color:black; !important" aria-current="page"
+                           href="scrapyard.php"><b>
+                              <?php echo $lang['scrapped'] ?>
+                           </b></a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"
+                           href="scrapyard_already.php"><b>
+                              <?php echo $lang['scrapped_already'] ?>
+                           </b></a>
+                     </li>
                   </ul>
+               </div>
             </div>
-         </div>
-         
+
             <?php
             $fieldLabels = [
                'Gd_Number' => $lang['gd_number'],
@@ -96,52 +111,58 @@
             ];
             ?>
             <div class="row">
-            <?php
-            $status = 3; // Status for items in the scrapyard
-            $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` INNER JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '3' ";
-            $result = mysqli_query($conn, $sql);
-            if (!empty($result)) {
-               $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-               foreach ($rows as $k) {
-                  echo '<div class="card custom-card col-sm-12 col-md-5">
+               <?php
+               $user_id = $_SESSION['user_id'];
+
+               $status = 3; // Status for items in the scrapyard
+               $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` LEFT JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '3' AND inventory.`Created_By` = '$user_id' ";
+               $result_4 = mysqli_query($conn, $sql);
+               if (!empty($result_4) && $result_4->num_rows > 0) {
+                  $rows = mysqli_fetch_all($result_4, MYSQLI_ASSOC);
+                  foreach ($rows as $k) {
+                     echo '<div class="card custom-card col-sm-12 col-md-5">
                   <div class="">
                   <div class="my-card">';
 
-                  echo '<table class="table table-responsive">';
-                  echo '<tbody class="bg-custom-color">';
+                     echo '<table class="table table-responsive">';
+                     echo '<tbody class="bg-custom-color">';
 
-                  foreach ($k as $key => $value) {
-                     if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
-                        $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
-                        echo '<tr>';
-                        echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
-                        echo '<td>' . $value . '</td>';
-                        echo '</tr>';
+                     foreach ($k as $key => $value) {
+                        if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
+                           $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                           echo '<tr>';
+                           echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+                           echo '<td>' . $value . '</td>';
+                           echo '</tr>';
+                        }
                      }
-                  }
 
-                  echo '</tbody>';
-                  echo '</table>';
+                     echo '</tbody>';
+                     echo '</table>';
+                     echo '</div></div></div>';
+                  }
+               } else {
+                  echo '<div class="card custom-card col-sm-12 col-md-12">
+                           <div class="">
+                           <div class="my-card">';
+                  echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
+                  echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                   echo '</div></div></div>';
                }
-            } else {
-               echo '<img src="assets/img/nodatapolice.jpeg" width="50%" alt="" srcset="" style="margin-left: 32%;"/>';
-               echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
-            }
 
-            function getFieldLabel($fieldName)
-            {
-               global $fieldLabels;
-               return isset($fieldLabels[$fieldName]) ? $fieldLabels[$fieldName] : $fieldName;
-            }
-            ?>
+               function getFieldLabel($fieldName)
+               {
+                  global $fieldLabels;
+                  return isset($fieldLabels[$fieldName]) ? $fieldLabels[$fieldName] : $fieldName;
+               }
+               ?>
             </div>
          </div>
       </div>
    </div>
 
 
-   
+
    <?php include('footer.php') ?>
 </body>
 

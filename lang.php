@@ -3,9 +3,9 @@
 $en = array(
     // Login page keys
     "e"=>"E",
-    "malkhana"=>"Malkhana",
-    "marching"=>"Marching Towards",
-    "smart"=>"“Smart Policing & Swachh Bharat”",
+    "malkhana"=>"Maalkhana",
+    "marching"=>"Towards Swachh Bharat",
+    "smart"=>"Smart Policing and Marching",
     "project_heading"=>"'Smart Policing and Marching Towards Swacch Bharat'",
     "enter_mobile"=>"Enter Mobile No.",
     "otp_generate"=>"Send Otp",
@@ -15,10 +15,14 @@ $en = array(
     "enter_otp"=>"Please enter OTP to verify your account",
     "not_got_otp"=>"Didn't get the code?",
     "resend_otp"=>"Resend it",
+    "invalid_otp"=> "Invalid OTP, please try again.",
+    "nonactive_user" => "User is not active, please try again.",
+    "invalid_user" => "Invalid User!.",
 
     // Dashbboard Page Keys
     "sidebar_home"=>"HOME",
     "sidebar_register"=>"REGISTER",
+    "sidebar_userlist" => "USER LIST",
     "sidebar_languages"=>"LANGUAGES",
     "sidebar_logout"=>"LOGOUT",
     "dashboard_search"=>"Search Inventory",
@@ -105,12 +109,16 @@ $en = array(
     "auction_already.php" => 'Auction',
     "auction.php" => 'Auction',
     "user.php" => 'Register',
+    "user_list.php" => 'User List',
     "language_change.php" => 'Translate',
 
     "scrapped"=>"Eligible",
     "scrapped_already"=>"Already Present",
 
-
+    // user_list
+    "name" => "Name",
+    "contact" => "Mobile No.",
+    "address" => "Address",
 
 );
 
@@ -128,9 +136,15 @@ $hi = array(
     "enter_otp"=>"अपना खाता सत्यापित करने के लिए कृपया ओटीपी दर्ज करें",
     "not_got_otp"=>"ओटीपी नहीं मिला?",
     "resend_otp"=>"फिर से भेजें",
+
+    "invalid_otp"=> "अमान्य ओटीपी, कृपया पुनः प्रयास करें।",
+    "nonactive_user" => "उपयोगकर्ता सक्रिय नहीं है, कृपया पुनः प्रयास करें।",
+    "invalid_user" => "अमान्य उपयोगकर्ता!।",
+
     // Dashbboard Page Keys
     "sidebar_home"=>"होम",
     "sidebar_register"=>"रजिस्टर करें",
+    "sidebar_userlist" => "उपयोगकर्ता सूची",
     "sidebar_languages"=>"भाषा",
     "sidebar_logout"=>"लॉग आउट",
     "dashboard_search"=>"सूची में खोजें",
@@ -215,6 +229,8 @@ $hi = array(
     "language_change.php" => 'भाषा',
     "scrapped"=>"योग्य",
     "scrapped_already"=>"पहले से मौजूद",
+
+    "user_list.php" => 'उपयोगकर्ता सूची',
 
 );
 

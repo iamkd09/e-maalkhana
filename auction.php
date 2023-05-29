@@ -97,9 +97,10 @@
                $DaysAgo = date('Y-m-d', strtotime('-365 days'));
 
                $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4)";
-               $result = mysqli_query($conn, $sql);
-               if (!empty($result)) {
-                  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+               $result_5 = mysqli_query($conn, $sql);
+               $null_date = "0000-00-00";
+               if (!empty($result_5) && $result_5->num_rows > 0) {
+                  $rows = mysqli_fetch_all($result_5, MYSQLI_ASSOC);
                   foreach ($rows as $k) {
                      echo '<div class="card custom-card col-sm-12 col-md-5">
                      <div class="">
@@ -109,7 +110,7 @@
                      echo '<tbody class="bg-custom-color">';
                      $gdNumber = "";
                      foreach ($k as $key => $value) {
-                        if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
+                        if (!empty($value) && $value != $null_date && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
                            echo '<tr>';
                            echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
@@ -128,7 +129,7 @@
                      echo '</div></div></div>';
                   }
                } else {
-                  echo '<div class="card custom-card col-sm-12 col-md-5">
+                  echo '<div class="card custom-card col-sm-12 col-md-12">
                      <div class="">
                      <div class="my-card">';
                   echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';

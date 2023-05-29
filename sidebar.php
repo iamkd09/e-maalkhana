@@ -42,6 +42,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <p><?php echo $lang['sidebar_register'] ?></p>
                 </a>
             </li>
+
+            <li class="<?php echo ($current_page == 'user_list.php') ? 'active' : ''; ?>">
+                <a href="user_list.php">
+                    <?php $_SESSION['user_list'] = true; ?>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <p><?php echo $lang['sidebar_userlist'] ?></p>
+                </a>
+            </li>
             <?php }?>
             <li class="<?php echo ($current_page == 'language_change.php') ? 'active' : ''; ?>">
                 <a href="language_change.php">

@@ -96,11 +96,11 @@
             ?>
             <div class="row">
             <?php
-            $status = 3; // Status for items in the scrapyard
-            $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` INNER JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '4' ";
-            $result = mysqli_query($conn, $sql);
-            if (!empty($result)) {
-               $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            $user_id = $_SESSION['user_id'];
+            $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` LEFT JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '4' AND inventory.`Created_By` = '$user_id' ";
+            $result_3 = mysqli_query($conn, $sql);
+            if (!empty($result_3) && $result_3->num_rows > 0) {
+               $rows = mysqli_fetch_all($result_3, MYSQLI_ASSOC);
                foreach ($rows as $k) {
                   echo '<div class="card custom-card col-sm-12 col-md-5">
                   <div class="">
@@ -124,8 +124,12 @@
                   echo '</div></div></div>';
                }
             } else {
-               echo '<img src="./assets/img/datanotfound.jpg" width="100%" alt="" srcset="" />';
-               echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
+                  echo '<div class="card custom-card col-sm-12 col-md-12">
+                        <div class="">
+                        <div class="my-card">';
+                  echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
+                  echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
+                  echo '</div></div></div>';
             }
 
             function getFieldLabel($fieldName)
