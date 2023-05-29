@@ -59,7 +59,7 @@ if (isset($_POST['search_scrap'])) {
                <div class="row search-row">
                <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
                   <div class="col-9">
-                     <input class="form-control searchbar btn btn-outline-info searchnew f-14"  type="search" name="search_scrap" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
+                     <input class="form-control searchbar btn btn-outline-info searchnew f-14"  type="search" name="outward_list" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
                   </div>
                   <div class="col-2">
                      <button name="search" class="btn btn-success">
@@ -75,10 +75,10 @@ if (isset($_POST['search_scrap'])) {
                <div class="col-md-12">
                      <ul class="nav-custom container-custom">
                         <li class="nav-item nav-item-new">
-                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important;"aria-current="page" href="scrapyard.php"><b><?php echo $lang['scrapped'] ?></b></a>
+                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important;"aria-current="page" href="outward_list.php"><b><?php echo $lang['scrapped'] ?></b></a>
                         </li>
                         <li class="nav-item nav-item-new">
-                           <a class="nav-link" style="color:black; !important" href="scrapyard_already.php"><b><?php echo $lang['scrapped_already'] ?></b></a>
+                           <a class="nav-link" style="color:black; !important" href="outward_already.php"><b><?php echo $lang['scrapped_already'] ?></b></a>
                         </li>
                      </ul>
                </div>
@@ -111,15 +111,13 @@ if (isset($_POST['search_scrap'])) {
             ?>
             <div class="row">
             <?php     
-               $currentDate = date('Y-m-d');
-               $DaysAgo = date('Y-m-d', strtotime('-365 days'));
                $user_id = $_SESSION['user_id'];
-               $sqlScrap = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4) AND `Created_By` = '$user_id' ";
-               if (isset($_POST['search_scrap'])) {
-                  $gd_search = $_POST['search_scrap'];
-                  $sqlScrap .= "AND `Gd_Number` LIKE '%$gd_search%'";
+               $sqlOut = "SELECT * FROM `inventory` WHERE  `Status` = '1' AND `Created_By` = '$user_id' ";
+               if (isset($_POST['outward_list'])) {
+                  $gd_search = $_POST['outward_list'];
+                  $sqlOut .= "AND `Gd_Number` LIKE '%$gd_search%'";
                }
-               $resultQS = mysqli_query($conn, $sqlScrap);
+               $resultQS = mysqli_query($conn, $sqlOut);
                $rowsScrap = mysqli_fetch_all($resultQS, MYSQLI_ASSOC);
                if (!empty($rowsScrap)) {
                   
@@ -147,7 +145,9 @@ if (isset($_POST['search_scrap'])) {
                      }
                      echo '</tbody>';
                      echo '</table>';
-                     echo '<button id="scrap_init" onclick=openModal("'.$gdNumber.'"); name="scrap" class="btn btn-primary fs-fw" >Send to Scrapyard</button>';
+                     echo '<a href="outward.php?outward_search='.$gdNumber.'">
+                     <button class="btn btn-primary fs-fw" >Outward</button> </a>
+                     ';
                      echo '</div></div></div>';
                   }
                } else {
@@ -164,126 +164,7 @@ if (isset($_POST['search_scrap'])) {
          </div>
       </div>
    </div>
-
-   <!-- Common modal structure for scrapyard and auction -->
-   <div class="modal" tabindex="-1" id="confirmationModal" role="dialog">
-      <div class="modal-dialog" role="document">
-         <div class="modal-content my-model">
-            <div class="modal-header my-header">
-               <h5 class="modal-title"></h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body" id="getCode">
-               <p></p>
-            </div>
-            <input type="hidden" value="" name="gd" id="gd_confirm" readonly>
-          
-            <div class="text-center">
-               <button type="button"  class="btn btn-info fs-fw" id="confirmYes" >Yes</button>
-               <button type="button" class="btn btn-malkhana" data-dismiss="modal">No</button>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <div class="modal" tabindex="-1" id="alertPopup" role="dialog">
-      <div class="modal-dialog" role="document">
-         <div class="modal-content my-model">
-            <div class="modal-header my-header">
-               <h5 class="modal-title">Message</h5>
-               <button type="button" class="close alert_sh" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body" id="getCode">
-            </div>
-            <div class="text-center">
-               <button type="button" class="btn btn-malkhana alert_sh fs-fw" data-dismiss="modal">Close</button>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <script>
-
-      function test(gdNUmber){
-        
-      }
-      function openModal(id) {
-         console.log(id);
-        if(id != '' && id != undefined) {
-           showConfirmationPopup('Send to Scrapyard', 'Are you sure you want to send '+ id +' it to the scrapyard?',id);  
-        }
-      }
-
-      function showConfirmationPopup(title, message,id) {
-         $('#gd_confirm').val(id);
-         $('#confirmationModal .modal-title').text(title);
-         $('#confirmationModal .modal-body p').text(message);
-         $('#confirmationModal').modal('show');
-      }
-
-      function hideConfirmationPopup() {
-         $('#confirmationModal').modal('hide');
-      }
-
-      function showAlertPopup(message) {
-         $('#alertPopup .modal-body').text(message);
-         $('#alertPopup').modal('show');
-      }
-
-      function hideAlertPopup() {
-         $('#alertPopup').modal('hide');
-         window.location.reload();
-      }
-
-      // $('#scrap_init').on('click', function () {
-      //    showConfirmationPopup('Send to Scrapyard', 'Are you sure you want to send it to the scrapyard?');
-      // });
-
-      $('.alert_sh').on('click', function () {
-         hideAlertPopup();
-      });
-
-      $('#confirmYes').on('click', function () {
-         var gd_no = $('#gd_confirm').val();
-         // Perform the action based on scrapyard or auction
-         var url = '';
-         var successMessage = '';
-
-         if ($('#confirmationModal .modal-title').text() === 'Send to Scrapyard') {
-            url = 'scrap.php';
-            successMessage = 'The item has been sent to the scrapyard.';
-         } else if ($('#confirmationModal .modal-title').text() === 'Send to Auction') {
-            url = 'auct.php';
-            successMessage = 'The item has been sent to the auction.';
-         }
-
-         $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-               gd_number: gd_no
-            },
-            success: function (response) {
-               console.log(response);
-               if (response === 'success') {
-                  hideConfirmationPopup();
-                  showAlertPopup(successMessage);
-               } else {
-                  hideConfirmationPopup();
-                  showAlertPopup('Failed to send the item.');
-               }
-            },
-            error: function () {
-               hideConfirmationPopup();
-               showAlertPopup('An error occurred while processing your request.');
-            }
-         });
-      });
-   </script>
+   
 
    <?php include('footer.php') ?>
 </body>

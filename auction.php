@@ -43,7 +43,7 @@
                <div class="row search-row">
                <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
                   <div class="col-9">
-                     <input class="form-control searchbar btn btn-outline-info searchnew f-14" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
+                     <input class="form-control searchbar btn btn-outline-info searchnew f-14"  type="search" name="auct_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
                   </div>
                   <div class="col-2">
                      <button name="search" class="btn btn-success"><?php echo $lang['go_button'] ?></button>
@@ -97,6 +97,10 @@
                $DaysAgo = date('Y-m-d', strtotime('-365 days'));
 
                $sql = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4)";
+               if (isset($_POST['auct_search'])) {
+                  $gd_search = $_POST['auct_search'];
+                  $sql .= "AND `Gd_Number` LIKE '%$gd_search%'";
+               }
                $result_5 = mysqli_query($conn, $sql);
                $null_date = "0000-00-00";
                if (!empty($result_5) && $result_5->num_rows > 0) {

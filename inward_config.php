@@ -39,20 +39,19 @@ if (isset($_POST['submit'])) {
     $sql1 = "INSERT INTO `inventory` (`Gd_Number`, `stolen_date`, `Date_Of_Recovery`, `FIR_Reference_Number`, `Under_Section`, `Recovered_From`, `Recovered_By`, `accident_date`, `Vehicle_Number`, `Vehicle_Type`, `MV_Act`, `Owner_Name`, `Vehicle_R_Number`, `Car_Make`, `Car_Model`, `Car_Color`, `Item_desc`, `Pictures`, `category_id`, `sub_category_id`, `Created_By`) VALUES ('$gd_number', '$stolen_date', '$recovery_date', '$fir_number', '$under_section',  '$recovered_from', '$recovered_by', '$accident_date', '$vehicle_number', '$vehicle_type', '$mv_act', '$owner_name', '$vehicle_r_number', '$car_make', '$car_model', '$car_color','$item_description', '$upload', '$cat', '".$sub_cat."', '$user_id')";
     $result = mysqli_query($conn,$sql1);
   }
-
-    if ($result) {
-      $_SESSION['success'] = '<span style="color:green;">Registration Successful.</span>';
-      header("Location: inward.php");
-      exit;
-    } else {
-      $_SESSION['error'] = '<span style="color:red;">Oops! An error occurred.</span>';
+    if ($result && !empty($result)) {
+      if($result == 1) {
+        $_SESSION['success'] = '<span style="color:green;">Registration Successful.</span>';
+      } else {
+        $_SESSION['error'] = '<span style="color:red;">Oops! An error occurred.</span>';
+      }
       header("Location: inward.php");
       exit;
     }
-  } else {
-    // $_SESSION['error'] = '<span style="color:red;">GD Number already exists.</span>';
-    echo '<span style="color:red;">GD Number already exists.</span>';
-    // header("Location: inward.php");
-    exit;
-  }
+    else {
+      //$_SESSION['error'] = '<span style="color:red;">GD Number already exists.</span>';
+      header("Location: inward.php");
+      exit;
+    }
+  } 
 ?>

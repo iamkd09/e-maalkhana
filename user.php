@@ -76,7 +76,7 @@ if (isset($_POST['submit'])) {
           $result = $conn->query($query);
 
           if ($result) {
-              $message = "Registration successfully";
+              $message = "Registration successful";
               $messageColor = "green";
           } else {
               $message = "Error occurred while registering. Please try again.";

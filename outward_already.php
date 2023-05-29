@@ -32,7 +32,19 @@
 </head>
 
 <?php
+if (isset($_POST['scrap_already'])) {
+  $gd_search = $_POST['scrap_already'];
+  $user_id = $_SESSION['user_id'];
+  unset($result);
+  $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%' AND `Status` = 3 AND `Created_By` = '$user_id' ";
 
+  $result = mysqli_query($conn, $sql);
+  $data = mysqli_fetch_assoc($result);
+} else {
+  unset($result);
+  $gd_search = '';
+  $result = [];
+}
 ?>
 
 
@@ -52,7 +64,7 @@
                      <div class="row my-card top-24">
                         <div class="col-9">
                            <input class="form-control searchbar btn btn-outline-info searchnew f-14"
-                              type="search" name="scrap_already" data-mdb-ripple-color="dark"
+                              type="search" name="out_already" data-mdb-ripple-color="dark"
                               placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search"
                               style="height: fit-content; border-radius: 5px!important;"
                               value="<?php echo $gd_search ?? ''; ?>">
@@ -73,13 +85,13 @@
                   <ul class="nav-custom container-custom container-custom-none">
                      <li class="nav-item">
                         <a class="nav-link nav-item-new" style="color:black; !important" aria-current="page"
-                           href="scrapyard.php"><b>
+                           href="outward_list.php"><b>
                               <?php echo $lang['scrapped'] ?>
                            </b></a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"
-                           href="scrapyard_already.php"><b>
+                           href="outward_already.php"><b>
                               <?php echo $lang['scrapped_already'] ?>
                            </b></a>
                      </li>
@@ -118,13 +130,13 @@
                $user_id = $_SESSION['user_id'];
 
                $status = 3; // Status for items in the scrapyard
-               $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` LEFT JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '3' AND inventory.`Created_By` = '$user_id' ";
-
-               if (isset($_POST['scrap_already'])) {
-                  $gd_search = $_POST['scrap_already'];
+               $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` LEFT JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '2' AND inventory.`Created_By` = '$user_id' ";
+               if (isset($_POST['out_already'])) {
+                  $gd_search = $_POST['out_already'];
                   $sql .= "AND `Gd_Number` LIKE '%$gd_search%'";
                }
                $result_4 = mysqli_query($conn, $sql);
+
 
                if (!empty($result_4) && $result_4->num_rows > 0) {
                   $rows = mysqli_fetch_all($result_4, MYSQLI_ASSOC);
@@ -135,9 +147,9 @@
 
                      echo '<table class="table table-responsive">';
                      echo '<tbody class="bg-custom-color">';
-
+                     $null_date = "0000-00-00";
                      foreach ($k as $key => $value) {
-                        if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
+                        if (!empty($value) && $value != $null_date && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
                            echo '<tr>';
                            echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
