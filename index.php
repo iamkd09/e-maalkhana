@@ -59,10 +59,10 @@
   }
 }
       else {
-        $error ='<span style="color:red;">User is not active, please try again.</span>';
+        $error ='<span style="color:red;">'.$lang['nonactive_user'].'</span>';
       }
   } else {
-    $error ='<span style="color:red;">Invalid User!.</span>';
+    $error ='<span style="color:red;">'.$lang['invalid_user'].'</span>';
      }
   }
  }

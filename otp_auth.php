@@ -50,12 +50,12 @@
                         header("Location: dashboard.php");
                         exit;
                     }else{
-                        $_SESSION['msg'] = '<span style="color:red;">Invalid OTP, please try again.</span>';
+                        $_SESSION['msg'] = '<span style="color:red;">'.$lang['invalid_otp'].'</span>';
                         header("Location: otp.php");
                         exit;
                     }
                 } else {
-                    $_SESSION['msg'] = '<span style="color:red;">Invalid OTP, please try again.</span>';
+                    $_SESSION['msg'] = '<span style="color:red;">'.$lang['invalid_otp'].'</span>';
                     header("Location: otp.php");
                     exit;
                 }  

@@ -15,6 +15,9 @@ $en = array(
     "enter_otp"=>"Please enter OTP to verify your account",
     "not_got_otp"=>"Didn't get the code?",
     "resend_otp"=>"Resend it",
+    "invalid_otp"=> "Invalid OTP, please try again.",
+    "nonactive_user" => "User is not active, please try again.",
+    "invalid_user" => "Invalid User!.",
 
     // Dashbboard Page Keys
     "sidebar_home"=>"HOME",
@@ -133,6 +136,11 @@ $hi = array(
     "enter_otp"=>"अपना खाता सत्यापित करने के लिए कृपया ओटीपी दर्ज करें",
     "not_got_otp"=>"ओटीपी नहीं मिला?",
     "resend_otp"=>"फिर से भेजें",
+
+    "invalid_otp"=> "अमान्य ओटीपी, कृपया पुनः प्रयास करें।",
+    "nonactive_user" => "उपयोगकर्ता सक्रिय नहीं है, कृपया पुनः प्रयास करें।",
+    "invalid_user" => "अमान्य उपयोगकर्ता!।",
+
     // Dashbboard Page Keys
     "sidebar_home"=>"होम",
     "sidebar_register"=>"रजिस्टर करें",
