@@ -72,7 +72,7 @@ if (isset($_POST['search_scrap'])) {
          </div>
          <div class="content ck">
             <div class="row" style="text-align:center">
-               <div class="col-md-12">
+               <div class="col-md-12 cr-text">
                      <ul class="nav-custom container-custom">
                         <li class="nav-item nav-item-new">
                            <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important;"aria-current="page" href="scrapyard.php"><b><?php echo $lang['scrapped'] ?></b></a>
