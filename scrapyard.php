@@ -54,7 +54,7 @@ if (isset($_POST['search_scrap'])) {
          </nav>
          <div class="panel-header panel-header-sm">
          </div>
-         <div class="container" style="z-index: 9999;position: relative;">
+         <div class="container" style="">
             <form action="" method="post" autocomplete="off">
                <div class="row search-row">
                <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">

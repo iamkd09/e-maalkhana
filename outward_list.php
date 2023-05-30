@@ -54,7 +54,7 @@ if (isset($_POST['search_scrap'])) {
          </nav>
          <div class="panel-header panel-header-sm">
          </div>
-         <div class="container" style="z-index: 9999;position: relative;">
+         <div class="container">
             <form action="" method="post" autocomplete="off">
                <div class="row search-row">
                <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
@@ -72,7 +72,7 @@ if (isset($_POST['search_scrap'])) {
          </div>
          <div class="content ck">
             <div class="row" style="text-align:center">
-               <div class="col-md-12">
+               <div class="col-md-12 cr-text">
                      <ul class="nav-custom container-custom">
                         <li class="nav-item nav-item-new">
                            <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important;"aria-current="page" href="outward_list.php"><b><?php echo $lang['scrapped'] ?></b></a>
