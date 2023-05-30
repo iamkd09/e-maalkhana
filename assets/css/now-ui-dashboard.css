@@ -2986,11 +2986,12 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .alert.alert-success {
-  background-color: #1be611;
+  background-color: #80f27a;
 }
 
 .alert.alert-danger {
-  background-color: #ff5050;
+  background-color: #ffa9a9;
+  color: #fff !important;
 }
 
 .alert.alert-warning {

@@ -256,11 +256,13 @@ function getStatusLabel($category_id, $sub_category_id)
             </div>   
 
             <div class="row">
-               <form action="" method="POST">
-                  <input type="date" name="start_date" id="" required>
-                  <input type="date" name="end_date" id="" required>
-                  <button class="btn btn-primary fs-fw" type="submit" name="filter">Filter</button>
-               </form>
+               <div class="col-sm-12">
+                  <form action="" method="POST">
+                     <input type="date" name="start_date" id="" required>
+                     <input type="date" name="end_date" id="" required>
+                     <button class="btn btn-sm btn-primary fs-fw" type="submit" name="filter">Filter</button>
+                  </form>
+               </div>
             </div>
 
                <!-- Pie chart - Scrapyard -->

@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
       exit;
     }
     else {
-      //$_SESSION['error'] = '<span style="color:red;">GD Number already exists.</span>';
+      $_SESSION['error'] = '<span style="color:red;">GD Number already exists.</span>';
       header("Location: inward.php");
       exit;
     }

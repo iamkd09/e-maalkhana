@@ -20,6 +20,25 @@ if (isset($_GET['outward_search'])) {
 }
 ?>
 
+<?php
+                $status_new = $_GET['status_new'];
+
+                // Display the corresponding message with appropriate CSS class
+                if ($status_new == 'success') {
+                  $message = '<p class="success">Success! Item is outwarded successfully.</p>';
+                } elseif ($status_new == 'error_update') {
+                  $message =  '<p class="error">Error in outwarding.</p>';
+                } elseif ($status_new == 'error_insert') {
+                  $message =  '<p class="error">Error in outwarding.</p>';
+                } elseif ($status_new == 'invalid_status') {
+                  $message =  '<p class="error">Item cannot be outwarded.</p>';
+                } elseif ($status_new == 'error_retrieve') {
+                  $message =  '<p class="error">Item cannot be outwarded.</p>';
+                } else{
+                  $message =  '<p class="error">Item cannot be outwarded.</p>';
+                } 
+                ?>
+
 <head>
   <title>Outward-Form</title>
 </head>
@@ -47,6 +66,15 @@ if (isset($_GET['outward_search'])) {
             </form>
          </div>
       <div class="content ck ck2" <?php $select = 'outward' ?>>
+      <?php
+      if(isset($_GET['status_new']) && !empty($_GET['status_new'])) {
+        if ($status_new == 'success') {
+          echo '<div class="alert alert-success fs-fw" style="z-index: 1000; color: white !important;">' . $message . '</div>';
+        } else{
+          echo '<div class="alert alert-danger fs-fw white-cs" style="z-index: 1000; color: white !important;">' . $message . '</div>';
+        }
+      }  
+      ?>
         <div class="row">
           <?php $status_new ?>
           <div class="col-md-12">
@@ -66,26 +94,8 @@ if (isset($_GET['outward_search'])) {
                 }
                 ?>
 
-                <?php
-                $status_new = $_GET['status_new'];
+               
 
-                // Display the corresponding message with appropriate CSS class
-                if ($status_new == 'success') {
-                  echo '<p class="success">Success! Item is outwarded successfully.</p>';
-                } elseif ($status_new == 'error_update') {
-                  echo '<p class="error">Error in outwarding.</p>';
-                } elseif ($status_new == 'error_insert') {
-                  echo '<p class="error">Error in outwarding.</p>';
-                } elseif ($status_new == 'invalid_status') {
-                  echo '<p class="error">Item cannot be outwarded.</p>';
-                } elseif ($status_new == 'error_retrieve') {
-                  echo '<p class="error">Item cannot be outwarded.</p>';
-                } elseif ($status_new == 'already_updated') {
-                  echo '<p class="error">Item cannot be outwarded.</p>';
-                } else {
-                  echo '';
-                }
-                ?>
               </div>
             </div>
           </div>

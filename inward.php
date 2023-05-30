@@ -39,18 +39,18 @@ if ($result->num_rows > 0) {
       <div class="panel-header panel-header-sm">
       </div>
 
-      <?php 
-          if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
-            $message =  $_SESSION['error'];
-            echo '<div class="alert alert-danger>"'.$message.'"</div>';
-            unset($_SESSION['success']);
-          }
-          if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-            $message =  $_SESSION['success'];
-            echo '<div class="alert alert-success>"'.$message.'"</div>';
-           unset($_SESSION['error']);
-          }
+      <?php
+        if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+          $message = $_SESSION['error'];
+          echo '<div class="alert alert-danger fs-fw white-cs" style="z-index: 1000; color: white !important;">' . $message . '</div>';
+          unset($_SESSION['error']);
+        } elseif (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+          $message = $_SESSION['success'];
+          echo '<div class="alert alert-success fs-fw" style="z-index: 1000; color: white !important;">' . $message . '</div>';
+          unset($_SESSION['success']);
+        }
       ?>
+
 
       <div class="content">
         
