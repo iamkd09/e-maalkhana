@@ -58,6 +58,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <p><?php echo $lang['sidebar_languages'] ?></p>
                 </a>
             </li>
+            <li class="<?php echo ($current_page == 'inventory.php') ? 'active' : ''; ?>">
+                <a href="inventory.php">
+                    <?php $_SESSION['inventory'] = true; ?>
+                    <i class="fa fa-store" aria-hidden="true"></i>
+                    <p><?php echo $lang['sidebar_inventory'] ?></p>
+                </a>
+            </li>
             <li>
                 <a href="./logout.php" class="border-color:red" >
                     <i class="fa fa-power-off"></i>

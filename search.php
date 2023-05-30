@@ -32,7 +32,7 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
          
          <div class="panel-header panel-header-sm">
          </div>
-         <div class="container">
+         <div class="container" style="z-index: 9999;position: relative;">
             <form action="" method="post" autocomplete="off">
                <div class="row search-row">
                <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
@@ -90,6 +90,10 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                               echo '<td>' . $value . '</td>';
                               echo '</tr>';
                            }
+                           if($key == 'Gd_Number'){
+                              $gdNumber = $value;
+                              
+                           }
                         }
 
                         echo '</tbody>';
@@ -101,11 +105,12 @@ if (isset($_POST['gd_search']) && !empty($_POST['gd_search'])) {
                         echo '<div class="buttons" style="display: flex;">';
                         if ($daysDiff > $scrap_day) {
                            echo '<div class="row">';
-                           echo '<button id="scrap_init" name="scrap" class="btn btn-primary fs-fw btn-info" >Send to Scrapyard</button><button id="auct_init" name="auct" class="btn btn-primary fs-fw btn-info">Send to Auction</button><button class="btn btn-primary fs-fw btn-info">
-                           <a class="no-ui" href="outward.php">Send to Outward</a>
-                         </button>';
-                           echo '</div>';
+                           echo '<button id="scrap_init" name="scrap" class="btn btn-primary fs-fw btn-info" >Send to Scrapyard</button><button id="auct_init" name="auct" class="btn btn-primary fs-fw btn-info">Send to Auction</button>';
+                           // echo '</div>';
                         }
+                        echo '<button class="btn btn-primary fs-fw btn-info">
+                        <a class="no-ui" href="outward.php?outward_search='.$gdNumber.'">Send to Outward</a>
+                      </button></div>';
                         echo '</div></div></div></div>';
                      }
                   } else {

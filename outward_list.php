@@ -1,7 +1,6 @@
 <?php include('header.php') ?>
-<?php include('conn.php') ?>
 <?php include('sidebar.php') ?>
-
+<?php $gdNumber = 0; ?>
 <head>
    <title>
       Project-admin
@@ -28,13 +27,23 @@
          padding-right: 10px;
       }
    </style>
-
 </head>
 
 <?php
+if (isset($_POST['search_scrap'])) {
+  $gd_search = $_POST['search_scrap'];
+  $user_id = $_SESSION['user_id'];
+  unset($result);
+  $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '%$gd_search%' AND `Status` = 1 AND `Created_By` = '$user_id' ";
 
+  $result = mysqli_query($conn, $sql);
+  $data = mysqli_fetch_assoc($result);
+} else {
+  unset($result);
+  $gd_search = '';
+  $result = [];
+}
 ?>
-
 
 <body class="user-profile">
    <div class="wrapper ">
@@ -45,48 +54,35 @@
          </nav>
          <div class="panel-header panel-header-sm">
          </div>
-         <div class="container">
+         <div class="container" style="z-index: 9999;position: relative;">
             <form action="" method="post" autocomplete="off">
                <div class="row search-row">
-                  <div class="card custom-card col-sm-12 col-md-12">
-                     <div class="row my-card top-24">
-                        <div class="col-9">
-                           <input class="form-control searchbar btn btn-outline-info searchnew f-14"
-                              type="search" name="scrap_already" data-mdb-ripple-color="dark"
-                              placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search"
-                              style="height: fit-content; border-radius: 5px!important;"
-                              value="<?php echo $gd_search ?? ''; ?>">
-                        </div>
-                        <div class="col-2">
-                           <button name="search" class="btn btn-success">
-                              <?php echo $lang['go_button'] ?>
-                           </button>
-                        </div>
-                     </div>
+               <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
+                  <div class="col-9">
+                     <input class="form-control searchbar btn btn-outline-info searchnew f-14"  type="search" name="outward_list" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search ?? ''; ?>">
                   </div>
+                  <div class="col-2">
+                     <button name="search" class="btn btn-success">
+                        <?php echo $lang['go_button'] ?>
+                     </button>
+                  </div>
+                </div></div>  
                </div>
             </form>
          </div>
-         <div class="content ck ck2">
-         <div class="row" >
-            <div class="col-md-12 cr-text">
-                  <ul class="nav-custom container-custom container-custom-none">
-                     <li class="nav-item">
-                        <a class="nav-link nav-item-new" style="color:black; !important" aria-current="page"
-                           href="scrapyard.php"><b>
-                              <?php echo $lang['scrapped'] ?>
-                           </b></a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important"
-                           href="scrapyard_already.php"><b>
-                              <?php echo $lang['scrapped_already'] ?>
-                           </b></a>
-                     </li>
-                  </ul>
+         <div class="content ck">
+            <div class="row" style="text-align:center">
+               <div class="col-md-12">
+                     <ul class="nav-custom container-custom">
+                        <li class="nav-item nav-item-new">
+                           <a class="nav-link active" style="background-color: #1D6AA0; color:white; !important;"aria-current="page" href="outward_list.php"><b><?php echo $lang['scrapped'] ?></b></a>
+                        </li>
+                        <li class="nav-item nav-item-new">
+                           <a class="nav-link" style="color:black; !important" href="outward_already.php"><b><?php echo $lang['scrapped_already'] ?></b></a>
+                        </li>
+                     </ul>
                </div>
             </div>
-
             <?php
             $fieldLabels = [
                'Gd_Number' => $lang['gd_number'],
@@ -114,24 +110,22 @@
             ];
             ?>
             <div class="row">
-               <?php
+            <?php     
                $user_id = $_SESSION['user_id'];
-
-               $status = 3; // Status for items in the scrapyard
-               $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` LEFT JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '3' AND inventory.`Created_By` = '$user_id' ";
-
-               if (isset($_POST['scrap_already'])) {
-                  $gd_search = $_POST['scrap_already'];
-                  $sql .= "AND `Gd_Number` LIKE '%$gd_search%'";
+               $sqlOut = "SELECT * FROM `inventory` WHERE  `Status` = '1' AND `Created_By` = '$user_id' ";
+               if (isset($_POST['outward_list'])) {
+                  $gd_search = $_POST['outward_list'];
+                  $sqlOut .= "AND `Gd_Number` LIKE '%$gd_search%'";
                }
-               $result_4 = mysqli_query($conn, $sql);
-
-               if (!empty($result_4) && $result_4->num_rows > 0) {
-                  $rows = mysqli_fetch_all($result_4, MYSQLI_ASSOC);
-                  foreach ($rows as $k) {
+               $resultQS = mysqli_query($conn, $sqlOut);
+               $rowsScrap = mysqli_fetch_all($resultQS, MYSQLI_ASSOC);
+               if (!empty($rowsScrap)) {
+                  
+                  foreach ($rowsScrap as $k) {
+                     $gdNumber = '';
                      echo '<div class="card custom-card col-sm-12 col-md-5">
-                  <div class="">
-                  <div class="my-card">';
+                     <div class="">
+                     <div class="my-card">';
 
                      echo '<table class="table table-responsive">';
                      echo '<tbody class="bg-custom-color">';
@@ -144,33 +138,33 @@
                            echo '<td>' . $value . '</td>';
                            echo '</tr>';
                         }
+                        if($key == 'Gd_Number'){
+                           $gdNumber = $value;
+                           
+                        }
                      }
-
                      echo '</tbody>';
                      echo '</table>';
+                     echo '<a href="outward.php?outward_search='.$gdNumber.'">
+                     <button class="btn btn-primary fs-fw" >Outward</button> </a>
+                     ';
                      echo '</div></div></div>';
                   }
                } else {
                   echo '<div class="card custom-card col-sm-12 col-md-12">
-                           <div class="">
-                           <div class="my-card">';
+                     <div class="">
+                     <div class="my-card">';
                   echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
                   echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                   echo '</div></div></div>';
-               }
 
-               function getFieldLabel($fieldName)
-               {
-                  global $fieldLabels;
-                  return isset($fieldLabels[$fieldName]) ? $fieldLabels[$fieldName] : $fieldName;
                }
-               ?>
-            </div>
+            ?>
+           </div> 
          </div>
       </div>
    </div>
-
-
+   
 
    <?php include('footer.php') ?>
 </body>

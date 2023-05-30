@@ -44,7 +44,7 @@
                <div class="row search-row">
                <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
                   <div class="col-9">
-                     <input class="form-control searchbar btn btn-outline-info searchnew f-14" href="search.php" type="search" name="gd_search" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search; ?>">
+                     <input class="form-control searchbar btn btn-outline-info searchnew f-14"  type="search" name="auct_already" data-mdb-ripple-color="dark" placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search" style="height: fit-content; border-radius: 5px!important;" value="<?php echo $gd_search; ?>">
                   </div>
                   <div class="col-2">
                      <button name="search" class="btn btn-success"><?php echo $lang['go_button'] ?></button>
@@ -98,6 +98,10 @@
             <?php
             $user_id = $_SESSION['user_id'];
             $sql = "SELECT inventory.*,sa_log.created_at as created FROM `inventory` LEFT JOIN `sa_log` ON inventory.id = inward_id WHERE inventory.status = '4' AND inventory.`Created_By` = '$user_id' ";
+            if (isset($_POST['auct_already'])) {
+               $gd_search = $_POST['auct_already'];
+               $sql .= "AND `Gd_Number` LIKE '%$gd_search%'";
+            }
             $result_3 = mysqli_query($conn, $sql);
             if (!empty($result_3) && $result_3->num_rows > 0) {
                $rows = mysqli_fetch_all($result_3, MYSQLI_ASSOC);

@@ -3,7 +3,7 @@
 <?php include "header.php"; ?>
 
 <?php
-
+$message = "";
 $query = "SELECT `id`,`name` FROM `category`";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
@@ -17,7 +17,8 @@ $result = $conn->query($query);
 if ($result->num_rows > 0) {
     $sub_category = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
-
+//unset($_SESSION['success']);
+//unset($_SESSION['error']);
 
 ?>
 
@@ -37,8 +38,22 @@ if ($result->num_rows > 0) {
         </nav>
       <div class="panel-header panel-header-sm">
       </div>
+
+      <?php 
+          if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+            $message =  $_SESSION['error'];
+            echo '<div class="alert alert-danger>"'.$message.'"</div>';
+            unset($_SESSION['success']);
+          }
+          if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+            $message =  $_SESSION['success'];
+            echo '<div class="alert alert-success>"'.$message.'"</div>';
+           unset($_SESSION['error']);
+          }
+      ?>
+
       <div class="content">
-        <?php echo $success ?? ''; ?>
+        
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -74,11 +89,6 @@ if ($result->num_rows > 0) {
                   </div>    
                   <div class="row form-div" id="common_inputs"></div>   
               </form>
-              <?php 
-                //  if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
-                //     echo $_SESSION['error'];
-                //  }
-               ?>
             </div>
           </div>
         </div>

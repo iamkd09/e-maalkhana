@@ -24,6 +24,7 @@ $en = array(
     "sidebar_register"=>"REGISTER",
     "sidebar_userlist" => "USER LIST",
     "sidebar_languages"=>"LANGUAGES",
+    "sidebar_inventory" => "INVENTORY",
     "sidebar_logout"=>"LOGOUT",
     "dashboard_search"=>"Search Inventory",
     "inward_button"=>"Inward",
@@ -111,14 +112,18 @@ $en = array(
     "user.php" => 'Register',
     "user_list.php" => 'User List',
     "language_change.php" => 'Translate',
-
+    "inventory.php" => 'Inventory',
+    "outward_list.php" => 'Outward',
+    "outward_already.php" => 'Outward',
     "scrapped"=>"Eligible",
     "scrapped_already"=>"Already Present",
 
     // user_list
     "name" => "Name",
     "contact" => "Mobile No.",
-    "address" => "Address",
+
+    'cat_name' => 'Category',
+    'sub_cat_name' => 'Sub-Category',
 
 );
 
@@ -146,6 +151,7 @@ $hi = array(
     "sidebar_register"=>"रजिस्टर करें",
     "sidebar_userlist" => "उपयोगकर्ता सूची",
     "sidebar_languages"=>"भाषा",
+    "sidebar_inventory" => "वस्तुसूची",
     "sidebar_logout"=>"लॉग आउट",
     "dashboard_search"=>"सूची में खोजें",
     "inward_button"=>"इन्वर्ड",
@@ -162,7 +168,7 @@ $hi = array(
     "go_button"=>"खोजे",
     "no_data"=>"डाटा प्राप्त नहीं हुआ",
     "register_here"=>"रजिस्टर करें",
-    "station_name"=>"थाने का नाम दर्ज करें",
+    "station_name"=>"थाने का नाम",
     "role_select"=>"भूमिका चुनें",
     "mobile_number"=>"मोबाइल नंबर",
     "address"=>"पता",
@@ -229,9 +235,13 @@ $hi = array(
     "language_change.php" => 'भाषा',
     "scrapped"=>"योग्य",
     "scrapped_already"=>"पहले से मौजूद",
-
+    "inventory.php" => 'वस्तुसूची',
     "user_list.php" => 'उपयोगकर्ता सूची',
+    "outward_list" => 'आउटवर्ड',
+    "outward_already.php" => 'आउटवर्ड',
 
+    'cat_name' => 'श्रेणी',
+    'sub_cat_name' => 'उप-श्रेणी',
 );
 
 ?>

@@ -9,9 +9,26 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 $user_id = $_SESSION['user_id'];
 
+$start_date = '';
+$end_date='';
+// Filter date
+   if(isset($_POST['filter'])){
+      $start_date = $_POST['start_date'];
+      $end_date = $_POST['end_date'];
+   }
+   
+
 // Fetch inventory data for different statuses
-$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 AND `Created_By` = '$user_id' GROUP BY `category_id`, `sub_category_id`  ";
+$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 AND `Created_By` = '$user_id'  ";
+
+
+if(!empty($start_date) && !empty($end_date)){
+   $queryInward.="AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+}
+
+$queryInward.= "GROUP BY `category_id`, `sub_category_id` ";
 $resultInward = mysqli_query($conn, $queryInward);
+
 $dataInward = array();
 while ($row = mysqli_fetch_assoc($resultInward)) {
    $category_id = $row['category_id'];
@@ -21,8 +38,15 @@ while ($row = mysqli_fetch_assoc($resultInward)) {
    $dataInward[] = array($label, $count);
 }
 
-$queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 AND `Created_By` = '$user_id' GROUP BY `category_id`, `sub_category_id`";
+$queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 AND `Created_By` = '$user_id' ";
+
+if(!empty($start_date) && !empty($end_date)){
+   $queryOutward.="AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+}
+
+$queryOutward.= "GROUP BY `category_id`, `sub_category_id` ";
 $resultOutward = mysqli_query($conn, $queryOutward);
+
 $dataOutward = array();
 while ($row = mysqli_fetch_assoc($resultOutward)) {
    $category_id = $row['category_id'];
@@ -32,7 +56,13 @@ while ($row = mysqli_fetch_assoc($resultOutward)) {
    $dataOutward[] = array($label, $count);
 }
 
-$queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 AND `Created_By` = '$user_id' GROUP BY `category_id`, `sub_category_id`";
+$queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 AND `Created_By` = '$user_id' ";
+
+if(!empty($start_date) && !empty($end_date)){
+   $queryScrapyard.="AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+}
+
+$queryScrapyard.= "GROUP BY `category_id`, `sub_category_id` ";
 $resultScrapyard = mysqli_query($conn, $queryScrapyard);
 $dataScrapyard = array();
 while ($row = mysqli_fetch_assoc($resultScrapyard)) {
@@ -43,7 +73,13 @@ while ($row = mysqli_fetch_assoc($resultScrapyard)) {
    $dataScrapyard[] = array($label, $count);
 }
 
-$queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 AND `Created_By` = '$user_id' GROUP BY `category_id`, `sub_category_id`";
+$queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 AND `Created_By` = '$user_id' ";
+
+if(!empty($start_date) && !empty($end_date)){
+   $queryAuction.="AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+}
+
+$queryAuction.= "GROUP BY `category_id`, `sub_category_id` ";
 $resultAuction = mysqli_query($conn, $queryAuction);
 $dataAuction = array();
 while ($row = mysqli_fetch_assoc($resultAuction)) {
@@ -187,7 +223,7 @@ function getStatusLabel($category_id, $sub_category_id)
                   </a>
                </div>
                <div class="col-md-3">
-                  <a href="outward.php" class="ct-txt">
+                  <a href="outward_list.php" class="ct-txt">
                      <button type="button" class="form-control btn btn-lg btn-outline-malkhana"
                         data-mdb-ripple-color="dark">
                         <b>
@@ -219,6 +255,13 @@ function getStatusLabel($category_id, $sub_category_id)
                </div>
             </div>   
 
+            <div class="row">
+               <form action="" method="POST">
+                  <input type="date" name="start_date" id="" required>
+                  <input type="date" name="end_date" id="" required>
+                  <button class="btn btn-primary fs-fw" type="submit" name="filter">Filter</button>
+               </form>
+            </div>
 
                <!-- Pie chart - Scrapyard -->
                <!-- <div class="container"> -->
