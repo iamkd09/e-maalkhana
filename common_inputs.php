@@ -117,9 +117,9 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
 
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
-                                <label>' . $lang['vehicle_type'] . ':</label>
+                                <label>' . $lang['label_vehicle_type'] . ':</label>
                                 <select class="form-control statetocity" name="vehicle_type">
-                                <option>' . $lang['vehicle_type'] . '</option>
+                                <option></option>
                                 <option>' . $lang['two_wheeler'] . '</option>
                                 <option>' . $lang['three_wheeler'] . '</option>
                                 <option>' . $lang['four_wheeler'] . '</option>
@@ -259,9 +259,9 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
 
      <div class="col-md-4 pl-1">
          <div class="form-group">
-             <label>' . $lang['vehicle_type'] . ':</label>
+             <label>' . $lang['label_vehicle_type'] . ':</label>
              <select class="form-control statetocity" name="vehicle_type">
-             <option>' . $lang['vehicle_type'] . '</option>
+             <option></option>
              <option>' . $lang['two_wheeler'] . '</option>
              <option>' . $lang['three_wheeler'] . '</option>
              <option>' . $lang['four_wheeler'] . '</option>
@@ -325,9 +325,9 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
  
       <div class="col-md-4 pl-1">
          <div class="form-group">
-             <label>' . $lang['vehicle_type'] . ':</label>
+             <label>' . $lang['label_vehicle_type'] . ':</label>
              <select class="form-control statetocity" name="vehicle_type">
-             <option>' . $lang['vehicle_type'] . '</option>
+             <option></option>
              <option>' . $lang['two_wheeler'] . '</option>
              <option>' . $lang['three_wheeler'] . '</option>
              <option>' . $lang['four_wheeler'] . '</option>
@@ -393,7 +393,7 @@ $html .= '
   <div class="col-md-12 pl-2">
    <div class="form-group ff-file">
       <label for="file-select">' . $lang['pictures'] . ':</label>
-      <input type="file" name="upload[]" id="file-select" multiple="multiple" accept="image/*" max="4">
+      <input type="file" name="upload[]" multiple="multiple">
    </div>
 </div>
 </div>

@@ -77,14 +77,14 @@ if (isset($_POST['submit'])) {
 
           if ($result) {
               $message = "Registration successful";
-              $messageColor = "green";
+              // $messageColor = "green";
           } else {
               $message = "Error occurred while registering. Please try again.";
-              $messageColor = "red";
+              // $messageColor = "red";
           }
       } else {
           $message = "All fields are required.";
-          $messageColor = "red";
+          // $messageColor = "red";
       }
   }
 }
@@ -103,11 +103,31 @@ if (isset($_POST['submit'])) {
         </nav>
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
-      <?php if(!empty($message)): ?>
-        <div class="alert <?php echo ($result) ? 'alert-success' : 'alert-danger'; ?>">
-          <?php echo $message; ?>
-        </div>
-      <?php endif; ?>
+      <?php if (!empty($message)): ?>
+            <div class="modal" tabindex="-1" id="alertPopup" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content my-model">
+                        <div class="modal-header my-header">
+                            <h5 class="modal-title">Message</h5>
+                            <button type="button" class="close alert_sh" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="getCode">
+                            <div class="alert <?php echo ($result) ? 'success' : 'danger'; ?>">
+                                <h4><?php echo $message; ?></h4>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                          <a href="user.php">
+                            <button type="button" class="btn btn-malkhana alert_sh fs-fw" data-dismiss="modal"> Close</button>
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -182,7 +202,9 @@ if (isset($_POST['submit'])) {
                       </div>
                     </div>
                   </div>
+                  <div class="col-md-12 text-center" >
                   <button type="submit" name="submit" class="btn btn-primary fs-fw"><?php echo $lang['submit'] ?></button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -203,6 +225,9 @@ if (isset($_POST['submit'])) {
     });
   }
   $("input[required]").parent("label").addClass("required");
+  $(document).ready(function() {
+            $('#alertPopup').modal('show');
+        });
 </script>
   <!--   Core JS Files   -->
   <?php include('./footer.php') ?>

@@ -75,6 +75,7 @@ if ($result->num_rows > 0) {
                           ?>
                         </select>
                       </div>
+
                     </div>
                   
                   <div class="col-md-6 pl-1" id="subCategoryRow" style="display: none;">
@@ -93,9 +94,8 @@ if ($result->num_rows > 0) {
           </div>
         </div>
         
-     
         <hr class=""> </hr>
-
+    
       </div>
       </div>
      

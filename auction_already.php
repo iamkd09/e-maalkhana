@@ -113,15 +113,33 @@
                   echo '<table class="table table-responsive">';
                   echo '<tbody class="bg-custom-color">';
 
+                  // $null_date = "0000-00-00";
+                  // $default_date = "1970-01-01";
                   foreach ($k as $key => $value) {
+                     $value = trim($value);
                      if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
-                        $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
-                        echo '<tr>';
-                        echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
-                        echo '<td>' . $value . '</td>';
-                        echo '</tr>';
+                         $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                         echo '<tr>';
+                         echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+                         
+                         // Check if the value is a JSON string
+                         if ($key === 'Pictures') {
+                             $pictures = json_decode($value, true);
+                             if (is_array($pictures)) {
+                                 foreach ($pictures as $picture) {
+                                     echo '<td><img src="' . $picture . '"></td>';
+                                 }
+                             }
+                         } else {
+                             echo '<td>' . $value . '</td>';
+                         }
+                         
+                         echo '</tr>';
                      }
-                  }
+                     if ($key === 'Gd_Number') {
+                         $gdNumber = $value;
+                     }
+                 }
 
                   echo '</tbody>';
                   echo '</table>';

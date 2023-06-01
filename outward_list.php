@@ -54,7 +54,7 @@ if (isset($_POST['search_scrap'])) {
          </nav>
          <div class="panel-header panel-header-sm">
          </div>
-         <div class="container" style="z-index: 9999;position: relative;">
+         <div class="container" >
             <form action="" method="post" autocomplete="off">
                <div class="row search-row">
                <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
@@ -130,23 +130,38 @@ if (isset($_POST['search_scrap'])) {
                      echo '<table class="table table-responsive">';
                      echo '<tbody class="bg-custom-color">';
 
+                     // $null_date = "0000-00-00";
+                     // $default_date = "1970-01-01";
                      foreach ($k as $key => $value) {
+                        $value = trim($value);
                         if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
-                           $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
-                           echo '<tr>';
-                           echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
-                           echo '<td>' . $value . '</td>';
-                           echo '</tr>';
+                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                            echo '<tr>';
+                            echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+                            
+                            // Check if the value is a JSON string
+                            if ($key === 'Pictures') {
+                                $pictures = json_decode($value, true);
+                                if (is_array($pictures)) {
+                                    foreach ($pictures as $picture) {
+                                        echo '<td><img src="' . $picture . '"></td>';
+                                    }
+                                }
+                            } else {
+                                echo '<td>' . $value . '</td>';
+                            }
+                            
+                            echo '</tr>';
                         }
-                        if($key == 'Gd_Number'){
-                           $gdNumber = $value;
-                           
+                        if ($key === 'Gd_Number') {
+                            $gdNumber = $value;
                         }
-                     }
+                    }
+                    
                      echo '</tbody>';
                      echo '</table>';
                      echo '<a href="outward.php?outward_search='.$gdNumber.'">
-                     <button class="btn btn-primary fs-fw" >Outward</button> </a>
+                     <div class="col-md-12 text-center" style="padding: 10%;"><button class="btn btn-primary fs-fw" >Outward</button> </div> </a>
                      ';
                      echo '</div></div></div>';
                   }

@@ -26,10 +26,10 @@ if (isset($_POST['inven_search'])) {
 <?php
 $user_id = $_SESSION['user_id'];
 
-if (!isset($_SESSION['inventory']) || $_SESSION['inventory'] !== true) {
-   header("Location: index.php");
-   exit;
-}
+// if (!isset($_SESSION['inventory']) || $_SESSION['inventory'] !== true) {
+//    header("Location: index.php");
+//    exit;
+// }
 
 $fieldLabels = [
     'Gd_Number' => $lang['gd_number'],
@@ -101,9 +101,14 @@ $fieldLabels = [
                LEFT JOIN `category` ON category.id = inventory.category_id
                LEFT JOIN `sub_category` ON sub_category.id = inventory.sub_category_id
                WHERE inventory.Status = '1' AND inventory.Created_By = '$user_id' "; 
+               if (isset($_POST['inven_search'])) {
+                  $gd_number = $_POST['inven_search'];
+                  $sql_user .= "AND `Gd_Number` LIKE '%$gd_number%'";
+               }
                $result_user = mysqli_query($conn, $sql_user);
                if (!empty($result_user) && $result_user->num_rows > 0) {
                   $rows_user = mysqli_fetch_all($result_user, MYSQLI_ASSOC);
+                  // echo "<pre>";print_r($rows_user);die;
                   foreach ($rows_user as $k) {
                      echo '<div class="card custom-card col-sm-12 col-md-5">
                            <div class="">
@@ -112,24 +117,54 @@ $fieldLabels = [
                      echo '<table class="table table-responsive">';
                      echo '<tbody class="bg-custom-color">';
 
-                     foreach ($k as $key => $value) {
-                        if (!empty($value) && !in_array($key, ['id', 'Status','category_id','sub_category_id', 'Created_By', 'Created_at', 'Updated_at' ])) {
-                           $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
-                           echo '<tr>';
-                           echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
-                           echo '<td>' . $value . '</td>';
-                           echo '</tr>';
-                        }
-                        if($key == 'Gd_Number'){
-                           $gdNumber = $value;
+                     // $null_date = "0000-00-00";
+                     // $default_date = "1970-01-01";
+                     // foreach ($k as $key => $value) {
+                     //    $value = trim($value);
+                     //    if (!empty($value)  && !in_array($key, ['id', 'Status','category_id','sub_category_id','Pictures', 'Created_By', 'Created_at', 'Updated_at' ])) {
+                     //       $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                     //       echo '<tr>';
+                     //       echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+                     //       echo '<td>' . $value . '</td>';
+                     //       echo '</tr>';
+                     //    }
+                     //    if($key == 'Gd_Number'){
+                     //       $gdNumber = $value;
                            
+                     //    }
+                     // }
+
+                     foreach ($k as $key => $value) {
+                        $value = trim($value);
+                        if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
+                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                            echo '<tr>';
+                            echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+                            
+                            // Check if the value is a JSON string
+                            if ($key === 'Pictures') {
+                                $pictures = json_decode($value, true);
+                                if (is_array($pictures)) {
+                                    foreach ($pictures as $picture) {
+                                        echo '<td><img src="' . $picture . '"></td>';
+                                    }
+                                }
+                            } else {
+                                echo '<td>' . $value . '</td>';
+                            }
+                            
+                            echo '</tr>';
                         }
-                     }
+                        if ($key === 'Gd_Number') {
+                            $gdNumber = $value;
+                        }
+                    }
+                    
 
                      echo '</tbody>';
                      echo '</table>';
-                     echo '<div class="row"><a href="outward.php?outward_search='.$gdNumber.'">
-                     <button class="btn btn-primary fs-fw" >Outward</button> </a> </div>
+                     echo '<div class="col-md-12 text-center"><a href="outward.php?outward_search='.$gdNumber.'">
+                     <button class="btn btn-primary fs-fw">Outward</button> </a> </div>
                      ';
                      echo '</div></div></div>';
                   }
