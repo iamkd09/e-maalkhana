@@ -125,6 +125,10 @@ $en = array(
     'cat_name' => 'Category',
     'sub_cat_name' => 'Sub-Category',
 
+    'filter_button' => 'Filter',
+    'reset_button' => 'Reset',
+
+
 );
 
 $hi = array(
@@ -242,6 +246,11 @@ $hi = array(
 
     'cat_name' => 'श्रेणी',
     'sub_cat_name' => 'उप-श्रेणी',
+
+    'filter_button' => 'फ़िल्टर',
+    'reset_button' => 'रीसेट',
+
+    
 );
 
 ?>

@@ -161,7 +161,7 @@ if (isset($_POST['search_scrap'])) {
                     }
                      echo '</tbody>';
                      echo '</table>';
-                     echo '<div class="col-md-12 text-center" style="padding: 10%;"><button id="scrap_init" onclick=openModal("'.$gdNumber.'"); name="scrap" class="btn btn-primary fs-fw " >Send to Scrapyard</button></div>';
+                     echo '<div class="col-md-12 text-center" style="padding: 10%;"><button id="scrap_init" onclick=openModal("'.$gdNumber.'"); name="scrap" class="btn btn-primary fs-fw " >'.$lang['scrapyard_button'].'</button></div>';
                      echo '</div></div></div>';
                   }
                } else {

@@ -143,7 +143,7 @@
                      
                      echo '</tbody>';
                      echo '</table>';
-                     echo '<div class="col-md-12 text-center"><button id="scrap_init" name="scrap" onclick=openModal("'.$gdNumber.'"); class="btn btn-primary fs-fw" >Send to auciton</button></div>';
+                     echo '<div class="col-md-12 text-center"><button id="scrap_init" name="scrap" onclick=openModal("'.$gdNumber.'"); class="btn btn-primary fs-fw" >'.$lang['auction_button'].'</button></div>';
                      echo '</div></div></div>';
                   }
                } else {

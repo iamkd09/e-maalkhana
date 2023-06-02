@@ -144,6 +144,7 @@ $fieldLabels = [
                             // Check if the value is a JSON string
                             if ($key === 'Pictures') {
                                 $pictures = json_decode($value, true);
+                               
                                 if (is_array($pictures)) {
                                     foreach ($pictures as $picture) {
                                         echo '<td><img src="' . $picture . '"></td>';
@@ -164,7 +165,7 @@ $fieldLabels = [
                      echo '</tbody>';
                      echo '</table>';
                      echo '<div class="col-md-12 text-center"><a href="outward.php?outward_search='.$gdNumber.'">
-                     <button class="btn btn-primary fs-fw">Outward</button> </a> </div>
+                     <button class="btn btn-primary fs-fw">'.$lang['outward_button'].'</button> </a> </div>
                      ';
                      echo '</div></div></div>';
                   }

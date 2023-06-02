@@ -161,7 +161,7 @@ if (isset($_POST['search_scrap'])) {
                      echo '</tbody>';
                      echo '</table>';
                      echo '<a href="outward.php?outward_search='.$gdNumber.'">
-                     <div class="col-md-12 text-center" style="padding: 10%;"><button class="btn btn-primary fs-fw" >Outward</button> </div> </a>
+                     <div class="col-md-12 text-center" style="padding: 10%;"><button class="btn btn-primary fs-fw" >'.$lang['outward_button'].'</button> </div> </a>
                      ';
                      echo '</div></div></div>';
                   }

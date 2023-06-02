@@ -268,8 +268,8 @@ function getStatusLabel($category_id, $sub_category_id)
                               <input type="date" class="form-control mt-3 " name="end_date" value="<?php echo $end_date ?>" required>
                            </div>
                         <div class="col-md-4 text-center">  
-                         <button class="btn btn-sm btn-primary fs-fw" type="submit" name="filter">Filter</button>
-                         <a href="dashboard.php" class="btn btn-sm btn-primary fs-fw">Reset
+                         <button class="btn btn-sm btn-primary fs-fw" type="submit" name="filter"><?php echo $lang['filter_button'] ?></button>
+                         <a href="dashboard.php" class="btn btn-sm btn-primary fs-fw"><?php echo $lang['reset_button'] ?>
                          </a>
                         </div> 
                         </div>
