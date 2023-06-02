@@ -109,7 +109,7 @@ if (isset($_POST['submit'])) {
                     <div class="modal-content my-model">
                         <div class="modal-header my-header" style="padding: 0px 5px 0px 15px;">
                             <h5 class="modal-title"><h4><?php echo $message; ?></h4></h5>
-                            <a href="user.php" class="close alert_sh" data-dismiss="modal" aria-label="Close">
+                            <a href="user.php" class="close alert_sh" >
                                 <span aria-hidden="true">&times;</span>
                             </a>
                         </div>

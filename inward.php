@@ -58,8 +58,8 @@ if ($result->num_rows > 0) {
             <div class="modal-content my-model">
                 <div class="modal-header my-header" style="padding: 0px 5px 0px 15px;">
                     <h5 class="modal-title"><h4><?php echo $message; ?></h4></h5>
-                    <a href="inward.php" class="close alert_sh" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <a href="inward.php" class="close alert_sh" >
+                                <span aria-hidden="true">&times;</span>
                     </a>
                 </div>
             </div>
