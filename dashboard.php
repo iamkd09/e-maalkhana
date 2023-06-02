@@ -17,13 +17,14 @@ if (isset($_POST['filter'])) {
    $end_date = $_POST['end_date'];
 }
 
-
+//  print_r($start_date);
+//  die;
 // Fetch inventory data for different statuses
 $queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 AND `Created_By` = '$user_id'  ";
 
 
 if (!empty($start_date) && !empty($end_date)) {
-   $queryInward .= "AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+   $queryInward .= "AND date_format(`Created_at`,'%Y-%m-%d') >= '$start_date' AND date_format(`Created_at`,'%Y-%m-%d') <= '$end_date'";
 }
 
 $queryInward .= "GROUP BY `category_id`, `sub_category_id` ";
@@ -41,7 +42,7 @@ while ($row = mysqli_fetch_assoc($resultInward)) {
 $queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 AND `Created_By` = '$user_id' ";
 
 if (!empty($start_date) && !empty($end_date)) {
-   $queryOutward .= "AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+   $queryOutward .= "AND date_format(`Created_at`,'%Y-%m-%d') >= '$start_date' AND date_format(`Created_at`,'%Y-%m-%d') <= '$end_date'";
 }
 
 $queryOutward .= "GROUP BY `category_id`, `sub_category_id` ";
@@ -59,7 +60,7 @@ while ($row = mysqli_fetch_assoc($resultOutward)) {
 $queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 AND `Created_By` = '$user_id' ";
 
 if (!empty($start_date) && !empty($end_date)) {
-   $queryScrapyard .= "AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+   $queryScrapyard .= "AND date_format(`Created_at`,'%Y-%m-%d') >= '$start_date' AND date_format(`Created_at`,'%Y-%m-%d') <= '$end_date'";
 }
 
 $queryScrapyard .= "GROUP BY `category_id`, `sub_category_id` ";
@@ -76,7 +77,7 @@ while ($row = mysqli_fetch_assoc($resultScrapyard)) {
 $queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 AND `Created_By` = '$user_id' ";
 
 if (!empty($start_date) && !empty($end_date)) {
-   $queryAuction .= "AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+   $queryAuction .= "AND date_format(`Created_at`,'%Y-%m-%d') >= '$start_date' AND date_format(`Created_at`,'%Y-%m-%d') <= '$end_date'";
 }
 
 $queryAuction .= "GROUP BY `category_id`, `sub_category_id` ";
@@ -261,13 +262,15 @@ function getStatusLabel($category_id, $sub_category_id)
                      <div class="card-body">
                         <div class="row">
                            <div class="col-md-4">
-                              <input type="date" class="form-control mt-3" name="start_date" id="" required>
+                              <input type="date" class="form-control mt-3" name="start_date" value="<?php echo $start_date ?>" required>
                            </div>
                            <div class="col-md-4">
-                              <input type="date" class="form-control mt-3 " name="end_date" id="" required>
+                              <input type="date" class="form-control mt-3 " name="end_date" value="<?php echo $end_date ?>" required>
                            </div>
                         <div class="col-md-4 text-center">  
                          <button class="btn btn-sm btn-primary fs-fw" type="submit" name="filter">Filter</button>
+                         <a href="dashboard.php" class="btn btn-sm btn-primary fs-fw">Reset
+                         </a>
                         </div> 
                         </div>
                      </div>
@@ -283,7 +286,18 @@ function getStatusLabel($category_id, $sub_category_id)
                            <?php echo $lang['inward_cases'] ?>
                         </b></div>
                      <div class="card-body">
-                        <div id="piechart-inward" style="height: 300px;"></div>
+                        <?php
+                           if(!empty($dataInward)){
+                        ?>
+                           <div id="piechart-inward" style="height: 300px;"></div>
+                        <?php
+                           }else{
+
+                        ?>
+                           <img src="assets/img/pienodata.jpg" width="25%" alt="" srcset="" style="margin-left: 32%;"/>
+                        <?php      
+                           }
+                        ?>
                      </div>
                   </div>
                </div>
@@ -292,8 +306,19 @@ function getStatusLabel($category_id, $sub_category_id)
                      <div class="card-header"><b>
                            <?php echo $lang['outward_cases'] ?>
                         </b></div>
-                     <div class="card-body">
-                        <div id="piechart-outward" style="height: 300px;"></div>
+                        <div class="card-body">
+                        <?php
+                           if(!empty($dataOutward)){
+                        ?>
+                           <div id="piechart-outward" style="height: 300px;"></div>
+                        <?php
+                           }else{
+
+                        ?>
+                           <img src="assets/img/pienodata.jpg" width="25%" alt="" srcset="" style="margin-left: 32%;"/>
+                        <?php      
+                           }
+                        ?>
                      </div>
                   </div>
                </div>
@@ -303,8 +328,19 @@ function getStatusLabel($category_id, $sub_category_id)
                      <div class="card-header"><b>
                            <?php echo $lang['scrapyard_cases'] ?>
                         </b></div>
-                     <div class="card-body">
-                        <div id="piechart-scrapyard" style="height: 300px;"></div>
+                        <div class="card-body">
+                        <?php
+                           if(!empty($dataScrapyard)){
+                        ?>
+                           <div id="piechart-scrapyard" style="height: 300px;"></div>
+                        <?php
+                           }else{
+
+                        ?>
+                           <img src="assets/img/pienodata.jpg" width="25%" alt="" srcset="" style="margin-left: 32%;"/>
+                        <?php      
+                           }
+                        ?>
                      </div>
                   </div>
                </div>
@@ -313,8 +349,19 @@ function getStatusLabel($category_id, $sub_category_id)
                      <div class="card-header"><b>
                            <?php echo $lang['auction_cases'] ?>
                         </b></div>
-                     <div class="card-body">
-                        <div id="piechart-auction" style="height: 300px;"></div>
+                        <div class="card-body">
+                        <?php
+                           if(!empty($dataAuction)){
+                        ?>
+                           <div id="piechart-auction" style="height: 300px;"></div>
+                        <?php
+                           }else{
+
+                        ?>
+                           <img src="assets/img/pienodata.jpg" width="25%" alt="" srcset="" style="margin-left: 32%;"/>
+                        <?php      
+                           }
+                        ?>
                      </div>
                   </div>
                </div>
