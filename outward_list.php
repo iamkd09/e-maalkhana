@@ -45,6 +45,26 @@ if (isset($_POST['search_scrap'])) {
 }
 ?>
 
+<?php
+      if (isset($_GET['status_new'])) {
+         $status = $_GET['status_new'];
+         $message = '';
+         if ($status == 'success') {
+            $message = 'Registration successful.';
+         } elseif ($status == 'error_update') {
+            $message = 'Error updating status.';
+         } elseif ($status == 'error_insert') {
+            $message = 'Error inserting data.';
+         } elseif ($status == 'error_retrieve') {
+            $message = 'Error retrieving status.';
+         } elseif ($status == 'already_updated') {
+            $message = 'Already updated.';
+         } elseif ($status == 'invalid_date') {
+            $message = 'Invalid date.';
+         }
+        }
+?>
+
 <body class="user-profile">
    <div class="wrapper ">
       <?php include "sidebar.php"; ?>
@@ -71,6 +91,22 @@ if (isset($_POST['search_scrap'])) {
             </form>
          </div>
          <div class="content ck">
+         <?php if (!empty($message)): ?>
+            <div class="modal" tabindex="-1" id="alertPopup" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content my-model">
+                        <div class="modal-header my-header" style="padding: 0px 5px 0px 15px;">
+                            <h5 class="modal-title"><h4><?php echo $message; ?></h4></h5>
+                            <a href="outward_list.php" class="close alert_sh" >
+                            
+                                <span aria-hidden="true">&times;</span>
+                            
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
             <div class="row" style="text-align:center">
                <div class="col-md-12">
                      <ul class="nav-custom container-custom">
@@ -182,6 +218,12 @@ if (isset($_POST['search_scrap'])) {
    
 
    <?php include('footer.php') ?>
+
+   <script>
+  $(document).ready(function() {
+      $('#alertPopup').modal('show');
+  });
+</script>
 </body>
 
 </html>

@@ -25,9 +25,14 @@ $fieldLabels = [
     'Pictures' => $lang['pictures']
 ];
 
+
+
 $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` LIKE '$gd_search' limit 1";
 $result = mysqli_query($conn, $sql);
 ?>
+
+
+
 <div class="row">
     <?php
 
@@ -56,6 +61,7 @@ $result = mysqli_query($conn, $sql);
     </div>
 
     <form action="outward_config.php" method="post">
+        
         <div class="row">
             <input type="hidden" class="form-control" name="id" id="id" value="<?= $id ?>">
             <?php
@@ -118,16 +124,16 @@ $result = mysqli_query($conn, $sql);
             } ?>
 
         </div>
-                <div class="col-md-12 pl-2">
+                <!-- <div class="col-md-12 pl-2">
                 <div class="form-group ff-file">
                     <label for="file-select"><?= $lang['pictures']?>:</label>
                     <input type="file" name="pictures" id="file-select" multiple="multiple" accept="image/*" max="4">
                 </div>
-                </div>
+                </div> -->
 
-            <div class="col-md-12 pl-1 mt-2rem">
+            <div  class="col-md-12 text-center" style="padding: 10%;">
                 <div class="form-group">
-                    <button type="submit" name="submit" class="btn btn-primary fs-fw">
+                    <button  type="submit" name="submit" class="btn btn-primary fs-fw">
                         <?= $lang['submit'] ?>
                     </button>
                 </div>
@@ -138,48 +144,7 @@ $result = mysqli_query($conn, $sql);
     <?php
     } ?>
 
-<div class="modal" tabindex="-1" id="alertPopup" role="dialog">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content my-model">
-         <div class="modal-header my-header">
-            <h5 class="modal-title">Message</h5>
-            <button type="button" class="close alert_sh" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body" id="getCode">
-         </div>
-         <div class="text-center">
-            <button type="button" class="btn btn-malkhana alert_sh fs-fw" data-dismiss="modal">Close</button>
-         </div>
-      </div>
-   </div>
-</div>
 
-<script>
-   $(document).ready(function() {
-      <?php
-      if (isset($_GET['status'])) {
-         $status = $_GET['status'];
-         $message = '';
-         if ($status == 'success') {
-            $message = 'Registration successful.';
-         } elseif ($status == 'error_update') {
-            $message = 'Error updating status.';
-         } elseif ($status == 'error_insert') {
-            $message = 'Error inserting data.';
-         } elseif ($status == 'error_retrieve') {
-            $message = 'Error retrieving status.';
-         } elseif ($status == 'already_updated') {
-            $message = 'Already updated.';
-         } elseif ($status == 'invalid_date') {
-            $message = 'Invalid date.';
-         }
-      ?>
-         $('#getCode').html('<?php echo $message; ?>');
-         $('#alertPopup').modal('show');
-      <?php } ?>
-   });
-</script>
+
 
 <?php include('footer.php'); ?>

@@ -107,21 +107,11 @@ if (isset($_POST['submit'])) {
             <div class="modal" tabindex="-1" id="alertPopup" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content my-model">
-                        <div class="modal-header my-header">
-                            <h5 class="modal-title">Message</h5>
-                            <button type="button" class="close alert_sh" data-dismiss="modal" aria-label="Close">
+                        <div class="modal-header my-header" style="padding: 0px 5px 0px 15px;">
+                            <h5 class="modal-title"><h4><?php echo $message; ?></h4></h5>
+                            <a href="user.php" class="close alert_sh" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="getCode">
-                            <div class="alert <?php echo ($result) ? 'success' : 'danger'; ?>">
-                                <h4><?php echo $message; ?></h4>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                          <a href="user.php">
-                            <button type="button" class="btn btn-malkhana alert_sh fs-fw" data-dismiss="modal"> Close</button>
-                          </a>
+                            </a>
                         </div>
                     </div>
                 </div>
