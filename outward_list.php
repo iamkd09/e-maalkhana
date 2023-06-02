@@ -50,7 +50,7 @@ if (isset($_POST['search_scrap'])) {
          $status = $_GET['status_new'];
          $message = '';
          if ($status == 'success') {
-            $message = 'Registration successful.';
+            $message = 'Item Outwarded successfully.';
          } elseif ($status == 'error_update') {
             $message = 'Error updating status.';
          } elseif ($status == 'error_insert') {

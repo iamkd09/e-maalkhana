@@ -115,6 +115,8 @@ if (isset($_POST['search_scrap'])) {
                $DaysAgo = date('Y-m-d', strtotime('-365 days'));
                $user_id = $_SESSION['user_id'];
                $sqlScrap = "SELECT * FROM `inventory` WHERE `Created_at` <= '$DaysAgo' AND `Status` = '1' AND (`category_id` = 2 OR `category_id` = 4) AND `Created_By` = '$user_id' ";
+               // print_r($sqlScrap);
+               // die;
                if (isset($_POST['search_scrap'])) {
                   $gd_search = $_POST['search_scrap'];
                   $sqlScrap .= "AND `Gd_Number` LIKE '%$gd_search%'";

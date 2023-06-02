@@ -187,7 +187,7 @@ if (isset($_POST['submit'])) {
                       <div class="form-group">
                         <label><?php echo $lang['city'] ?>:</label>
                         <select class="form-control" name="cityName" id="city" aria-label="Default select example" required>
-                          <option value=""><?php echo $lang['select_state'] ?></option>
+                          <option value=""><?php echo $lang['select_city'] ?></option>
                         </select>
                       </div>
                     </div>

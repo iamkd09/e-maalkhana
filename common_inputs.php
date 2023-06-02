@@ -397,7 +397,7 @@ $html .= '
    </div>
 </div>
 </div>
-    <div class="col-md-12 pl-1 mt-2rem">
+    <div class="col-md-12 text-center">
       <div class="form-group">
         <button type="submit" name="submit" class="btn btn-primary fs-fw">' . $lang['submit'] . '</button>
       </div>

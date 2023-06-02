@@ -37,9 +37,9 @@ if (isset($_POST['submit'])) {
     $gd_number = $_POST['gd_number'];
     // die("dd");
 
-    $stolen_date = !empty(trim($_POST['stolen_date'])) ? date('Y-m-d', strtotime($_POST['stolen_date'])) : 'null';
-    $recovery_date = !empty(trim($_POST['recovery_date'])) ? date('Y-m-d', strtotime($_POST['recovery_date'])) : 'null';
-    $accident_date = !empty(trim($_POST['accident_date'])) ? date('Y-m-d', strtotime($_POST['accident_date'])) : 'null';
+    $stolen_date = !empty(trim($_POST['stolen_date'])) ?"'". date('Y-m-d', strtotime($_POST['stolen_date']))."'" : 'null';
+    $recovery_date = !empty(trim($_POST['recovery_date'])) ? "'".date('Y-m-d', strtotime($_POST['recovery_date']))."'" : 'null';
+    $accident_date = !empty(trim($_POST['accident_date'])) ? "'".date('Y-m-d', strtotime($_POST['accident_date']))."'" : 'null';
 
     $fir_number = $_POST['fir_number'];
     $under_section = $_POST['under_section'];
@@ -56,10 +56,9 @@ if (isset($_POST['submit'])) {
     $car_color = $_POST['car_color'];
     $item_description = $_POST['description'];
     $date = date('Y-m-d H:i:s');
- 
-    $docFile = !empty($document) && (count($document) > 0) ? json_encode($document) : null;
-  
-
+    $docFile = !empty($document) && (count($document) > 0) ? json_encode($document) : NULL;
+    // print_r($docFile);
+    // die;
 
     // Check if the GD number already exists in the inventory table
     $sql = "SELECT * FROM `inventory` WHERE `Gd_Number` = '$gd_number'";
@@ -71,13 +70,12 @@ if (isset($_POST['submit'])) {
     if (empty($check_gd)) {
 
       $sql1 = "INSERT INTO `inventory` (`Gd_Number`, `stolen_date`, `Date_Of_Recovery`, `FIR_Reference_Number`, `Under_Section`, `Recovered_From`, `Recovered_By`, `accident_date`, `Vehicle_Number`, `Vehicle_Type`, `MV_Act`, `Owner_Name`, `Vehicle_R_Number`, `Car_Make`, `Car_Model`, `Car_Color`, `Item_desc`, `Pictures`, `category_id`, `sub_category_id`, `Created_By`) VALUES ('$gd_number',$stolen_date, $recovery_date, '$fir_number', '$under_section',  '$recovered_from', '$recovered_by', $accident_date, '$vehicle_number', '$vehicle_type', '$mv_act', '$owner_name', '$vehicle_r_number', '$car_make', '$car_model', '$car_color','$item_description', '$docFile', '$cat', '" . $sub_cat . "', '$user_id')";
-
-      // echo $sql1;die;
+      // print_r($sql1);die;
       $result = mysqli_query($conn, $sql1);
     }
     if ($result && !empty($result)) {
       if ($result == 1) {
-        $_SESSION['success'] = '<span >Registration Successful.</span>';
+        $_SESSION['success'] = '<span >Item Inwarded Sucessfully.</span>';
       } else {
         $_SESSION['error'] = '<span >Oops! An error occurred.</span>';
       }
