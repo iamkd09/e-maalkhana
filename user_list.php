@@ -64,8 +64,8 @@ $fieldLabels = [
          <div class="content ck ck2">
          <div class="row">
                <?php
-
-               $sql_user = "SELECT users.*,role.name as role_name,state.name as state_name, city.name as city_name FROM `users` left join `state` on state.id = users.state left join `city` on city.id = users.city left join `role` on role.id = users.role_id WHERE users.status = '1' "; 
+               $user_id = $_SESSION['user_id'];
+               $sql_user = "SELECT users.*,role.name as role_name,state.name as state_name, city.name as city_name FROM `users` left join `state` on state.id = users.state left join `city` on city.id = users.city left join `role` on role.id = users.role_id WHERE users.status = '1' AND `created_by` = $user_id "; 
                if (isset($_POST['user_search'])) {
                   $mobile = $_POST['user_search'];
                   $sql_user .= "AND `contact` LIKE '%$mobile%'";
