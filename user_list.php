@@ -1,5 +1,4 @@
 
-
 <?php include('header.php') ?>
 <?php include('sidebar.php') ?>
 <?php include('conn.php') ?>
@@ -25,6 +24,7 @@ $fieldLabels = [
    'address' => $lang['address'],
    'state_name' => $lang['state'],
    'city_name' => $lang['city'],
+   'role_name' => $lang['role_name'],
 ];
 ?>
 <body class="user-profile">
@@ -46,9 +46,9 @@ $fieldLabels = [
                         <div class="col-9">
                            <input class="form-control searchbar btn btn-outline-info searchnew f-14"
                               type="search" name="user_search" data-mdb-ripple-color="dark"
-                              placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search"
+                              placeholder="<?php echo $lang['search_mobile'] ?>" aria-label="Search"
                               style="height: fit-content; border-radius: 5px!important;"
-                              value="<?php echo $gd_search; ?>">
+                              value="<?php echo $_POST['user_search']; ?>">
                         </div>
                         <div class="col-2">
                            <button name="search" class="btn btn-success">
@@ -65,7 +65,7 @@ $fieldLabels = [
          <div class="row">
                <?php
 
-               $sql_user = "SELECT users.*,state.name as state_name, city.name as city_name FROM `users` left join `state` on state.id = users.state left join `city` on city.id = users.city WHERE `status` = '1' "; 
+               $sql_user = "SELECT users.*,role.name as role_name,state.name as state_name, city.name as city_name FROM `users` left join `state` on state.id = users.state left join `city` on city.id = users.city left join `role` on role.id = users.role_id WHERE users.status = '1' "; 
                if (isset($_POST['user_search'])) {
                   $mobile = $_POST['user_search'];
                   $sql_user .= "AND `contact` LIKE '%$mobile%'";

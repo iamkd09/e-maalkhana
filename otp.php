@@ -44,7 +44,7 @@
               echo $_SESSION['msg'];
             }
           ?>
-          <div class="mt-4 form-group">
+          <div class="col-md-12 text-center">
           <button class="btn btn-danger px-4 validate" name="validate"><?php echo $lang['validate'] ?></button>
           </div>
       </div>
