@@ -20,7 +20,7 @@ if (isset($_POST['filter'])) {
 //  print_r($start_date);
 //  die;
 // Fetch inventory data for different statuses
-$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 AND `Created_By` = '$user_id'  ";
+$queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 AND `Created_By` = '$user_id'";
 
 
 if (!empty($start_date) && !empty($end_date)) {
@@ -259,15 +259,17 @@ function getStatusLabel($category_id, $sub_category_id)
             <div class="col-md-15 my-3">
                <div class="card ">
                   <form action="" method="POST">
-                     <div class="card-body">
+                     <div class="card-body" style="padding-top: 10px;">
                         <div class="row">
-                           <div class="col-md-4">
-                              <input type="date" class="form-control mt-3" name="start_date" value="<?php echo $start_date ?>" required>
+                           <div class="form-group col-md-4">
+                              <label><?php echo $lang['from'] ?>:</label>
+                              <input type="date" class="form-control" name="start_date" value="<?php echo $start_date ?>" required>
                            </div>
-                           <div class="col-md-4">
-                              <input type="date" class="form-control mt-3 " name="end_date" value="<?php echo $end_date ?>" required>
+                           <div class="form-group col-md-4">
+                              <label><?php echo $lang['to'] ?>:</label>
+                              <input type="date" class="form-control " name="end_date" value="<?php echo $end_date ?>" required>
                            </div>
-                        <div class="col-md-4 text-center">  
+                        <div class="col-md-4 text-center textIndent">  
                          <button class="btn btn-sm btn-primary fs-fw" type="submit" name="filter"><?php echo $lang['filter_button'] ?></button>
                          <a href="dashboard.php" class="btn btn-sm btn-primary fs-fw"><?php echo $lang['reset_button'] ?>
                          </a>

@@ -27,6 +27,7 @@ $en = array(
     "sidebar_inventory" => "INVENTORY",
     "sidebar_logout"=>"LOGOUT",
     "dashboard_search"=>"Search Inventory",
+    "search_mobile"=>"Search Mobile Number",
     "inward_button"=>"Inward",
     "scrapyard_button"=>"Scrapyard",
     "auction_button"=>"Auction",
@@ -37,6 +38,8 @@ $en = array(
     "outward_cases" => "Outward Items",
     "scrapyard_cases" => "Scrapyard Items",
     "auction_cases" => "Auction Items",
+    "from"=>"From",
+    "to"=>"To",
 
     // Search Page
     "go_button"=>"Go",
@@ -158,6 +161,7 @@ $hi = array(
     "sidebar_inventory" => "वस्तुसूची",
     "sidebar_logout"=>"लॉग आउट",
     "dashboard_search"=>"सूची में खोजें",
+    "search_mobile"=>"मोबाइल नंबर खोजें",
     "inward_button"=>"इन्वर्ड",
     "scrapyard_button"=>"रद्दीखाना",
     "auction_button"=>"नीलामी",
@@ -168,6 +172,9 @@ $hi = array(
     "outward_cases" => "आउटवर्ड मामले",
     "scrapyard_cases" => "रद्दीखाना मामले",
     "auction_cases" => "नीलामी मामले",
+
+    "from"=>"शुरू तिथि",
+    "to"=>"अंत तिथि",
     // Search Page
     "go_button"=>"खोजे",
     "no_data"=>"डाटा प्राप्त नहीं हुआ",
