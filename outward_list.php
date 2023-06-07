@@ -45,6 +45,26 @@ if (isset($_POST['search_scrap'])) {
 }
 ?>
 
+<?php
+      if (isset($_GET['status_new'])) {
+         $status = $_GET['status_new'];
+         $message = '';
+         if ($status == 'success') {
+            $message = 'Item Outwarded successfully.';
+         } elseif ($status == 'error_update') {
+            $message = 'Error updating status.';
+         } elseif ($status == 'error_insert') {
+            $message = 'Error inserting data.';
+         } elseif ($status == 'error_retrieve') {
+            $message = 'Error retrieving status.';
+         } elseif ($status == 'already_updated') {
+            $message = 'Already updated.';
+         } elseif ($status == 'invalid_date') {
+            $message = 'Invalid date.';
+         }
+        }
+?>
+
 <body class="user-profile">
    <div class="wrapper ">
       <?php include "sidebar.php"; ?>
@@ -54,7 +74,7 @@ if (isset($_POST['search_scrap'])) {
          </nav>
          <div class="panel-header panel-header-sm">
          </div>
-         <div class="container">
+         <div class="container" >
             <form action="" method="post" autocomplete="off">
                <div class="row search-row">
                <div class="card custom-card col-sm-12 col-md-12"><div class="row my-card top-24">
@@ -71,6 +91,20 @@ if (isset($_POST['search_scrap'])) {
             </form>
          </div>
          <div class="content ck">
+         <?php if (!empty($message)): ?>
+            <div class="modal" tabindex="-1" id="alertPopup" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content my-model">
+                        <div class="modal-header my-header" style="padding: 0px 5px 0px 15px;">
+                            <h5 class="modal-title"><h4><?php echo $message; ?></h4></h5>
+                            <a href="outward_list.php" class="close alert_sh" >
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
             <div class="row" style="text-align:center">
                <div class="col-md-12 cr-text">
                      <ul class="nav-custom container-custom">
@@ -130,23 +164,38 @@ if (isset($_POST['search_scrap'])) {
                      echo '<table class="table table-responsive">';
                      echo '<tbody class="bg-custom-color">';
 
+                     // $null_date = "0000-00-00";
+                     // $default_date = "1970-01-01";
                      foreach ($k as $key => $value) {
+                        $value = trim($value);
                         if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
-                           $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
-                           echo '<tr>';
-                           echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
-                           echo '<td>' . $value . '</td>';
-                           echo '</tr>';
+                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                            echo '<tr>';
+                            echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+                            
+                            // Check if the value is a JSON string
+                            if ($key === 'Pictures') {
+                                $pictures = json_decode($value, true);
+                                if (is_array($pictures)) {
+                                    foreach ($pictures as $picture) {
+                                        echo '<td><img src="' . $picture . '"></td>';
+                                    }
+                                }
+                            } else {
+                                echo '<td>' . $value . '</td>';
+                            }
+                            
+                            echo '</tr>';
                         }
-                        if($key == 'Gd_Number'){
-                           $gdNumber = $value;
-                           
+                        if ($key === 'Gd_Number') {
+                            $gdNumber = $value;
                         }
-                     }
+                    }
+                    
                      echo '</tbody>';
                      echo '</table>';
                      echo '<a href="outward.php?outward_search='.$gdNumber.'">
-                     <button class="btn btn-primary fs-fw" >Outward</button> </a>
+                     <div class="col-md-12 text-center" style="padding: 10%;"><button class="btn btn-primary fs-fw" >'.$lang['outward_button'].'</button> </div> </a>
                      ';
                      echo '</div></div></div>';
                   }
@@ -167,6 +216,12 @@ if (isset($_POST['search_scrap'])) {
    
 
    <?php include('footer.php') ?>
+
+   <script>
+  $(document).ready(function() {
+      $('#alertPopup').modal('show');
+  });
+</script>
 </body>
 
 </html>

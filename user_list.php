@@ -44,8 +44,8 @@ $fieldLabels = [
                   <div class="card custom-card col-sm-12 col-md-12">
                      <div class="row my-card top-24">
                         <div class="col-9">
-                           <input class="form-control searchbar btn btn-outline-info searchnew f-14" href="search.php"
-                              type="search" name="gd_search" data-mdb-ripple-color="dark"
+                           <input class="form-control searchbar btn btn-outline-info searchnew f-14"
+                              type="search" name="user_search" data-mdb-ripple-color="dark"
                               placeholder="<?php echo $lang['dashboard_search'] ?>" aria-label="Search"
                               style="height: fit-content; border-radius: 5px!important;"
                               value="<?php echo $gd_search; ?>">
@@ -66,6 +66,10 @@ $fieldLabels = [
                <?php
 
                $sql_user = "SELECT users.*,state.name as state_name, city.name as city_name FROM `users` left join `state` on state.id = users.state left join `city` on city.id = users.city WHERE `status` = '1' "; 
+               if (isset($_POST['user_search'])) {
+                  $mobile = $_POST['user_search'];
+                  $sql_user .= "AND `contact` LIKE '%$mobile%'";
+               }
                $result_user = mysqli_query($conn, $sql_user);
                if (!empty($result_user) && $result_user->num_rows > 0) {
                   $rows_user = mysqli_fetch_all($result_user, MYSQLI_ASSOC);

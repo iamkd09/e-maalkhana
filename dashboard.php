@@ -10,23 +10,24 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 $user_id = $_SESSION['user_id'];
 
 $start_date = '';
-$end_date='';
+$end_date = '';
 // Filter date
-   if(isset($_POST['filter'])){
-      $start_date = $_POST['start_date'];
-      $end_date = $_POST['end_date'];
-   }
-   
+if (isset($_POST['filter'])) {
+   $start_date = $_POST['start_date'];
+   $end_date = $_POST['end_date'];
+}
 
+//  print_r($start_date);
+//  die;
 // Fetch inventory data for different statuses
 $queryInward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 1 AND `Created_By` = '$user_id'  ";
 
 
-if(!empty($start_date) && !empty($end_date)){
-   $queryInward.="AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+if (!empty($start_date) && !empty($end_date)) {
+   $queryInward .= "AND date_format(`Created_at`,'%Y-%m-%d') >= '$start_date' AND date_format(`Created_at`,'%Y-%m-%d') <= '$end_date'";
 }
 
-$queryInward.= "GROUP BY `category_id`, `sub_category_id` ";
+$queryInward .= "GROUP BY `category_id`, `sub_category_id` ";
 $resultInward = mysqli_query($conn, $queryInward);
 
 $dataInward = array();
@@ -40,11 +41,11 @@ while ($row = mysqli_fetch_assoc($resultInward)) {
 
 $queryOutward = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 2 AND `Created_By` = '$user_id' ";
 
-if(!empty($start_date) && !empty($end_date)){
-   $queryOutward.="AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+if (!empty($start_date) && !empty($end_date)) {
+   $queryOutward .= "AND date_format(`Created_at`,'%Y-%m-%d') >= '$start_date' AND date_format(`Created_at`,'%Y-%m-%d') <= '$end_date'";
 }
 
-$queryOutward.= "GROUP BY `category_id`, `sub_category_id` ";
+$queryOutward .= "GROUP BY `category_id`, `sub_category_id` ";
 $resultOutward = mysqli_query($conn, $queryOutward);
 
 $dataOutward = array();
@@ -58,11 +59,11 @@ while ($row = mysqli_fetch_assoc($resultOutward)) {
 
 $queryScrapyard = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 3 AND `Created_By` = '$user_id' ";
 
-if(!empty($start_date) && !empty($end_date)){
-   $queryScrapyard.="AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+if (!empty($start_date) && !empty($end_date)) {
+   $queryScrapyard .= "AND date_format(`Created_at`,'%Y-%m-%d') >= '$start_date' AND date_format(`Created_at`,'%Y-%m-%d') <= '$end_date'";
 }
 
-$queryScrapyard.= "GROUP BY `category_id`, `sub_category_id` ";
+$queryScrapyard .= "GROUP BY `category_id`, `sub_category_id` ";
 $resultScrapyard = mysqli_query($conn, $queryScrapyard);
 $dataScrapyard = array();
 while ($row = mysqli_fetch_assoc($resultScrapyard)) {
@@ -75,11 +76,11 @@ while ($row = mysqli_fetch_assoc($resultScrapyard)) {
 
 $queryAuction = "SELECT `category_id`, `sub_category_id`, COUNT(id) as count FROM `inventory` WHERE `status` = 4 AND `Created_By` = '$user_id' ";
 
-if(!empty($start_date) && !empty($end_date)){
-   $queryAuction.="AND `Created_at` BETWEEN '$start_date' AND '$end_date' ";
+if (!empty($start_date) && !empty($end_date)) {
+   $queryAuction .= "AND date_format(`Created_at`,'%Y-%m-%d') >= '$start_date' AND date_format(`Created_at`,'%Y-%m-%d') <= '$end_date'";
 }
 
-$queryAuction.= "GROUP BY `category_id`, `sub_category_id` ";
+$queryAuction .= "GROUP BY `category_id`, `sub_category_id` ";
 $resultAuction = mysqli_query($conn, $queryAuction);
 $dataAuction = array();
 while ($row = mysqli_fetch_assoc($resultAuction)) {
@@ -138,7 +139,7 @@ function getStatusLabel($category_id, $sub_category_id)
 
          var optionsInward = {
             title: '',
-            legend: {position: 'bottom', alignment: 'start'},
+            legend: { position: 'bottom', alignment: 'start' },
          };
 
          var chartInward = new google.visualization.PieChart(document.getElementById('piechart-inward'));
@@ -152,7 +153,7 @@ function getStatusLabel($category_id, $sub_category_id)
 
          var optionsOutward = {
             title: '',
-            legend: {position: 'bottom', alignment: 'start'}
+            legend: { position: 'bottom', alignment: 'start' }
          };
 
          var chartOutward = new google.visualization.PieChart(document.getElementById('piechart-outward'));
@@ -166,7 +167,7 @@ function getStatusLabel($category_id, $sub_category_id)
 
          var optionsScrapyard = {
             title: '',
-            legend: {position: 'bottom', alignment: 'start'}
+            legend: { position: 'bottom', alignment: 'start' }
          };
 
          var chartScrapyard = new google.visualization.PieChart(document.getElementById('piechart-scrapyard'));
@@ -180,7 +181,7 @@ function getStatusLabel($category_id, $sub_category_id)
 
          var optionsAuction = {
             title: '',
-            legend: {position: 'bottom', alignment: 'start'}
+            legend: { position: 'bottom', alignment: 'start' }
          };
 
          var chartAuction = new google.visualization.PieChart(document.getElementById('piechart-auction'));
@@ -196,7 +197,7 @@ function getStatusLabel($category_id, $sub_category_id)
          <!-- Navbar -->
          <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
             <?php include("navbar.php") ?>
-            <a class="form-control me-2 searchbar btn btn-outline-info desk-search" href="search.php"
+            <a class="form-control me-2 searchbar btn btn-outline-info desk-search" href="inventory.php"
                data-mdb-ripple-color="dark" placeholder="Search" aria-label="Search"
                style="color: #ffffff; font-size:15px;">
                <b class="desk-b">
@@ -253,54 +254,119 @@ function getStatusLabel($category_id, $sub_category_id)
                   </a>
 
                </div>
-            </div>   
-
-            <div class="row">
-               <form action="" method="POST">
-                  <input type="date" name="start_date" id="" required>
-                  <input type="date" name="end_date" id="" required>
-                  <button class="btn btn-primary fs-fw" type="submit" name="filter">Filter</button>
-               </form>
             </div>
-
-               <!-- Pie chart - Scrapyard -->
-               <!-- <div class="container"> -->
-                  <div class="row">
-                     <div class="col-md-6 mt-3">
-                      <div class="card">
-                      <div class="card-header"><b><?php echo $lang['inward_cases'] ?></b></div>
-                      <div class="card-body">
-                        <div id="piechart-inward" style="height: 300px;"></div>
-                      </div>  
-                      </div>  
-                     </div>
-                     <div class="col-md-6 mt-3">
-                      <div class="card">
-                        <div class="card-header"><b><?php echo $lang['outward_cases'] ?></b></div>
-                        <div class="card-body">
-                        <div id="piechart-outward" style="height: 300px;"></div>
-                        </div>
-                      </div>  
-                     </div>
-                 
-                     <div class="col-md-6 mt-3">
-                      <div class="card">
-                        <div class="card-header"><b><?php echo $lang['scrapyard_cases'] ?></b></div>
-                        <div class="card-body">
-                        <div id="piechart-scrapyard" style="height: 300px;"></div>
+            <hr >
+            <div class="col-md-15 my-3">
+               <div class="card ">
+                  <form action="" method="POST">
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-md-4">
+                              <input type="date" class="form-control mt-3" name="start_date" value="<?php echo $start_date ?>" required>
+                           </div>
+                           <div class="col-md-4">
+                              <input type="date" class="form-control mt-3 " name="end_date" value="<?php echo $end_date ?>" required>
+                           </div>
+                        <div class="col-md-4 text-center">  
+                         <button class="btn btn-sm btn-primary fs-fw" type="submit" name="filter"><?php echo $lang['filter_button'] ?></button>
+                         <a href="dashboard.php" class="btn btn-sm btn-primary fs-fw"><?php echo $lang['reset_button'] ?>
+                         </a>
                         </div> 
-                      </div>
+                        </div>
                      </div>
-                     <div class="col-md-6 mt-3">
-                      <div class="card">
-                      <div class="card-header"><b><?php echo $lang['auction_cases'] ?></b></div>
-                      <div class="card-body">
-                        <div id="piechart-auction" style="height: 300px;"></div>
-                      </div>  
-                      </div>   
-                     </div>
+                  </form>
                </div>
-      <!-- </div> -->
-      <!-- ... -->
-   <?php include('footer.php'); ?>
+            </div>
+            <!-- Pie chart - Scrapyard -->
+            <!-- <div class="container"> -->
+            <div class="row">
+               <div class="col-md-6 mt-3">
+                  <div class="card">
+                     <div class="card-header"><b>
+                           <?php echo $lang['inward_cases'] ?>
+                        </b></div>
+                     <div class="card-body">
+                        <?php
+                           if(!empty($dataInward)){
+                        ?>
+                           <div id="piechart-inward" style="height: 300px;"></div>
+                        <?php
+                           }else{
+
+                        ?>
+                           <img src="assets/img/pienodata.jpg" width="25%" alt="" srcset="" style="margin-left: 32%;"/>
+                        <?php      
+                           }
+                        ?>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 mt-3">
+                  <div class="card">
+                     <div class="card-header"><b>
+                           <?php echo $lang['outward_cases'] ?>
+                        </b></div>
+                        <div class="card-body">
+                        <?php
+                           if(!empty($dataOutward)){
+                        ?>
+                           <div id="piechart-outward" style="height: 300px;"></div>
+                        <?php
+                           }else{
+
+                        ?>
+                           <img src="assets/img/pienodata.jpg" width="25%" alt="" srcset="" style="margin-left: 32%;"/>
+                        <?php      
+                           }
+                        ?>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="col-md-6 mt-3">
+                  <div class="card">
+                     <div class="card-header"><b>
+                           <?php echo $lang['scrapyard_cases'] ?>
+                        </b></div>
+                        <div class="card-body">
+                        <?php
+                           if(!empty($dataScrapyard)){
+                        ?>
+                           <div id="piechart-scrapyard" style="height: 300px;"></div>
+                        <?php
+                           }else{
+
+                        ?>
+                           <img src="assets/img/pienodata.jpg" width="25%" alt="" srcset="" style="margin-left: 32%;"/>
+                        <?php      
+                           }
+                        ?>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 mt-3">
+                  <div class="card">
+                     <div class="card-header"><b>
+                           <?php echo $lang['auction_cases'] ?>
+                        </b></div>
+                        <div class="card-body">
+                        <?php
+                           if(!empty($dataAuction)){
+                        ?>
+                           <div id="piechart-auction" style="height: 300px;"></div>
+                        <?php
+                           }else{
+
+                        ?>
+                           <img src="assets/img/pienodata.jpg" width="25%" alt="" srcset="" style="margin-left: 32%;"/>
+                        <?php      
+                           }
+                        ?>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- </div> -->
+            <!-- ... -->
+            <?php include('footer.php'); ?>
 </body>

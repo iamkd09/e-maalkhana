@@ -8,7 +8,7 @@ $en = array(
     "smart"=>"Smart Policing and Marching",
     "project_heading"=>"'Smart Policing and Marching Towards Swacch Bharat'",
     "enter_mobile"=>"Enter Mobile No.",
-    "otp_generate"=>"Send Otp",
+    "otp_generate"=>"Send O.T.P.",
     // Otp Page Keys
     "validate"=>"Validate",
     "otp_sent"=>"4 digit OTP code has been sent to your registered mobile no.",
@@ -33,10 +33,10 @@ $en = array(
     "outward_button"=>"Outward",
     "scrap_auct_button"=>"Scrapyard/Auction",
 
-    "inward_cases" => "Inward Cases",
-    "outward_cases" => "Outward Cases",
-    "scrapyard_cases" => "Scrapyard Cases",
-    "auction_cases" => "Auction Cases",
+    "inward_cases" => "Inward Items",
+    "outward_cases" => "Outward Items",
+    "scrapyard_cases" => "Scrapyard Items",
+    "auction_cases" => "Auction Items",
 
     // Search Page
     "go_button"=>"Go",
@@ -71,7 +71,7 @@ $en = array(
     "accident_date"=>"Accident Date",
     "release_date"=>"Release Date",
     "vehicle_number"=>"Vehicle Number",
-    "vehicle_type"=>"Vehicle Type",
+    "label_vehicle_type"=>"Vehicle Type",
     "two_wheeler"=>"Two Wheeler",
     "three_wheeler"=>"Three Wheeler",
     "four_wheeler"=>"Four Wheeler",
@@ -124,6 +124,10 @@ $en = array(
 
     'cat_name' => 'Category',
     'sub_cat_name' => 'Sub-Category',
+
+    'filter_button' => 'Filter',
+    'reset_button' => 'Reset',
+
 
 );
 
@@ -194,7 +198,7 @@ $hi = array(
     "accident_date"=>"दुर्घटना की तारीख",
     "release_date"=>"रिहाई की तारीख",
     "vehicle_number"=>"वाहन संख्या",
-    "vehicle_type"=>"वाहन का प्रकार",
+    "label_vehicle_type"=>"वाहन का प्रकार",
     "two_wheeler"=>"2 व्हीलर",
     "three_wheeler"=>"3 व्हीलर",
     "four_wheeler"=>"4 व्हीलर",
@@ -242,6 +246,11 @@ $hi = array(
 
     'cat_name' => 'श्रेणी',
     'sub_cat_name' => 'उप-श्रेणी',
+
+    'filter_button' => 'फ़िल्टर',
+    'reset_button' => 'रीसेट',
+
+    
 );
 
 ?>

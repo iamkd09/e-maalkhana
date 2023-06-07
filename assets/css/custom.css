@@ -132,7 +132,7 @@ select {
     margin-right: 2rem;
     padding: 1rem;
     padding-right: 2rem;
-  }
+}
 @media screen and (min-width: 768px) { 
     /* Desktop CSS */
     .desk-login {
@@ -155,7 +155,7 @@ select {
     }
     .modal-content.my-model {
         position: relative;
-        margin-top: 25% !important;
+        margin-top: 50% !important;
     }
     .nav-custom {
         display: -ms-flexbox;
@@ -197,7 +197,7 @@ select {
     }
     .modal-content.my-model {
         position: relative;
-        margin-top: 40% !important;
+        margin-top: 100% !important;
     }
     .container-custom {
         /* width: 100%; */
