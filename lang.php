@@ -40,6 +40,7 @@ $en = array(
     "auction_cases" => "Auction Items",
     "from"=>"From",
     "to"=>"To",
+    "last_one_month"=>"  (Last 1 Month Items)",
 
     // Search Page
     "go_button"=>"Go",
@@ -56,6 +57,7 @@ $en = array(
     "select_state"=>"select state",
     "city"=>"City",
     "select_city"=>"select city",
+    "role_name"=>"Role Name",
     "submit"=>"Submit",
 
     "bhasha" => "Language",
@@ -74,7 +76,7 @@ $en = array(
     "accident_date"=>"Accident Date",
     "release_date"=>"Release Date",
     "vehicle_number"=>"Vehicle Number",
-    "label_vehicle_type"=>"Vehicle Type",
+    "vehicle_type"=>"Vehicle Type",
     "two_wheeler"=>"Two Wheeler",
     "three_wheeler"=>"Three Wheeler",
     "four_wheeler"=>"Four Wheeler",
@@ -175,6 +177,8 @@ $hi = array(
 
     "from"=>"शुरू तिथि",
     "to"=>"अंत तिथि",
+
+    "last_one_month"=>" (पिछले 1 महीने के मामले)",
     // Search Page
     "go_button"=>"खोजे",
     "no_data"=>"डाटा प्राप्त नहीं हुआ",
@@ -205,7 +209,7 @@ $hi = array(
     "accident_date"=>"दुर्घटना की तारीख",
     "release_date"=>"रिहाई की तारीख",
     "vehicle_number"=>"वाहन संख्या",
-    "label_vehicle_type"=>"वाहन का प्रकार",
+    "vehicle_type"=>"वाहन का प्रकार",
     "two_wheeler"=>"2 व्हीलर",
     "three_wheeler"=>"3 व्हीलर",
     "four_wheeler"=>"4 व्हीलर",
@@ -229,6 +233,7 @@ $hi = array(
     "Objects other than vehicles"=>"अन्य (वाहन के अलावा कुछ और वस्तु) का फार्म",
     "select_lang"=>"भाषा चुने",
     "hindi"=>"हिंदी",
+    "role_name"=>"भूमिका",
 
     "outward_form"=>"आउटवर्ड फॉर्म",
     "na"=> '',
