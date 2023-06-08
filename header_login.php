@@ -10,7 +10,7 @@ ini_set('session.gc_maxlifetime', -1);
     
     $userDataDecode = decrypt($_COOKIE['tokenData'],secret_key);
     if($userDataDecode != ''){
-      $userDatas = explode($userDataDecode,"|");
+      $userDatas = explode("|",$userDataDecode);
       $_SESSION['user_id'] = $userDatas[0];
       $_SESSION['role_id'] = $userDatas[1];
       header("Location: dashboard.php");

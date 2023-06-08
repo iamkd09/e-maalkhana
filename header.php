@@ -8,7 +8,8 @@ ini_set('session.gc_maxlifetime', -1);
 
   if(isset($_COOKIE['tokenData'])) {
     $userDataDecode = decrypt($_COOKIE['tokenData'],secret_key);
-    $userDatas = explode($userDataDecode,"|");
+
+    $userDatas = explode("|",$userDataDecode);
 
     $_SESSION['user_id'] = $userDatas[0];
     $_SESSION['role_id'] = $userDatas[1];

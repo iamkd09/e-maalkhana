@@ -48,7 +48,7 @@
                         $authToken = $user_id."|".$role_id;
                         
                         $tokenData = encrypt($authToken,secret_key);
-                        print_r($tokenData); exit;
+
                         setcookie('tokenData', $tokenData);
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['role_id'] = $role_id; 
