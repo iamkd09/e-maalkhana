@@ -342,7 +342,7 @@ function getStatusLabel($category_id, $sub_category_id)
                <div class="col-md-6 mt-3">
                   <div class="card">
                      <div class="card-header">
-                     <b><?php echo $lang['auction_cases'] ?></b>
+                     <b><?php echo $lang['auction_cases'] ?> </b>
                      </div>
                      <div class="card-body">
                         <?php
