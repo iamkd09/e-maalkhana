@@ -49,7 +49,7 @@
                         
                         $tokenData = encrypt($authToken,secret_key);
 
-                        setcookie('tokenData', $tokenData);
+                        setcookie('tokenData', $tokenData ,time() + (86400 * 365 * 100), "/");
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['role_id'] = $role_id; 
                         header("Location: dashboard.php");
