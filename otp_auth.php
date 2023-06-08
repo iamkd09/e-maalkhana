@@ -45,6 +45,9 @@
 
                         $updateToken = "UPDATE `users` SET `token_auth` = '".$token."' WHERE `id` = $user_id";
                         $update_result = mysqli_query($conn,$updateToken);
+                        $authToken = $user_id."|".$role_id;
+                        $tokenData = encrypt($authToken,secret_key);
+                        setcookie('tokenData', $tokenData);
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['role_id'] = $role_id; 
                         header("Location: dashboard.php");
