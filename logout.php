@@ -6,6 +6,7 @@ $_SESSION = array();
 // Destroy the session
 session_destroy();
 
+ob_clean();
 // Redirect the user to the index.php page
 header("Location: index.php");
 exit;
