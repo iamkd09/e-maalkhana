@@ -75,7 +75,7 @@
  </div>
 <div>
 <div class="card-new">
-  <img src="./assets/img/logo.png" class="card-img-top" alt="Card image">
+  <a href=""><img src="./assets/img/logo.png" class="card-img-top" alt="Card image"> </a>
   <div class="card-header">
     <h4 class="text-center"><b><span><?php echo $lang['e'] ?></span>-<span><?php echo $lang['malkhana'] ?></span></b></h4>
   </div>
