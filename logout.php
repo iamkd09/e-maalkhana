@@ -1,6 +1,6 @@
 <?php
 // Unset all of the session variables
-setcookie("tokenData", "");
+setcookie("tokenData", "", time() - 3600, '/');
 $_SESSION = array();
 
 // Destroy the session
