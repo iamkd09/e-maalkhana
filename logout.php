@@ -4,7 +4,7 @@ $_SESSION = array();
 
 // Destroy the session
 session_destroy();
-unset($_COOKIE['tokeData']);
+setcookie("tokenData", "");
 
 // Redirect the user to the index.php page
 header("Location: index.php");
