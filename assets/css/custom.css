@@ -133,6 +133,16 @@ select {
     padding: 1rem;
     padding-right: 2rem;
 }
+.scroll-bar-css {
+    scroll-behavior: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 250px;
+}
+.spacing {
+    padding-left: 5px;
+    padding-right: 5px;
+}
 @media screen and (min-width: 768px) { 
     /* Desktop CSS */
     .desk-login {

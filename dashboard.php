@@ -280,7 +280,7 @@ function getStatusLabel($category_id, $sub_category_id)
                <div class="col-md-6 mt-3">
                   <div class="card">
                      <div class="card-header">
-                        <b><?php echo $lang['inward_cases'] ?><?php echo $lang['last_one_month'] ?></b>
+                        <b><?php echo $lang['inward_cases'] ?></b>
                      </div>
                         
                      <div class="card-body">
@@ -302,7 +302,7 @@ function getStatusLabel($category_id, $sub_category_id)
                <div class="col-md-6 mt-3">
                   <div class="card">
                      <div class="card-header">
-                     <b><?php echo $lang['outward_cases'] ?><?php echo $lang['last_one_month'] ?></b>
+                     <b><?php echo $lang['outward_cases'] ?></b>
                      </div>
                      <div class="card-body">
                         <?php
@@ -324,7 +324,7 @@ function getStatusLabel($category_id, $sub_category_id)
                <div class="col-md-6 mt-3">
                   <div class="card">
                      <div class="card-header">
-                     <b><?php echo $lang['scrapyard_cases'] ?><?php echo $lang['last_one_month'] ?></b>
+                     <b><?php echo $lang['scrapyard_cases'] ?></b>
                      </div>
                      <div class="card-body">
                         <?php
@@ -345,7 +345,7 @@ function getStatusLabel($category_id, $sub_category_id)
                <div class="col-md-6 mt-3">
                   <div class="card">
                      <div class="card-header">
-                     <b><?php echo $lang['auction_cases'] ?> <?php echo $lang['last_one_month'] ?></b>
+                     <b><?php echo $lang['auction_cases'] ?> </b>
                      </div>
                      <div class="card-body">
                         <?php

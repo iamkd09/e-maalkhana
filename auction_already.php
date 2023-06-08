@@ -126,10 +126,12 @@
                          if ($key === 'Pictures') {
                              $pictures = json_decode($value, true);
                              if (is_array($pictures)) {
-                                 foreach ($pictures as $picture) {
-                                     echo '<td><img src="' . $picture . '"></td>';
-                                 }
-                             }
+                              echo '<td><div class="scroll-bar-css">';
+                              foreach ($pictures as $picture) {
+                                  echo '<span class="spacing"><a href="'.$picture.'" target="_blank"><img src="' . $picture . '" width="100px" height="100px"></a></span>';
+                              }
+                              echo '<div></td>';
+                          }
                          } else {
                              echo '<td>' . $value . '</td>';
                          }
