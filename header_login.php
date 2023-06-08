@@ -6,7 +6,13 @@ ini_set('session.gc_maxlifetime', -1);
   include('env.php');
   include "functions.php";
 
+  if(isset($_COOKIE['tokenData'])) {
+    $userDatas = explode($_COOKIE['tokenData'],"|");
 
+    $_SESSION['user_id'] = $userDatas[0];
+    $_SESSION['role_id'] = $userDatas[1];
+    header("Location: dashboard.php");
+  }
   $lang = $en;
   if(isset($_COOKIE['mal_lang'])){
   
