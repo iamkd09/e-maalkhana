@@ -6,20 +6,7 @@ ini_set('session.gc_maxlifetime', -1);
   include('env.php');
   include "functions.php";
 
-  if(isset($_COOKIE['tokenData'])) {
-    $userDatas = explode($_COOKIE['tokenData'],"|");
 
-    $_SESSION['user_id'] = $userDatas[0];
-    $_SESSION['role_id'] = $userDatas[1];
-   
-  }else{
-    header("Location: index.php");
-    exit;
-  }
-//   if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-//     header("Location: index.php");
-//     exit;
-//  }
   $lang = $en;
   if(isset($_COOKIE['mal_lang'])){
   
