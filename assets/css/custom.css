@@ -211,7 +211,7 @@ select {
     }
     .modal-content.my-model {
         position: relative;
-        margin-top: 100% !important;
+        margin-top: 75% !important;
     }
     .container-custom {
         /* width: 100%; */
