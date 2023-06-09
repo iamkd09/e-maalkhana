@@ -64,9 +64,9 @@ if (!isset($_SESSION['language']) || $_SESSION['language'] !== true) {
 </html>
 
 <script>
- $('#translate').on('change',function() {
-    var en = $(this).find(":selected").val();
-    document.cookie= "mal_lang="+en;
-    window.location.reload();
- });
- </script>
+  $('#translate').on('change', function() {
+    var lang = $(this).find(":selected").val();
+    document.cookie = "mal_lang=" + lang;
+    window.location.href = "dashboard.php";
+  });
+</script>

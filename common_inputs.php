@@ -117,7 +117,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
 
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
-                                <label>' . $lang['label_vehicle_type'] . ':</label>
+                                <label>' . $lang['vehicle_type'] . ':</label>
                                 <select class="form-control statetocity" name="vehicle_type">
                                 <option></option>
                                 <option>' . $lang['two_wheeler'] . '</option>
@@ -259,7 +259,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
 
      <div class="col-md-4 pl-1">
          <div class="form-group">
-             <label>' . $lang['label_vehicle_type'] . ':</label>
+             <label>' . $lang['vehicle_type'] . ':</label>
              <select class="form-control statetocity" name="vehicle_type">
              <option></option>
              <option>' . $lang['two_wheeler'] . '</option>
@@ -325,7 +325,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
  
       <div class="col-md-4 pl-1">
          <div class="form-group">
-             <label>' . $lang['label_vehicle_type'] . ':</label>
+             <label>' . $lang['vehicle_type'] . ':</label>
              <select class="form-control statetocity" name="vehicle_type">
              <option></option>
              <option>' . $lang['two_wheeler'] . '</option>
