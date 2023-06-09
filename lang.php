@@ -7,17 +7,19 @@ $en = array(
     "marching"=>"Towards Swachh Bharat",
     "smart"=>"Smart Policing and Marching",
     "project_heading"=>"'Smart Policing and Marching Towards Swacch Bharat'",
-    "enter_mobile"=>"Enter Mobile No.",
-    "otp_generate"=>"Send O.T.P.",
+    "enter_mobile"=>"Enter Mobile Number",
+    "otp_generate"=>"Enter Password",
     // Otp Page Keys
-    "validate"=>"Validate",
+    "validate"=>"Login",
     "otp_sent"=>"4 digit OTP code has been sent to your registered mobile no.",
-    "enter_otp"=>"Please enter OTP to verify your account",
+    "enter_otp"=>"Please enter password to verify your account",
     "not_got_otp"=>"Didn't get the code?",
     "resend_otp"=>"Resend it",
     "invalid_otp"=> "Invalid OTP, please try again.",
     "nonactive_user" => "User is not active, please try again.",
     "invalid_user" => "Invalid User!.",
+    "reset_button"=>"Reset Password",
+    "new_password" => "New Password",
 
     // Dashbboard Page Keys
     "sidebar_home"=>"HOME",
@@ -58,6 +60,7 @@ $en = array(
     "city"=>"City",
     "select_city"=>"select city",
     "role_name"=>"Role Name",
+    "password"=>"Password",
     "submit"=>"Submit",
 
     "bhasha" => "Language",
@@ -118,6 +121,7 @@ $en = array(
     "user_list.php" => 'User List',
     "language_change.php" => 'Translate',
     "inventory.php" => 'Inventory',
+    "reset_config.php" => 'Reset',
     "outward_list.php" => 'Outward',
     "outward_already.php" => 'Outward',
     "scrapped"=>"Eligible",
@@ -131,7 +135,7 @@ $en = array(
     'sub_cat_name' => 'Sub-Category',
 
     'filter_button' => 'Filter',
-    'reset_button' => 'Reset',
+    "reset_heading" => "Reset Password",
 
 
 );
@@ -143,9 +147,11 @@ $hi = array(
     "marching"=>"की ओर अग्रसर",
     "smart"=>"“स्मार्ट पुलिसिंग और स्वच्छ भारत”",
     "enter_mobile"=>"मोबाइल नंबर दर्ज करें",
-    "otp_generate"=>"ओटीपी भेजें",
+    "otp_generate"=>"पासवर्ड दर्ज करें",
+    "password"=>"पासवर्ड",
+    "reset_button"=>"पासवर्ड रीसेट",
     // Otp Page Keys
-    "validate"=>"सत्यापित करें",
+    "validate"=>"लॉग इन करें",
     "otp_sent"=>"आपके रजिस्टर्ड मोबाइल नंबर पर 4 अंकों का ओटीपी भेजा गया है",
     "enter_otp"=>"अपना खाता सत्यापित करने के लिए कृपया ओटीपी दर्ज करें",
     "not_got_otp"=>"ओटीपी नहीं मिला?",
@@ -154,6 +160,8 @@ $hi = array(
     "invalid_otp"=> "अमान्य ओटीपी, कृपया पुनः प्रयास करें।",
     "nonactive_user" => "उपयोगकर्ता सक्रिय नहीं है, कृपया पुनः प्रयास करें।",
     "invalid_user" => "अमान्य उपयोगकर्ता!।",
+    "reset_heading" => "पासवर्ड रीसेट",
+    "new_password" => "नया पासवर्ड",
 
     // Dashbboard Page Keys
     "sidebar_home"=>"होम",
@@ -241,6 +249,7 @@ $hi = array(
     //Page titles
     "outward.php" => 'आउटवर्ड',
     "search.php" => 'सर्च',
+    "reset_config.php" => 'रीसेट',
     "dashboard.php" => 'होम ',
     "inward.php" => 'इन्वर्ड',
     "scrapyard_already.php" => 'रद्दीखाना',
@@ -260,7 +269,6 @@ $hi = array(
     'sub_cat_name' => 'उप-श्रेणी',
 
     'filter_button' => 'फ़िल्टर',
-    'reset_button' => 'रीसेट',
 
     
 );

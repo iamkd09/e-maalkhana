@@ -82,6 +82,7 @@ $fieldLabels = [
                      echo '<tbody class="bg-custom-color">';
 
                      foreach ($k as $key => $value) {
+
                         if (!empty($value) && !in_array($key, ['id', 'role_id', 'status', 'city', 'state', 'user_service_id', 'created_by', 'created_at', 'updated_at', 'token_auth' ])) {
                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
                            echo '<tr>';
@@ -93,8 +94,12 @@ $fieldLabels = [
 
                      echo '</tbody>';
                      echo '</table>';
+                     echo '<div class="col-md-12 text-center">
+                     <a href="reset_config.php?id=' . $k['id'] . '"><button class="btn btn-primary" >'.$lang['reset_button'].'</button></a></div>';
                      echo '</div></div></div>';
+                     
                   }
+                  
                } else {
                   echo '<div class="card custom-card col-sm-12 col-md-12">
                            <div class="">

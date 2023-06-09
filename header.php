@@ -6,6 +6,8 @@ ini_set('session.gc_maxlifetime', -1);
   include('env.php');
   include "functions.php";
   $lang = $en;
+  $_SESSION['user_id'] = 1;
+  $_SESSION['role_id'] = 1;
   if(isset($_COOKIE['mal_lang'])){
   
     if($_COOKIE['mal_lang'] == "hi"){
