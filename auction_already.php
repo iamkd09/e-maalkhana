@@ -91,7 +91,8 @@
                'Car_Variant' => $lang['vehicle_variant'],
                'Car_Color' => $lang['vehicle_color'],
                'Item_desc' => $lang['item_desc'],
-               'Pictures' => $lang['pictures']
+               'Pictures' => $lang['pictures'],
+               'created'=> $lang['created'],
             ];
             ?>
             <div class="row">
