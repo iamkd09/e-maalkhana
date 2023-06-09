@@ -26,6 +26,7 @@ if (isset($_POST['reset'])) {
     $resetResult = $conn->query($resetQuery);
     if($resetResult){
         $message =  "Password Reset Successfully!";
+       
     }else{
         $message = "Some error occured!";
     }
@@ -52,7 +53,7 @@ if (isset($_POST['reset'])) {
                       <?php echo $message; ?>
                     </h4>
                   </h5>
-                  <a href="user.php" class="close alert_sh">
+                  <a href="dashboard.php" class="close alert_sh">
                     <span aria-hidden="true">&times;</span>
                   </a>
                 </div>

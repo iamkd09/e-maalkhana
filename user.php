@@ -56,24 +56,12 @@ if (isset($_POST['submit'])) {
     $messageColor = "red";
   } else {
     if (isset($roleRow['user_service_role']) && !empty($name) && !empty($role) && !empty($phone) && !empty($address) && !empty($state) && !empty($city)) {
-      $url = user_service_url . "/api/v1/user/serviceCall/user-account/create/";
-      $postData = json_encode([
-        "phone_number" => $phone,
-        "first_name" => $name,
-        "email_id" => "",
-        "last_name" => "",
-        "role_id" => $roleRow['user_service_role'],
-        "source" => "junkyard",
-        "project_ids" => [],
-        "committed_by_user_id" => 1,
-      ]);
-      $saveInService = postCurl($url, $postData);
-
-      $users = json_decode($saveInService, true);
-      $user_service_id = $users['id'] ?? null;
+      
+      $user_service_id =  0;
 
 
       $query = "INSERT INTO `users` (`name`, `role_id`, `contact`, `address`, `state`, `city`, `created_by`,`user_service_id`,`token_auth`) VALUES ('$name', '$role', '$phone', '$address', '$state', '$city','$user_id', '$user_service_id','$password')";
+      // echo $query; exit;
       $result = $conn->query($query);
 
       if ($result) {

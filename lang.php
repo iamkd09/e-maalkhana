@@ -15,7 +15,7 @@ $en = array(
     "enter_otp"=>"Please enter password to verify your account",
     "not_got_otp"=>"Didn't get the code?",
     "resend_otp"=>"Resend it",
-    "invalid_otp"=> "Invalid OTP, please try again.",
+    "invalid_otp"=> "Invalid Password, please try again.",
     "nonactive_user" => "User is not active, please try again.",
     "invalid_user" => "Invalid User!.",
     "reset_button"=>"Reset",
@@ -161,7 +161,7 @@ $hi = array(
     "not_got_otp"=>"ओटीपी नहीं मिला?",
     "resend_otp"=>"फिर से भेजें",
 
-    "invalid_otp"=> "अमान्य ओटीपी, कृपया पुनः प्रयास करें।",
+    "invalid_otp"=> "अमान्य पासवर्ड, कृपया पुनः प्रयास करें।",
     "nonactive_user" => "उपयोगकर्ता सक्रिय नहीं है, कृपया पुनः प्रयास करें।",
     "invalid_user" => "अमान्य उपयोगकर्ता!।",
     "reset_heading" => "पासवर्ड रीसेट",

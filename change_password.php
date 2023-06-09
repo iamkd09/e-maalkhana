@@ -16,7 +16,7 @@ if (!isset($_SESSION['change_password']) || $_SESSION['change_password'] !== tru
   exit;
 }
  
-
+$message = '';
 
 $user_id = $_SESSION['user_id'];
 
@@ -25,8 +25,10 @@ if (isset($_POST['reset'])) {
 
     $resetQuery = "UPDATE `users` SET `token_auth` = '$new_password' WHERE `users`.`id` = '$user_id' ";
     $resetResult = $conn->query($resetQuery);
-    if($resetResult){
+
+    if(isset($resetResult)){
         $message =  "Password Changed Successfully!";
+       
     }else{
         $message = "Some error occured!";
     }
@@ -53,7 +55,7 @@ if (isset($_POST['reset'])) {
                       <?php echo $message; ?>
                     </h4>
                   </h5>
-                  <a href="user.php" class="close alert_sh">
+                  <a href="dashboard.php" class="close alert_sh">
                     <span aria-hidden="true">&times;</span>
                   </a>
                 </div>
