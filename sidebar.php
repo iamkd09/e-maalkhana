@@ -5,6 +5,7 @@ $Role = $_SESSION['role_id'];
 
 $current_page = basename($_SERVER['PHP_SELF']);
 
+$user_id = $_SESSION['user_id'];
 ?>
 
 <div class="sidebar" data-color="blue">  
@@ -56,6 +57,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <?php $_SESSION['language'] = true; ?>
                     <i class="fa fa-language" aria-hidden="true"></i>
                     <p><?php echo $lang['sidebar_languages'] ?></p>
+                </a>
+            </li>
+            <li class="<?php echo ($current_page == 'change_password.php') ? 'active' : ''; ?>">
+            <a href="change_password.php?id=<?php echo $user_id; ?>">
+                    <?php $_SESSION['change_password'] = true; ?>
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    <p><?php echo $lang['sidebar_reset_password'] ?></p>
                 </a>
             </li>
             <li>

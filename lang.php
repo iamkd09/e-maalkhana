@@ -18,7 +18,7 @@ $en = array(
     "invalid_otp"=> "Invalid OTP, please try again.",
     "nonactive_user" => "User is not active, please try again.",
     "invalid_user" => "Invalid User!.",
-    "reset_button"=>"Reset Password",
+    "reset_button"=>"Reset",
     "new_password" => "New Password",
 
     // Dashbboard Page Keys
@@ -104,6 +104,8 @@ $en = array(
     "select_lang"=>"Select Language",
     "hindi"=>"Hindi",
 
+    'sidebar_reset_password'=>'Change Password',
+    'change_password'=>'Change',
     // Outward Form
     "outward_form"=>"Outward Form",
     "na"=> '',
@@ -121,7 +123,8 @@ $en = array(
     "user_list.php" => 'User List',
     "language_change.php" => 'Translate',
     "inventory.php" => 'Inventory',
-    "reset_config.php" => 'Reset',
+    "reset_config.php" => 'Reset Password',
+    "change_password.php" => 'Change Password',
     "outward_list.php" => 'Outward',
     "outward_already.php" => 'Outward',
     "scrapped"=>"Eligible",
@@ -136,6 +139,7 @@ $en = array(
 
     'filter_button' => 'Filter',
     "reset_heading" => "Reset Password",
+    "change_heading" => "Change Password",
 
 
 );
@@ -149,7 +153,7 @@ $hi = array(
     "enter_mobile"=>"मोबाइल नंबर दर्ज करें",
     "otp_generate"=>"पासवर्ड दर्ज करें",
     "password"=>"पासवर्ड",
-    "reset_button"=>"पासवर्ड रीसेट",
+    "reset_button"=>"रीसेट",
     // Otp Page Keys
     "validate"=>"लॉग इन करें",
     "otp_sent"=>"आपके रजिस्टर्ड मोबाइल नंबर पर 4 अंकों का ओटीपी भेजा गया है",
@@ -162,6 +166,8 @@ $hi = array(
     "invalid_user" => "अमान्य उपयोगकर्ता!।",
     "reset_heading" => "पासवर्ड रीसेट",
     "new_password" => "नया पासवर्ड",
+    'change_password'=>'बदलें',
+    "change_heading" => "पासवर्ड बदलें",
 
     // Dashbboard Page Keys
     "sidebar_home"=>"होम",
@@ -177,6 +183,8 @@ $hi = array(
     "auction_button"=>"नीलामी",
     "outward_button"=>"आउटवर्ड",
     "scrap_auct_button"=>"रद्दीखाना/नीलामी",
+
+    'sidebar_reset_password'=>'पासवर्ड बदलें',
 
     "inward_cases" => "इन्वर्ड मामले",
     "outward_cases" => "आउटवर्ड मामले",
@@ -249,7 +257,7 @@ $hi = array(
     //Page titles
     "outward.php" => 'आउटवर्ड',
     "search.php" => 'सर्च',
-    "reset_config.php" => 'रीसेट',
+    "reset_config.php" => 'रीसेट पासवर्ड',
     "dashboard.php" => 'होम ',
     "inward.php" => 'इन्वर्ड',
     "scrapyard_already.php" => 'रद्दीखाना',
@@ -264,7 +272,7 @@ $hi = array(
     "user_list.php" => 'उपयोगकर्ता सूची',
     "outward_list" => 'आउटवर्ड',
     "outward_already.php" => 'आउटवर्ड',
-
+    "change_password.php" => 'पासवर्ड बदलें',
     'cat_name' => 'श्रेणी',
     'sub_cat_name' => 'उप-श्रेणी',
 

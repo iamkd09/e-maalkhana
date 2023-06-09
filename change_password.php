@@ -11,21 +11,22 @@
 
 
 <?php 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    // die($id);
-    $message = '';
+if (!isset($_SESSION['change_password']) || $_SESSION['change_password'] !== true) {
+  header("Location: index.php");
+  exit;
 }
+ 
+
 
 $user_id = $_SESSION['user_id'];
 
 if (isset($_POST['reset'])) {
     $new_password = base64_encode($_POST['newpassword']);
 
-    $resetQuery = "UPDATE `users` SET `token_auth` = '$new_password' WHERE `users`.`id` = '$id' AND `created_by` = '$user_id' ";
+    $resetQuery = "UPDATE `users` SET `token_auth` = '$new_password' WHERE `users`.`id` = '$user_id' ";
     $resetResult = $conn->query($resetQuery);
     if($resetResult){
-        $message =  "Password Reset Successfully!";
+        $message =  "Password Changed Successfully!";
     }else{
         $message = "Some error occured!";
     }
@@ -64,7 +65,7 @@ if (isset($_POST['reset'])) {
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title"><?php echo $lang['reset_heading']?></h5>
+                <h5 class="title"><?php echo $lang['change_heading']?></h5>
               </div>
               <div class="card-body">
                 <form method="POST" action="" autocomplete="off">
@@ -80,7 +81,7 @@ if (isset($_POST['reset'])) {
 
                   <div class="col-md-12 text-center">
                     <button type="submit" name="reset" class="btn btn-primary fs-fw">
-                      <?php echo $lang['reset_button'] ?>
+                      <?php echo $lang['change_password'] ?>
                     </button>
                   </div>
                     
