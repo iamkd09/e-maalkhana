@@ -140,12 +140,13 @@ $en = array(
     'filter_button' => 'Filter',
     "reset_heading" => "Reset Password",
     "change_heading" => "Change Password",
-
+    "created"=>"Created Date",
 
 );
 
 $hi = array(
     // Login page keys
+    "created"=>"निर्माण की तारीख",
     "e"=>"ई",
     "malkhana"=>"मालखाना",
     "marching"=>"की ओर अग्रसर",
