@@ -20,12 +20,7 @@
 
           if ($status == 1) {
                         if(!empty($contact)){
-                          $url = user_service_url."/api/user/ResendOTP/";
-                          $postData = json_encode([
-                            "phone_number" => $contact,
-                            "medium" => 1
-                          ]);
-                          $saveInService = postCurl($url,$postData);
+                          
            
                           $users = json_decode($saveInService, true);
                           $status = $users['status'] ?? 1;
