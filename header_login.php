@@ -7,23 +7,18 @@ ini_set('session.gc_maxlifetime', -1);
   include "functions.php";
 
   if(isset($_COOKIE['tokenData'])) {
+    
     $userDataDecode = decrypt($_COOKIE['tokenData'],secret_key);
-
-    $userDatas = explode("|",$userDataDecode);
-
-    $_SESSION['user_id'] = $userDatas[0];
-    $_SESSION['role_id'] = $userDatas[1];
-   
-  }else{
-    header("Location: index.php");
-    exit;
+    if($userDataDecode != ''){
+      $userDatas = explode("|",$userDataDecode);
+      print_r($userDatas);
+      $_SESSION['user_id'] = $userDatas[0];
+      $_SESSION['role_id'] = $userDatas[1];
+      header("Location: dashboard.php");
+    }
+    
   }
-//   if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-//     header("Location: index.php");
-//     exit;
-//  }
   $lang = $en;
-
   if(isset($_COOKIE['mal_lang'])){
   
     if($_COOKIE['mal_lang'] == "hi"){

@@ -1,5 +1,5 @@
 <?php 
-    require('header.php');
+    include('header_login.php');
     require ('conn.php');
     $_SESSION['msg'] = 'Authenticated.';
     $contact = $_SESSION["contact"]; 
@@ -45,6 +45,11 @@
 
                         $updateToken = "UPDATE `users` SET `token_auth` = '".$token."' WHERE `id` = $user_id";
                         $update_result = mysqli_query($conn,$updateToken);
+                        $authToken = $user_id."|".$role_id;
+                        
+                        $tokenData = encrypt($authToken,secret_key);
+
+                        setcookie('tokenData', $tokenData ,time() + (86400 * 365 * 100), "/");
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['role_id'] = $role_id; 
                         header("Location: dashboard.php");

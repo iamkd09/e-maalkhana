@@ -1,5 +1,5 @@
 <?php 
-    require('header.php');
+    include('header_login.php');
     require ('conn.php');
     $_SESSION['msg'] = 'OTP resent successfully!';
     $contact = $_SESSION["contact"]; 
