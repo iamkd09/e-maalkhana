@@ -30,7 +30,7 @@
               <?php echo $lang['enter_otp'] ?>
             </h6>
             <form action="otp_auth.php" method="POST" autocomplete="off">
-              <div class="card-body">
+              <div class="otp-card">
                 <div id="otp" class="inputs d-flex flex-row justify-content-center otp_new otp-alignment" name="otp">
                   <div class="col-md-12 text-center">
                     <div class="form-group">

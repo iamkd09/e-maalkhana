@@ -25,6 +25,10 @@
     padding: 0px 18px 12px 0px !important;
 }
 
+.otp-card {
+    padding: 15px 0px 0px 0px !important;
+  }
+  
 .green {
     color: green !important;
 }
@@ -33,7 +37,7 @@
 }
 .otp-alignment {
     position: relative !important;
-    right: 5% !important;
+    /* right: 5% !important; */
 }
 .form-group > label {
     color: #000;
