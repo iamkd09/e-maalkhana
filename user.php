@@ -25,7 +25,8 @@ if ($result->num_rows > 0) {
 ?>
 
 <?php
-$query_role = "SELECT `id`,`name` FROM `role`";
+$role_id = $_SESSION['role_id'];
+$query_role = "SELECT `id`,`name` FROM `role` WHERE `id` >= $role_id";
 $result = $conn->query($query_role);
 if ($result->num_rows > 0) {
   $options_role = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -56,8 +57,8 @@ if (isset($_POST['submit'])) {
     $messageColor = "red";
   } else {
     if (isset($roleRow['user_service_role']) && !empty($name) && !empty($role) && !empty($phone) && !empty($address) && !empty($state) && !empty($city)) {
-      
-      $user_service_id =  0;
+
+      $user_service_id = 0;
 
 
       $query = "INSERT INTO `users` (`name`, `role_id`, `contact`, `address`, `state`, `city`, `created_by`,`user_service_id`,`token_auth`) VALUES ('$name', '$role', '$phone', '$address', '$state', '$city','$user_id', '$user_service_id','$password')";
@@ -66,6 +67,7 @@ if (isset($_POST['submit'])) {
 
       if ($result) {
         $message = "Registration successful";
+
         // $messageColor = "green";
       } else {
         $message = "Error occurred while registering. Please try again.";
@@ -102,7 +104,7 @@ if (isset($_POST['submit'])) {
                       <?php echo $message; ?>
                     </h4>
                   </h5>
-                  <a href="user.php" class="close alert_sh">
+                  <a href="user_list.php" class="close alert_sh">
                     <span aria-hidden="true">&times;</span>
                   </a>
                 </div>
@@ -144,10 +146,10 @@ if (isset($_POST['submit'])) {
                           </option>
                           <?php
                           foreach ($options_role as $k => $role) {
-                            if ($_SESSION['user_id'] == 1 || ($_SESSION['user_id'] == 2 && $role['id'] >= 2 && $role['id'] <= 3)) {
-                              echo "<option value=" . $role['id'] . ">" . $role['name'] . "</option>";
-                            }
+
+                            echo "<option value=" . $role['id'] . ">" . $role['name'] . "</option>";
                           }
+
                           ?>
                         </select>
                       </div>
@@ -210,13 +212,16 @@ if (isset($_POST['submit'])) {
                         </select>
                       </div>
                     </div>
-                  
-                  <div class="col-md-6 pl-1">
-                    <div class="form-group">
-                      <label><?php echo $lang['password']?>:</label>
-                      <input type="text" class="form-control" name="password" placeholder="<?php echo $lang['password']?>" required>
+
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>
+                          <?php echo $lang['password'] ?>:
+                        </label>
+                        <input type="text" class="form-control" name="password"
+                          placeholder="<?php echo $lang['password'] ?>" required>
+                      </div>
                     </div>
-                  </div>
                   </div>
 
                   <div class="col-md-12 text-center">
