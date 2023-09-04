@@ -279,6 +279,8 @@ $hi = array(
     'sub_cat_name' => 'उप-श्रेणी',
 
     'filter_button' => 'फ़िल्टर',
+    "scrapped_date"=>"स्क्रैप्ड होने की तारीख",
+    "auctioned_date"=>"नीलाम होने की तारीख",
 
     
 );
