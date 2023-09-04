@@ -144,9 +144,9 @@ if (isset($_POST['search_scrap'])) {
             ];
             ?>
             <div class="row">
-            <?php     
+            <?php
                $user_id = $_SESSION['user_id'];
-               $sqlOut = "SELECT * FROM `inventory` WHERE  `Status` = '1' AND `Created_By` = '$user_id' ";
+               $sqlOut = "SELECT * FROM `inventory` WHERE `Status` = '1' AND `Created_By` = '$user_id' ";
                if (isset($_POST['outward_list'])) {
                   $gd_search = $_POST['outward_list'];
                   $sqlOut .= "AND `Gd_Number` LIKE '%$gd_search%'";
@@ -154,7 +154,7 @@ if (isset($_POST['search_scrap'])) {
                $resultQS = mysqli_query($conn, $sqlOut);
                $rowsScrap = mysqli_fetch_all($resultQS, MYSQLI_ASSOC);
                if (!empty($rowsScrap)) {
-                  
+
                   foreach ($rowsScrap as $k) {
                      $gdNumber = '';
                      echo '<div class="card custom-card col-sm-12 col-md-5">
@@ -167,33 +167,36 @@ if (isset($_POST['search_scrap'])) {
                      // $null_date = "0000-00-00";
                      // $default_date = "1970-01-01";
                      foreach ($k as $key => $value) {
-                        $value = trim($value);
-                        if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
-                            $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
-                            echo '<tr>';
-                            echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
-                            
-                            // Check if the value is a JSON string
-                            if ($key === 'Pictures') {
-                                $pictures = json_decode($value, true);
-                                if (is_array($pictures)) {
-                                 echo '<td><div class="scroll-bar-css">';
-                                 foreach ($pictures as $picture) {
-                                     echo '<span class="spacing"><a href="'.$picture.'" target="_blank"><img src="' . $picture . '" width="100px" height="100px"></a></span>';
+                           $value = trim($value);
+                           if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
+                              $label = isset($fieldLabels[$key]) ? $fieldLabels[$key] : $key;
+                              echo '<tr>';
+                              echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
+
+                              // Check if the value is a JSON string
+                              if ($key === 'Pictures') {
+                                 $pictures = json_decode($value, true);
+                                 if (is_array($pictures)) {
+                                       echo '<td><div class="scroll-bar-css">';
+                                       foreach ($pictures as $picture) {
+                                          echo '<span class="spacing"><a href="'.$picture.'" target="_blank"><img src="' . $picture . '" width="100px" height="100px"></a></span>';
+                                       }
+                                       echo '<div></td>';
                                  }
-                                 echo '<div></td>';
-                             }
-                            } else {
-                                echo '<td>' . $value . '</td>';
-                            }
-                            
-                            echo '</tr>';
-                        }
-                        if ($key === 'Gd_Number') {
-                            $gdNumber = $value;
-                        }
-                    }
-                    
+                              } elseif ($key === 'stolen_date' || $key === 'Date_Of_Recovery' && $value != '0000-00-00') {
+                                 $formattedDate = date('d-m-Y', strtotime($value));
+                                 echo '<td>' . $formattedDate . '</td>';
+                              } else {
+                                 echo '<td>' . $value . '</td>';
+                              }
+
+                              echo '</tr>';
+                           }
+                           if ($key === 'Gd_Number') {
+                              $gdNumber = $value;
+                           }
+                     }
+
                      echo '</tbody>';
                      echo '</table>';
                      echo '<a href="outward.php?outward_search='.$gdNumber.'">
@@ -208,9 +211,9 @@ if (isset($_POST['search_scrap'])) {
                   echo '<img src="assets/img/nodatapolice.jpeg" width="35%" alt="" srcset="" style="margin-left: 32%;"/>';
                   echo '<h3 style="text-align: center;">' . $lang['no_data'] . '!</h3>';
                   echo '</div></div></div>';
-
                }
-            ?>
+               ?>
+
            </div> 
          </div>
       </div>

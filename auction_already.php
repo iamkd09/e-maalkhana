@@ -92,7 +92,7 @@
                'Car_Color' => $lang['vehicle_color'],
                'Item_desc' => $lang['item_desc'],
                'Pictures' => $lang['pictures'],
-               'created'=> $lang['created'],
+               'created'=> $lang['auctioned_date'],
             ];
             ?>
             <div class="row">
@@ -114,8 +114,6 @@
                   echo '<table class="table table-responsive">';
                   echo '<tbody class="bg-custom-color">';
 
-                  // $null_date = "0000-00-00";
-                  // $default_date = "1970-01-01";
                   foreach ($k as $key => $value) {
                      $value = trim($value);
                      if (!empty($value) && !in_array($key, ['id', 'Status', 'category_id', 'sub_category_id', 'Created_By', 'Created_at', 'Updated_at'])) {
@@ -123,7 +121,6 @@
                          echo '<tr>';
                          echo '<td>' . '<b>' . $label . ':</b>' . '</td>';
                          
-                         // Check if the value is a JSON string
                          if ($key === 'Pictures') {
                              $pictures = json_decode($value, true);
                              if (is_array($pictures)) {
@@ -133,9 +130,12 @@
                               }
                               echo '<div></td>';
                           }
-                         } else {
-                             echo '<td>' . $value . '</td>';
-                         }
+                         } elseif ($key === 'stolen_date' || $key === 'Date_Of_Recovery' || $key === 'created' && $value != '0000-00-00') {
+                           $formattedDate = date('d-m-Y', strtotime($value));
+                           echo '<td>' . $formattedDate . '</td>';
+                        } else {
+                           echo '<td>' . $value . '</td>';
+                        }
                          
                          echo '</tr>';
                      }

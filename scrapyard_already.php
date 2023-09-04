@@ -111,7 +111,7 @@
                'Car_Color' => $lang['vehicle_color'],
                'Item_desc' => $lang['item_desc'],
                'Pictures' => $lang['pictures'],
-               'created'=> $lang['created'],
+               'created'=> $lang['scrapped_date'],
             ];
             ?>
             <div class="row">
@@ -156,9 +156,12 @@
                                  }
                                  echo '<div></td>';
                              }
-                            } else {
-                                echo '<td>' . $value . '</td>';
-                            }
+                            } elseif ($key === 'stolen_date' || $key === 'Date_Of_Recovery'  || $key === 'created' && $value != '0000-00-00') {
+                              $formattedDate = date('d-m-Y', strtotime($value));
+                              echo '<td>' . $formattedDate . '</td>';
+                           } else {
+                              echo '<td>' . $value . '</td>';
+                           }
                             
                             echo '</tr>';
                         }

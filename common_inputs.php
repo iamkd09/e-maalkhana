@@ -97,7 +97,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
                        <div class="col-md-4 pl-1">
                          <div class="form-group">
                            <label>' . $lang['vehicle_r_number'] . ':</label>
-                           <input type="text" class="form-control" name="vehicle_r_number" placeholder="' . $lang['vehicle_r_number'] . '">
+                           <input type="text" class="form-control" style="text-transform:uppercase" name="vehicle_r_number" placeholder="' . $lang['vehicle_r_number'] . '">
                          </div>
                        </div>
 
@@ -156,16 +156,16 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
                             <label>' . $lang['recovery_date'] . ':</label>
                             <input type="date" class="form-control" name="recovery_date" placeholder="' . $lang['recovery_date'] . '">
                           </div>
-                        </div>
+                        </div>'
 
-                        <div class="col-md-4 pl-1">
-                         <div class="form-group">
-                           <label>' . $lang['fir_number'] . ':</label>
-                           <input type="tel" class="form-control" name="fir_number" placeholder="' . $lang['fir_number'] . '"  oninput="this.value = this.value.replace(/[^0-9]/g, \'\')">
-                         </div>
-                       </div>
+                      //   <div class="col-md-4 pl-1">
+                      //    <div class="form-group">
+                      //      <label>' . $lang['fir_number'] . ':</label>
+                      //      <input type="text" class="form-control" name="fir_number" placeholder="' . $lang['fir_number'] . '"  oninput="this.value = this.value.replace(/[^0-9]/g, \'\')">
+                      //    </div>
+                      //  </div>
 
-                       <div class="col-md-4 pl-1">
+                       .'<div class="col-md-4 pl-1">
                          <div class="form-group">
                            <label>' . $lang['under_section'] . ':</label>
                            <input type="text" class="form-control" name="under_section" placeholder="' . $lang['under_section'] . '">
@@ -178,17 +178,17 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
                             <label>' . $lang['recovery_date'] . ':</label>
                             <input type="date" class="form-control" name="recovery_date"  placeholder="' . $lang['recovery_date'] . '">
                           </div>
-                        </div>
+                        </div>'
 
-                       <div class="col-md-4 pl-1">
-                         <div class="form-group">
-                           <label>' . $lang['fir_number'] . ':</label>
-                           <input type="tel" class="form-control" name="fir_number" placeholder="' . $lang['fir_number'] . '"  oninput="this.value = this.value.replace(/[^0-9]/g, \'\')">
-                         </div>
-                       </div>
+                      //  <div class="col-md-4 pl-1">
+                      //    <div class="form-group">
+                      //      <label>' . $lang['fir_number'] . ':</label>
+                      //      <input type="text" class="form-control" name="fir_number" placeholder="' . $lang['fir_number'] . '"  oninput="this.value = this.value.replace(/[^0-9]/g, \'\')">
+                      //    </div>
+                      //  </div>
                       
         
-              <div class="col-md-4 pl-1">
+              .'<div class="col-md-4 pl-1">
                 <div class="form-group">
                   <label>' . $lang['mv_act'] . ':</label>
                   <input type="text" class="form-control" name="mv_act" placeholder="' . $lang['mv_act'] . '" >
@@ -198,7 +198,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
               <div class="col-md-4 pl-1">
                 <div class="form-group">
                   <label>' . $lang['vehicle_r_number'] . ':</label>
-                  <input type="text" class="form-control" name="vehicle_r_number" placeholder="' . $lang['vehicle_r_number'] . '" >
+                  <input type="text" class="form-control" style="text-transform:uppercase" name="vehicle_r_number" placeholder="' . $lang['vehicle_r_number'] . '" >
                 </div>
               </div>
         
@@ -221,14 +221,14 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
   if (isset($_POST['sub_id']) || isset($data['sub_category_id'])) {
     $sub_category = $_POST['sub_id'] ?? $data['sub_category_id'];
 
-    $html .= '<div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label>' . $lang['fir_number'] . ':</label>
-                  <input type="text" class="form-control" name="fir_number"  placeholder="' . $lang['fir_number'] . '" oninput="this.value = this.value.replace(/[^0-9]/g, \'\')" >
-                </div>
-              </div>
+    // <div class="col-md-4 pl-1">
+    //             <div class="form-group">
+    //               <label>' . $lang['fir_number'] . ':</label>
+    //               <input type="text" class="form-control" name="fir_number"  placeholder="' . $lang['fir_number'] . '">
+    //             </div>
+    //           </div>
   
-                <div class="col-md-4 pl-1">
+              $html .= '  <div class="col-md-4 pl-1">
                   <div class="form-group">
                   <label>' . $lang['under_section'] . ':</label>
                   <input type="text" class="form-control" name="under_section" placeholder="' . $lang['under_section'] . '" >
@@ -362,7 +362,7 @@ if (isset($_POST['id']) || (isset($data)) && !empty($data)) {
       <div class="col-md-4 pl-1">
         <div class="form-group">
           <label>' . $lang['recovery_date'] . ':</label>
-          <input type="date" class="form-control" name="recovery_date"  placeholder="' . $lang['recovery_date'] . '">
+          <input type="date" class="form-control" name="recovery_date"  placeholder="' . $lang['recovery_date'] . '" >
         </div>
       </div>
 
@@ -408,7 +408,6 @@ $html .= '
 </div>
 </div>
 </div>';
-
 echo $html;
 
 include('footer.php');

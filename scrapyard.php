@@ -154,9 +154,12 @@ if (isset($_POST['search_scrap'])) {
                                  }
                                  echo '<div></td>';
                              }
-                            } else {
-                                echo '<td>' . $value . '</td>';
-                            }
+                            } elseif ($key === 'stolen_date' || $key === 'Date_Of_Recovery' && $value != '0000-00-00') {
+                              $formattedDate = date('d-m-Y', strtotime($value));
+                              echo '<td>' . $formattedDate . '</td>';
+                           } else {
+                              echo '<td>' . $value . '</td>';
+                           }
                             
                             echo '</tr>';
                         }
